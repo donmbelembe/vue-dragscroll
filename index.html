@@ -5,9 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .scroll-box {
+      width: 400px;
+      height: 400px;
+      border: 2px solid #000;
+      overflow: scroll;
+    }
+
+    .child {
+      width: 500px;
+      height: 500px;
+      border: 1px dashed blue;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .middle {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bottom {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .redbox {
+      width: 80px;
+      height: 80px;
+      background: red;
+    }
+  </style>
 </head>
 <body>
   <h1>TEST SERVER</h1>
+
+  <div class="container">
+    <div class="scroll-box">
+      <div class="child">
+        <div class="top">
+          <div class="redbox"></div>
+          <div class="redbox"></div>
+          <div class="redbox"></div>
+        </div>
+
+        <div class="middle">
+          <div class="redbox"></div>
+        </div>
+
+        <div class="bottom">
+          <div class="redbox"></div>
+          <div class="redbox"></div>
+          <div class="redbox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="./dist/vue-dragscroll.js"></script>
 </body>
