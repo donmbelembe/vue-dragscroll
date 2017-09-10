@@ -1,0 +1,24 @@
+{
+  "name": "vue-dragscroll",
+  "version": "1.0.0",
+  "description": " vue directive to make a scrollable element scroll by draging to the scroll direction",
+  "main": "vue-dragscroll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donmbelembe/vue-dragscroll.git"
+  },
+  "keywords": [
+    "vue",
+    "scroll",
+    "drag"
+  ],
+  "author": "Don mbelembe <bizroy678@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/donmbelembe/vue-dragscroll/issues"
+  },
+  "homepage": "https://github.com/donmbelembe/vue-dragscroll#readme"
+}
