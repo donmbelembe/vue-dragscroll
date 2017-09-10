@@ -55,33 +55,61 @@
       height: 80px;
       background: red;
     }
+
+    .grab-bing {
+      cursor : -webkit-grab;
+      cursor : -moz-grab;
+      cursor : -o-grab;
+      cursor : grab;
+    }
+
+
+    .grab-bing:active {
+      cursor : -webkit-grabbing;
+      cursor : -moz-grabbing;
+      cursor : -o-grabbing;
+      cursor : grabbing;
+    }
   </style>
 </head>
 <body>
   <h1>TEST SERVER</h1>
 
-  <div class="container">
-    <div class="scroll-box">
-      <div class="child">
-        <div class="top">
-          <div class="redbox"></div>
-          <div class="redbox"></div>
-          <div class="redbox"></div>
-        </div>
+  <div id="app">
+    <div class="container">
+      <div class="scroll-box grab-bing" v-dragscroll>
+        <div class="child">
+          <div class="top">
+            <div class="redbox"></div>
+            <div class="redbox"></div>
+            <div class="redbox"></div>
+          </div>
 
-        <div class="middle">
-          <div class="redbox"></div>
-        </div>
+          <div class="middle">
+            <div class="redbox"></div>
+          </div>
 
-        <div class="bottom">
-          <div class="redbox"></div>
-          <div class="redbox"></div>
-          <div class="redbox"></div>
+          <div class="bottom">
+            <div class="redbox"></div>
+            <div class="redbox"></div>
+            <div class="redbox"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="https://unpkg.com/vue"></script>
+  <!-- Switch between cdn and build-->
   <script src="./dist/vue-dragscroll.js"></script>
+  <!-- <script src="https://unpkg.com/vue-dragscroll"></script> -->
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue.js!',
+      }
+    })
+  </script>
 </body>
 </html>
