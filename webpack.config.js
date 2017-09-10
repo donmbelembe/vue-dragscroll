@@ -1,28 +1,37 @@
 const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const webpack = require('webpack')
 
 // Config object
 const library = {
-  name: 'vue-dragscroll',
+  name: 'VueDragScroll',
   target: 'umd',
   entry: 'src/vueDragScroll.js'
 }
 
-const DEV = process.env.NODE_ENV === 'development';
+const DEV = process.env.NODE_ENV === 'development'
+const WATCH = process.env.NODE_ENV === 'watch'
+const PROD = process.env.NODE_ENV === 'production'
 
 let webpackConfig = {
-  entry: path.resolve(__dirname, config.main),
-  watch: DEV,
+  entry: path.resolve(__dirname, library.entry),
+  watch: WATCH,
   output: {
     library: library.name,
     libraryTarget: library.target,
-    path: path.resolve(__dirname, "dist"),
-    filename: (DEV) ? library.output + '.js' : library.output + '.min.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: (PROD) ? 'vue-dragscroll.min.js' : 'vue-dragscroll.js',
     publicPath: '/dist/'
   },
-  devtool: DEV ? 'cheap-module-eval-source-map' : 'source-map',
+  externals: {
+    vue: {
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue',
+      root: '_'
+    }
+  },
+  devtool: DEV || WATCH ? 'cheap-module-eval-source-map' : 'source-map',
   devServer: {
     overlay: true,
     contentBase: path.resolve(__dirname)
@@ -40,12 +49,12 @@ let webpackConfig = {
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader']
       }
-    ],
+    ]
   },
   plugins: []
 }
 
-if(!DEV) {
+if (PROD) {
   webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     compress: { warnings: false }
