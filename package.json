@@ -4,9 +4,10 @@
   "description": " vue directive to make a scrollable element scroll by draging to the scroll direction",
   "main": "vueDragScroll.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack",
     "prod": "cross-env NODE_ENV=production webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run dev && npm run prod",
+    "watch": "cross-env NODE_ENV=watch webpack-dev-server --open --hot"
   },
   "repository": {
     "type": "git",
