@@ -2,7 +2,7 @@
   "name": "vue-dragscroll",
   "version": "1.0.0",
   "description": " vue directive to make a scrollable element scroll by draging to the scroll direction",
-  "main": "vueDragScroll.js",
+  "main": "build/vue-dragscroll.min.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack",
     "prod": "cross-env NODE_ENV=production webpack",
