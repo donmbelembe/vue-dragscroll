@@ -10,50 +10,67 @@ demo](https://donmbelembe.github.io/vue-dragscroll/)).
 
 
 Download the and unpack
-[distribution](https://github.com/asvd/dragscroll/releases/download/v0.0.8/dragscroll-0.0.8.tar.gz),
-or install it using [Bower](http://bower.io/):
+[distribution](https://github.com/donmbelembe/vue-dragscroll/releases),
+or install it using [Npm](npmjs.com):`
+
+npm:
 
 ```sh
-$ bower install dragscroll
+$ npm install vue-dragscroll
 ```
 
-or npm:
-
-```sh
-$ npm install dragscroll
-```
-
-Load the `dragscroll.js` in a preferable way (that is an UMD module):
+Load the `vue-dragscroll.js` in a preferable way (that is an UMD module):
 
 ```html
-<script src="path/to/dragscroll.js"></script>
+<script src="path/to/vue-dragscroll.min.js"></script>
+<!-- OR -->
+<script src="https://unpkg.com/vue-dragscroll"></script>
 ```
 
-Add the `dragscroll` class to a scrollable element:
+Add the `v-dragscroll` directive to a scrollable element:
 
 ```html
-<div class=dragscroll>
+<div v-dragscroll>
     Big text goes here...
 </div>
 ```
 
 That's it! Now you can scroll it by dragging. You can also add the
-`dragscroll` class to the `<body>` element and drag the whole page.
+`v-dragscroll` directive to the `<body>` element and drag the whole page.
 
 Keep in mind that now it is not possible to select the content with
 mouse, so apply the `cursor: default;` CSS style to prevent confusing
 the users (or even `cursor: grab;` in case the content is not a text).
+```css
+/* EXEMPLE */
+.grab-bing {
+  cursor : -webkit-grab;
+  cursor : -moz-grab;
+  cursor : -o-grab;
+  cursor : grab;
+}
 
-If you add or remove the `dragscroll` class dynamically, invoke
-`dragscroll.reset()` to update the listeners.
 
-You can also add the `nochilddrag` attribute to a scrollable element,
+.grab-bing:active {
+  cursor : -webkit-grabbing;
+  cursor : -moz-grabbing;
+  cursor : -o-grabbing;
+  cursor : grabbing;
+}
+```
+
+You can also add the `:nochilddrag` argument to the v-dragscroll,
 which will only enable drag-scrolling for an element itself, but not
 for its subchildren. This can be usefull, if you want to enable the
 scrolling the area by dragging its empty space, but keep the
 opportunity to select the text (see
 [example](http://asvd.github.io/jailed/demos/web/process/)).
+```html
+<div v-dragscroll:nochilddrag>
+  ...content
+</div>
+```
 
 -
 
-Follow me on twitter: https://twitter.com/asvd0
+Follow me on twitter: https://twitter.com/Donbelembe
