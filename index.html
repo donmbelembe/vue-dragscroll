@@ -8,52 +8,28 @@
   <style>
     h1 {
       text-align: center;
+      text-decoration: underline;
     }
 
     .container {
-      display: flex;
-      justify-content: center;
-    }
-
-    .scroll-box {
-      width: 400px;
-      height: 400px;
-      border: 2px solid #000;
-      overflow: scroll;
-    }
-
-    .child {
-      width: 500px;
-      height: 500px;
-      border: 1px dashed blue;
+      width: 100%;
       display: flex;
       flex-direction: column;
     }
 
-    .top {
+    .column {
       flex: 1;
-      display: flex;
-      justify-content: space-between;
     }
 
-    .middle {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .column div {
+      margin: 0 auto;
+      width: 400px;
     }
 
-    .bottom {
-      flex: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .redbox {
-      width: 80px;
-      height: 80px;
-      background: red;
+    .scroll-box {
+      height: 400px;
+      border: 2px solid #000;
+      overflow: scroll;
     }
 
     .grab-bing {
@@ -73,29 +49,56 @@
   </style>
 </head>
 <body>
-  <h1>TEST SERVER</h1>
+  <h1>vue-dragscroll</h1>
+
+  <h2><a href="https://github.com/donmbelembe/vue-dragscroll">https://github.com/donmbelembe/vue-dragscroll</a></h2>
+  <h2>CDN : <code>&lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;</code></h2>
+  <h2>NPM : <code>npm install vue-dragscroll</code></h2>
+  <h2>Usage:</h2>
+
+  <p>If using CDN, <strong>v-dragscroll</strong> is already injected to the vue instance.</p>
+  <p>If installed via npm:</p>
+  <p><code>import Vue from 'vue'</code></p>
+  <p><code>import VueDragscroll from 'vue-dragscroll'</code></p>
+  <p><code>Vue.use(VueDragscroll)</code></p>
+  <p><strong>OR</strong> import inside a component</p>
+  <p><code>import { dragscroll } from 'vue-dragscroll'</code></p>
+  <p>
+<pre>
+  <code>export default {</code>
+    <code>directives: {</code>
+      dragscroll
+    <code>}</code>
+  <code>}</code>
+</pre>
+  </p>
 
   <div id="app">
     <div class="container">
-      <div class="scroll-box grab-bing" v-dragscroll>
-        <div class="child">
-          <div class="top">
-            <div class="redbox"></div>
-            <div class="redbox"></div>
-            <div class="redbox"></div>
-          </div>
-
-          <div class="middle">
-            <div class="redbox"></div>
-          </div>
-
-          <div class="bottom">
-            <div class="redbox"></div>
-            <div class="redbox"></div>
-            <div class="redbox"></div>
+      <div class="column">
+        <div><h3>Simple Usage</h3></div>
+        <div><code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code></div>
+        <br>
+        <div class="scroll-box grab-bing" v-dragscroll>
+          <div class="child">
+            <img src="http://lorempicsum.com/up/627/500/4" alt="">
           </div>
         </div>
       </div>
+
+      <div class="column">
+        <div><h3>nochilddrag</h3></div>
+        <div><code>&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;</code></div>
+        <br>
+        <div>This  will only enable drag-scrolling for an element itself, but not for its subchildren.</div>
+        <div><a href="http://asvd.github.io/jailed/demos/web/process/" target="_blank">Check this best example</a></div>
+        <br>
+      </div>
+
+      <div>credit: <a href="http://asvd.github.io/dragscroll/" target="_blank">Javascript dragscroll library</a></div>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
 
