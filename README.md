@@ -70,7 +70,7 @@ opportunity to select the text (see
 </div>
 ```
 
-If you wish to handle enable/disable dragscrolling, you can pass a `boolean` as value
+If you wish to handle enable/disable dragscrolling, you can pass a `boolean` as value (This doesn't apply for mobile)
 ```html
 <div v-dragscroll="false">
   ...content
