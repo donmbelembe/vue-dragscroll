@@ -77,9 +77,16 @@
     <div class="container">
       <div class="column">
         <div><h3>Simple Usage</h3></div>
-        <div><code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code></div>
+        <div v-if="drag">
+          <code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code> <br>
+          <code>or</code> <br>
+          <code>&lt;div v-dragscroll="true"&gt; ... &lt;div&gt;</code>
+        </div>
+        <div v-else="drag"><code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code></div>
         <br>
-        <div class="scroll-box grab-bing" v-dragscroll>
+        <div><input type="checkbox" v-model="drag"> Enable drag</div>
+        <br>
+        <div class="scroll-box grab-bing" v-dragscroll="drag">
           <div class="child">
             <img src="http://lorempicsum.com/up/627/500/4" alt="">
           </div>
@@ -110,7 +117,7 @@
     new Vue({
       el: '#app',
       data: {
-        message: 'Hello Vue.js!',
+        drag: true
       }
     })
   </script>
