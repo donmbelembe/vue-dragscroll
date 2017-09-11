@@ -1,7 +1,6 @@
 export const dragscroll = {
-  bind: function (el, binding, vnode) {
+  init: function (el, binding) {
     let newScrollX, newScrollY
-
     var reset = function () {
       let lastClientX, lastClientY, pushed
 
@@ -27,11 +26,32 @@ export const dragscroll = {
         }
       }, 0)
     }
-
-    if (el.readyState === 'complete') {
-      reset()
+    // if value is undefined or true we will init
+    if (binding.value === undefined || binding.value === true) {
+      if (document.readyState === 'complete') {
+        reset()
+      } else {
+        window.addEventListener('load', reset, 0)
+      }
     } else {
-      window.addEventListener('load', reset, 0)
+      // if value is false means we disable
+      // if value is anything else log error 
+      if (binding.value) {
+        console.error('The passed value should be either \'undefined\', \'true\' or \'false\'.')
+      }
+
+      // window.removeEventListener('load', reset, 0)
+      el.removeEventListener('mousedown', el.md, 0)
+      window.removeEventListener('mouseup', el.mu, 0)
+      window.removeEventListener('mousemove', el.mm, 0)
+    }
+  },
+  bind: function (el, binding, vnode) {
+    binding.def.init(el, binding)
+  },
+  update: function (el, binding, vnode, oldVnode) {
+    if (binding.value !== binding.oldValue) {
+      binding.def.init(el, binding)
     }
   },
   unbind: function (el, binding, vnode) {
