@@ -5,7 +5,7 @@ export const dragscroll = {
       let lastClientX, lastClientY, pushed
 
       el.addEventListener('mousedown', el.md = function (e) {
-        if (!(binding.arg === 'nochilddrag') || document.elementFromPoint(e.pageX, e.pageY) === el) {
+        if (!(binding.arg === 'nochilddrag') || document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el) {
           pushed = 1
           lastClientX = e.clientX
           lastClientY = e.clientY
