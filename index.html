@@ -25,7 +25,7 @@
     }
 
     p {
-      margin: 5px;
+      margin: 25px;
       white-space: nowrap;
     }
 
@@ -158,26 +158,63 @@
 
           </div>
         </div>
+
+        <div class="col-12 text-center my-5">
+          <strong>Directive with <span class="text-danger">:nochilddrag</span> argument</strong> <br>
+          <code>&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;</code> <br>
+          <i>This  will only enable drag-scrolling for an element itself, but not for its subchildren.</i>
+          <a href="http://asvd.github.io/jailed/demos/web/process/" target="_blank">Check this example</a> <br>
+          <i><strong>On below examples, you can scroll on when holding mouse outside of child element</strong></i> <br>
+          <i>(Outside of the text or red box)</i>
+        </div>
+
+        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex flex-column justify-content-center">
+          <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag>
+              <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+              <p>Lorem ipsum dolor sit</p>
+              <p>Lorem ipsum</p>
+              <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+              <p>deserunt ipsa?</p>
+              <p>Lorem ipsum doipsa?</p>
+              <p>Unde impedit laboriosam deserunt ipsa?</p>
+              <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+              <p>deserunt ipsa?</p>
+              <p>laboriosam deserunt ipsa?</p>
+              <p>Loremlaboriosam deserunt ipsa?</p>
+              <p>deserunt ipsa?</p>
+              <p>Lorepedit laboriosam deserunt ipsa?</p>
+              <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+              <p>Lorepedit laboriosam deserunt ipsa?</p>
+              <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+          <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+            <div class="small-box bg-danger m-5"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-5">
+        <div>
+          Credit: <a href="http://asvd.github.io/dragscroll/" target="_blank">Javascript dragscroll library</a>
+          Me: <a href="https://twitter.com/Donbelembe" target="_blank">@donbelembe</a>
+        </div>
       </div>
     </div>
   </div>
-
-    <div class="container">
-      <div class="column">
-        <div><h3>nochilddrag</h3></div>
-        <div><code>&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;</code></div>
-        <br>
-        <div>This  will only enable drag-scrolling for an element itself, but not for its subchildren.</div>
-        <div><a href="http://asvd.github.io/jailed/demos/web/process/" target="_blank">Check this best example</a></div>
-        <br>
-      </div>
-
-      <div>credit: <a href="http://asvd.github.io/dragscroll/" target="_blank">Javascript dragscroll library</a></div>
-      <br>
-      <br>
-      <br>
-    </div>
-  
 
   <script src="https://unpkg.com/vue"></script>
   <script src="./dist/vue-dragscroll.js"></script>
