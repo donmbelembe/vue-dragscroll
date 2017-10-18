@@ -4,32 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Vue drag-scroll</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <style>
-    h1 {
-      text-align: center;
-      text-decoration: underline;
-    }
-
-    .container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .column {
-      flex: 1;
-    }
-
-    .column div {
-      margin: 0 auto;
-      width: 400px;
-    }
-
-    .scroll-box {
-      height: 400px;
-      border: 2px solid #000;
+    .big-box {
+      width: 300px;
+      height: 300px;
       overflow: scroll;
+    }
+
+    .oh {
+      overflow: hidden;
+    }
+
+    .small-box {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+    }
+
+    p {
+      margin: 5px;
+      white-space: nowrap;
     }
 
     .grab-bing {
@@ -38,8 +35,6 @@
       cursor : -o-grab;
       cursor : grab;
     }
-
-
     .grab-bing:active {
       cursor : -webkit-grabbing;
       cursor : -moz-grabbing;
@@ -47,58 +42,127 @@
       cursor : grabbing;
     }
   </style>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "ca-pub-8812398883694145",
-      enable_page_level_ads: true
-    });
-  </script>
 </head>
 <body>
-  <h1>vue-dragscroll</h1>
-
-  <h2><a href="https://github.com/donmbelembe/vue-dragscroll">https://github.com/donmbelembe/vue-dragscroll</a></h2>
-  <h2>CDN : <code>&lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;</code></h2>
-  <h2>NPM : <code>npm install vue-dragscroll</code></h2>
-  <h2>Usage:</h2>
-
-  <p>If using CDN, <strong>v-dragscroll</strong> is already injected to the vue instance.</p>
-  <p>If installed via npm:</p>
-  <p><code>import Vue from 'vue'</code></p>
-  <p><code>import VueDragscroll from 'vue-dragscroll'</code></p>
-  <p><code>Vue.use(VueDragscroll)</code></p>
-  <p><strong>OR</strong> import inside a component</p>
-  <p><code>import { dragscroll } from 'vue-dragscroll'</code></p>
-  <p>
-<pre>
-  <code>export default {</code>
-    <code>directives: {</code>
-      dragscroll
-    <code>}</code>
-  <code>}</code>
-</pre>
-  </p>
-
   <div id="app">
     <div class="container">
-      <div class="column">
-        <div><h3>Simple Usage</h3></div>
-        <div v-if="drag">
-          <code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code> <br>
-          <code>or</code> <br>
-          <code>&lt;div v-dragscroll="true"&gt; ... &lt;div&gt;</code>
-        </div>
-        <div v-else="drag"><code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code></div>
-        <br>
-        <div><input type="checkbox" v-model="drag"> Enable drag</div>
-        <br>
-        <div class="scroll-box grab-bing" v-dragscroll="drag">
-          <div class="child">
-            <img src="http://lorempicsum.com/up/627/500/4" alt="">
-          </div>
+      <div class="row mt-4 justify-content-center">
+          <h1 class="display-4">vue-dragscroll</h1>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12 col-md-6">
+          <a href="https://github.com/donmbelembe/vue-dragscroll" target="_blank" class="text-warning">
+            <i class="fa fa-github"></i> View on github
+          </a>
+          <br>
+          <a href="https://unpkg.com/vue-dragscroll" target="_blank" class="text-danger">
+            <i class="fa fa-bookmark"></i> CDN : https://unpkg.com/vue-dragscroll
+          </a>
+          <br>
+          <a href="https://www.npmjs.com/package/vue-dragscroll" target="_blank" class="text-info">
+            <i class="fa fa-bookmark"></i> NPM : https://www.npmjs.com/package/vue-dragscroll
+          </a>
         </div>
       </div>
 
+      <div class="row my-4 py-4 border border-primary">
+        <div class="col-12 text-center mb-3">
+          <h4 class="text-uppercase">Install</h4>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="col-12 mb-3">
+              <h5 class="text-uppercase">Via npm</h5>
+            </div>
+            <div>
+              <strong>Command</strong> <br>
+              <code>npm install vue-dragscroll</code>
+            </div>
+            <div class="mt-2">
+              <strong>Install globally (main.js)</strong> <br>
+              <code>import Vue from 'vue'</code> <br>
+              <code>import VueDragscroll from 'vue-dragscroll'</code> <br>
+              <code>Vue.use(VueDragscroll)</code> <br>
+            </div> 
+            <div class="mt-2">
+              <strong>Install for a single component</strong> <br>
+              <code>import { dragscroll } from 'vue-dragscroll'</code> <br>
+              <code>
+                  export default {
+                    directives: {
+                      dragscroll
+                    }
+                  }
+              </code>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="col-12 mb-3">
+              <h5 class="text-uppercase">Via cdn</h5>
+            </div>
+            <div>
+                <strong>Tag</strong> <br>
+                <code>&lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;</code>
+                
+            </div>
+        </div>
+      </div>
+        
+      <div class="row mb-4 py-4 border border-primary">
+        <div class="col-12 text-center mb-3">
+          <h4 class="text-uppercase">Usage</h4>
+        </div>
+
+        <div class="col-12 text-center mb-3">
+          <strong>Just add the directive to the parent element</strong> <br>
+            <div v-if="drag">
+              <code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code> <br>
+              <strong>For more control</strong> <br>
+              <code>&lt;div v-dragscroll="true"&gt; ... &lt;div&gt;</code>
+            </div>
+            <div v-else="drag">
+              <code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
+            </div>
+            <div>
+              <input type="checkbox" v-model="drag"> Enable drag
+            </div>
+            <div>
+              <input type="checkbox" v-model="oh"> (overflow: hidden)
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag">
+            <img src="http://lorempicsum.com/up/627/500/4" alt="">
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag">
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+            <p>ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Loremlaboriosam deserunt ipsa?</p>
+            <p>deserunt ipsa?</p>
+            <p>Lorepedit laboriosam deserunt ipsa?</p>
+            <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorepedit laboriosam deserunt ipsa?</p>
+            <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
       <div class="column">
         <div><h3>nochilddrag</h3></div>
         <div><code>&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;</code></div>
@@ -113,17 +177,17 @@
       <br>
       <br>
     </div>
-  </div>
+  
 
   <script src="https://unpkg.com/vue"></script>
-  <!-- Switch between cdn and build-->
   <script src="./dist/vue-dragscroll.js"></script>
   <!-- <script src="https://unpkg.com/vue-dragscroll"></script> -->
   <script>
     new Vue({
       el: '#app',
       data: {
-        drag: true
+        drag: true,
+        oh: false
       }
     })
   </script>
