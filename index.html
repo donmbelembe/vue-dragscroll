@@ -168,7 +168,7 @@
           <i>(Outside of the text or red box)</i>
         </div>
 
-        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex flex-column justify-content-center">
+        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
           <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag>
               <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
               <p>Lorem ipsum dolor sit</p>
@@ -203,6 +203,43 @@
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
+          </div>
+        </div>
+
+        <div class="col-12 text-center  mt-5 mb-3">
+          <strong>Horizontally only or Vertically only</strong> <br>
+          <div>
+            <code>&lt;div v-dragscroll.x&gt; ... &lt;div&gt;</code> <br>
+            <strong>Or</strong> <br>
+            <code>&lt;div v-dragscroll.y="true"&gt; ... &lt;div&gt;</code>
+          </div>
+        </div>
+  
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.x="drag">
+            <img src="http://lorempicsum.com/up/627/500/4" alt="">
+          </div>
+        </div>
+  
+        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="drag">
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+            <p>ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Loremlaboriosam deserunt ipsa?</p>
+            <p>deserunt ipsa?</p>
+            <p>Lorepedit laboriosam deserunt ipsa?</p>
+            <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorepedit laboriosam deserunt ipsa?</p>
+            <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+
           </div>
         </div>
       </div>

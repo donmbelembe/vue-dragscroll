@@ -17,11 +17,23 @@ export const dragscroll = {
 
       window.addEventListener('mousemove', el.mm = function (e) {
         if (pushed) {
-          el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
-          el.scrollTop -= newScrollY = (-lastClientY + (lastClientY = e.clientY))
-          if (el === document.body) {
-            el.scrollLeft -= newScrollX
-            el.scrollTop -= newScrollY
+          if (binding.modifiers.x) {
+            el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
+            if (el === document.body) {
+              el.scrollLeft -= newScrollX
+            }
+          } else if (binding.modifiers.y) {
+            el.scrollTop -= newScrollY = (-lastClientY + (lastClientY = e.clientY))
+            if (el === document.body) {
+              el.scrollTop -= newScrollY
+            }
+          } else {
+            el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
+            el.scrollTop -= newScrollY = (-lastClientY + (lastClientY = e.clientY))
+            if (el === document.body) {
+              el.scrollLeft -= newScrollX
+              el.scrollTop -= newScrollY
+            }
           }
         }
       }, 0)
