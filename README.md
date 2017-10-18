@@ -77,6 +77,14 @@ If you wish to handle enable/disable dragscrolling, you can pass a `boolean` as 
 </div>
 ```
 
--
+If you wish to scroll only Vertically or Horizotally, you can use `x` or `y` modifiers.
+```html
+<div v-dragscroll.x="false">
+  ...content
+</div>
+<div v-dragscroll.y="false">
+  ...content
+</div>
+```
 
-Follow me on twitter: https://twitter.com/Donbelembe
+- Follow me on twitter: https://twitter.com/Donbelembe
