@@ -5,12 +5,35 @@ export const dragscroll = {
       let lastClientX, lastClientY, pushed
 
       el.addEventListener('mousedown', el.md = function (e) {
-        if (!(binding.arg === 'nochilddrag') || document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el) {
+        let hasNoChildDrag = binding.arg === 'nochilddrag'
+        let hasFirstChildDrag = binding.arg === 'firstchilddrag'
+        let isEl = document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el
+        let isFirstChild = document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el.firstChild
+
+        let start = (e) => {
           pushed = 1
           lastClientX = e.clientX
           lastClientY = e.clientY
           e.preventDefault()
         }
+
+        if (hasNoChildDrag) {
+          if (isEl) {
+            start(e)
+          }
+        } else if (hasFirstChildDrag) {
+          if (isEl || isFirstChild) {
+            start(e)
+          }
+        } else {
+          start(e)
+        }
+        // if (!hasNoChildDrag || isEl) {
+        //   pushed = 1
+        //   lastClientX = e.clientX
+        //   lastClientY = e.clientY
+        //   e.preventDefault()
+        // }
       }, 0)
 
       window.addEventListener('mouseup', el.mu = function () { pushed = 0 }, 0)

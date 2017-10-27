@@ -242,6 +242,28 @@
 
           </div>
         </div>
+
+        <div class="col-12 text-center  mt-5 mb-3">
+          <strong>firstchilddrag (BETA VERSION)</strong> <br>
+          <div>
+            <code>&lt;div v-dragscroll:firstchilddrag&gt; &lt;div class="subContainer"&gt;...&lt;div&gt; &lt;div&gt;</code>
+            <i>
+              <br>When using <strong>nochilddrag</strong>, all elements inside the the parent element will not be dragable
+             <br> but in some case you may need to have only one subchild and multile grandchild 
+            <br> and only the grandchild should not be dragable.</i>
+          </div>
+        </div>
+  
+        <div class="col-12 d-flex justify-content-center">
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll:firstchilddrag>
+            <div class="bg-dark" style="width: 500px; height: 200px;">
+              <div class="small-box bg-danger m-5"></div>
+              <div class="small-box bg-danger m-5"></div>
+              <div class="small-box bg-danger m-5"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="row my-5">
