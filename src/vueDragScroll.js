@@ -28,12 +28,6 @@ export const dragscroll = {
         } else {
           start(e)
         }
-        // if (!hasNoChildDrag || isEl) {
-        //   pushed = 1
-        //   lastClientX = e.clientX
-        //   lastClientY = e.clientY
-        //   e.preventDefault()
-        // }
       }, 0)
 
       window.addEventListener('mouseup', el.mu = function () { pushed = 0 }, 0)
