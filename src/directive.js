@@ -4,10 +4,11 @@ const POINTER_START_EVENTS = ['mousedown', 'touchstart']
 const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
 
-let init = function (el, binding) {
+let init = function (el, binding, vnode) {
   let newScrollX, newScrollY
   var reset = function () {
     let lastClientX, lastClientY, pushed
+    let isDragging = false
 
     el.md = function (e) {
       let hasNoChildDrag = binding.arg === 'nochilddrag'
@@ -35,10 +36,20 @@ let init = function (el, binding) {
       }
     }
 
-    el.mu = function () { pushed = 0 }
+    el.mu = function () {
+      pushed = 0
+      if (isDragging) {
+        emitEvent(vnode, 'dragscrollend')
+      }
+      isDragging = false
+    }
 
     el.mm = function (e) {
       if (pushed) {
+        if (!isDragging) {
+          emitEvent(vnode, 'dragscrollstart')
+        }
+        isDragging = true
         if (binding.modifiers.x) {
           el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
           if (el === document.body) {
@@ -57,6 +68,8 @@ let init = function (el, binding) {
             el.scrollTop -= newScrollY
           }
         }
+
+        emitEvent(vnode, 'dragscrollmove')
       }
     }
 
@@ -75,7 +88,7 @@ let init = function (el, binding) {
     }
   } else {
     // if value is false means we disable
-    // if value is anything else log error 
+    // if value is anything else log error
     if (binding.value) {
       console.error('The passed value should be either \'undefined\', \'true\' or \'false\'.')
     }
@@ -87,13 +100,24 @@ let init = function (el, binding) {
   }
 }
 
+let emitEvent = function (vnode, eventName) {
+  // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
+  if (vnode.componentInstance) {
+    vnode.componentInstance.$emit(eventName)
+  } else {
+    let event = document.createEvent('Event')
+    event.initEvent(eventName, true, true)
+    vnode.elm.dispatchEvent(event)
+  }
+}
+
 export default {
   bind: function (el, binding, vnode) {
-    init(el, binding)
+    init(el, binding, vnode)
   },
   update: function (el, binding, vnode, oldVnode) {
     if (binding.value !== binding.oldValue) {
-      init(el, binding)
+      init(el, binding, vnode)
     }
   },
   unbind: function (el, binding, vnode) {
