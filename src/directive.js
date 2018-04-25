@@ -1,3 +1,9 @@
+import u from './utils'
+
+const POINTER_START_EVENTS = ['mousedown', 'touchstart']
+const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
+const POINTER_END_EVENTS = ['mouseup', 'touchend']
+
 let init = function (el, binding) {
   let newScrollX, newScrollY
   var reset = function () {
@@ -54,11 +60,11 @@ let init = function (el, binding) {
       }
     }
 
-    el.addEventListener('mousedown', el.md)
+    u.addEventListeners(el, POINTER_START_EVENTS, el.md)
 
-    window.addEventListener('mouseup', el.mu)
+    u.addEventListeners(window, POINTER_END_EVENTS, el.mu)
 
-    window.addEventListener('mousemove', el.mm)
+    u.addEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
   }
   // if value is undefined or true we will init
   if (binding.value === undefined || binding.value === true) {
@@ -75,9 +81,9 @@ let init = function (el, binding) {
     }
 
     // window.removeEventListener('load', reset)
-    el.removeEventListener('mousedown', el.md)
-    window.removeEventListener('mouseup', el.mu)
-    window.removeEventListener('mousemove', el.mm)
+    u.removeEventListeners(el, POINTER_START_EVENTS, el.md)
+    u.removeEventListeners(window, POINTER_END_EVENTS, el.mu)
+    u.removeEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
   }
 }
 
@@ -91,8 +97,8 @@ export default {
     }
   },
   unbind: function (el, binding, vnode) {
-    el.removeEventListener('mousedown', el.md)
-    window.removeEventListener('mouseup', el.mu)
-    window.removeEventListener('mousemove', el.mm)
+    u.removeEventListeners(el, POINTER_START_EVENTS, el.md)
+    u.removeEventListeners(window, POINTER_END_EVENTS, el.mu)
+    u.removeEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
   }
 }
