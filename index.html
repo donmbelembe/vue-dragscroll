@@ -113,7 +113,7 @@
           <h4 class="text-uppercase">Usage</h4>
         </div>
 
-        <div class="col-12 text-center mb-3">
+        <div class="col-12 mb-3">
           <strong>Just add the directive to the parent element</strong> <br>
             <div v-if="drag">
               <code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code> <br>
@@ -132,13 +132,25 @@
         </div>
 
         <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag">
+          <div 
+            class="big-box grab-bing border border-danger bg-secondary" 
+            :class="{oh: oh}" 
+            v-dragscroll="drag" 
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
 
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag">
+          <div 
+            class="big-box grab-bing border border-danger bg-secondary" 
+            :class="{oh: oh}" 
+            v-dragscroll="drag"
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
             <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p>Lorem ipsum dolor sit</p>
             <p>Lorem ipsum</p>
@@ -159,17 +171,22 @@
           </div>
         </div>
 
-        <div class="col-12 text-center my-5">
+        <div class="col-12 my-5">
           <strong>Directive with <span class="text-danger">:nochilddrag</span> argument</strong> <br>
           <code>&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;</code> <br>
-          <i>This  will only enable drag-scrolling for an element itself, but not for its subchildren.</i>
+          <i>This  will only enable drag-scrolling for an element itself, but not for its children.</i>
           <a href="http://asvd.github.io/jailed/demos/web/process/" target="_blank">Check this example</a> <br>
           <i><strong>On below examples, you can scroll on when holding mouse outside of child element</strong></i> <br>
           <i>(Outside of the text or red box)</i>
         </div>
 
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag>
+          <div 
+            class="big-box oh grab-bing border border-danger bg-secondary" 
+            v-dragscroll:nochilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
               <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
               <p>Lorem ipsum dolor sit</p>
               <p>Lorem ipsum</p>
@@ -190,7 +207,12 @@
         </div>
 
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag>
+          <div 
+            class="big-box oh grab-bing border border-danger bg-secondary" 
+            v-dragscroll:nochilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
@@ -206,7 +228,7 @@
           </div>
         </div>
 
-        <div class="col-12 text-center  mt-5 mb-3">
+        <div class="col-12 mt-5 mb-3">
           <strong>Horizontally only or Vertically only</strong> <br>
           <div>
             <code>&lt;div v-dragscroll.x&gt; ... &lt;div&gt;</code> <br>
@@ -216,13 +238,23 @@
         </div>
   
         <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.x="drag">
+          <div 
+            class="big-box grab-bing border border-danger bg-secondary" 
+            v-dragscroll.x="drag"
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
   
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="drag">
+          <div 
+            class="big-box grab-bing border border-danger bg-secondary" 
+            v-dragscroll.y="drag"
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
             <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p>Lorem ipsum dolor sit</p>
             <p>Lorem ipsum</p>
@@ -243,7 +275,7 @@
           </div>
         </div>
 
-        <div class="col-12 text-center  mt-5 mb-3">
+        <div class="col-12 mt-5 mb-3">
           <strong>firstchilddrag</strong> <br>
           <div>
             <code>&lt;div v-dragscroll:firstchilddrag&gt; &lt;div class="subContainer"&gt;...&lt;div&gt; &lt;div&gt;</code>
@@ -255,12 +287,31 @@
         </div>
   
         <div class="col-12 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll:firstchilddrag>
+          <div 
+            class="big-box grab-bing border border-danger bg-secondary" 
+            v-dragscroll:firstchilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
             <div class="bg-dark" style="width: 500px; height: 200px;">
               <div class="small-box bg-danger m-5"></div>
               <div class="small-box bg-danger m-5"></div>
               <div class="small-box bg-danger m-5"></div>
             </div>
+          </div>
+        </div>
+
+        <div class="col-12 mt-5 mb-3">
+          <strong>EVENTS</strong> <br>
+          <p>The directive provides 3 events.</p>
+          <ul>
+            <li><strong>dragscrollstart</strong></li>
+            <li><strong>dragscrollmove</strong></li>
+            <li><strong>dragscrollend</strong></li>
+          </ul>
+          <strong>example:</strong>
+          <div>
+            <code>&lt;div v-dragscroll  v-on:dragscrollstart="doSomething" v-on:dragscrollmove="doSomething" v-on:dragscrollend="doSomething" &gt; ... &lt;div&gt;</code> <br>
           </div>
         </div>
 
@@ -287,6 +338,11 @@
       data: {
         drag: true,
         oh: false
+      },
+      methods: {
+        eventTrigged(name) {
+          console.log(name);
+        }
       }
     })
   </script>

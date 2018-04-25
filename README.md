@@ -5,27 +5,26 @@ enables scrolling via holding the mouse button ("drag and drop" or
 "click and hold" style, [online
 demo](https://donmbelembe.github.io/vue-dragscroll/)).
 
+## Installation
 
-### Usage
-
-
-Download the and unpack
-[distribution](https://github.com/donmbelembe/vue-dragscroll/releases),
-or install it using [Npm](https://npmjs.com):
-
-npm:
+#### Via npm
 
 ```sh
 $ npm install vue-dragscroll
 ```
 
-Load the `vue-dragscroll.js` in a preferable way (that is an UMD module):
+#### Via cdn
+
+Download the and unpack
+[distribution](https://github.com/donmbelembe/vue-dragscroll/releases)
 
 ```html
 <script src="path/to/vue-dragscroll.min.js"></script>
 <!-- OR -->
 <script src="https://unpkg.com/vue-dragscroll"></script>
 ```
+
+## Usage
 
 Add the `v-dragscroll` directive to a scrollable element:
 
@@ -87,4 +86,25 @@ If you wish to scroll only Vertically or Horizotally, you can use `x` or `y` mod
 </div>
 ```
 
-- Follow me on twitter: https://twitter.com/Donbelembe
+## Events
+
+The directive provides 3 events.
+
+* dragscrollstart
+* dragscrollmove
+* dragscrollend
+
+Example:
+
+```html
+<div
+  v-dragscroll
+  v-on:dragscrollstart="doSomething"
+  v-on:dragscrollmove="doSomething"
+  v-on:dragscrollend="doSomething"
+>
+..Content
+<div>
+```
+
+Follow me on twitter: https://twitter.com/don_jon243
