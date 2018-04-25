@@ -11,7 +11,7 @@ demo](https://donmbelembe.github.io/vue-dragscroll/)).
 
 Download the and unpack
 [distribution](https://github.com/donmbelembe/vue-dragscroll/releases),
-or install it using [Npm](https://npmjs.com):`
+or install it using [Npm](https://npmjs.com):
 
 npm:
 
