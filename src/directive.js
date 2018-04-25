@@ -54,18 +54,18 @@ let init = function (el, binding) {
       }
     }
 
-    el.addEventListener('mousedown', el.md, 0)
+    el.addEventListener('mousedown', el.md)
 
-    window.addEventListener('mouseup', el.mu, 0)
+    window.addEventListener('mouseup', el.mu)
 
-    window.addEventListener('mousemove', el.mm, 0)
+    window.addEventListener('mousemove', el.mm)
   }
   // if value is undefined or true we will init
   if (binding.value === undefined || binding.value === true) {
     if (document.readyState === 'complete') {
       reset()
     } else {
-      window.addEventListener('load', reset, 0)
+      window.addEventListener('load', reset)
     }
   } else {
     // if value is false means we disable
@@ -74,10 +74,10 @@ let init = function (el, binding) {
       console.error('The passed value should be either \'undefined\', \'true\' or \'false\'.')
     }
 
-    // window.removeEventListener('load', reset, 0)
-    el.removeEventListener('mousedown', el.md, 0)
-    window.removeEventListener('mouseup', el.mu, 0)
-    window.removeEventListener('mousemove', el.mm, 0)
+    // window.removeEventListener('load', reset)
+    el.removeEventListener('mousedown', el.md)
+    window.removeEventListener('mouseup', el.mu)
+    window.removeEventListener('mousemove', el.mm)
   }
 }
 
@@ -91,8 +91,8 @@ export default {
     }
   },
   unbind: function (el, binding, vnode) {
-    el.removeEventListener('mousedown', el.md, 0)
-    window.removeEventListener('mouseup', el.mu, 0)
-    window.removeEventListener('mousemove', el.mm, 0)
+    el.removeEventListener('mousedown', el.md)
+    window.removeEventListener('mouseup', el.mu)
+    window.removeEventListener('mousemove', el.mm)
   }
 }
