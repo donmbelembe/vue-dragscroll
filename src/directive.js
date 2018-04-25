@@ -1,4 +1,4 @@
-export const dragscroll = {
+export default {
   init: function (el, binding) {
     let newScrollX, newScrollY
     var reset = function () {
@@ -84,21 +84,8 @@ export const dragscroll = {
     }
   },
   unbind: function (el, binding, vnode) {
-    el['removeEventListener']('mousedown', el.md, 0)
-    window['removeEventListener']('mouseup', el.mu, 0)
-    window['removeEventListener']('mousemove', el.mm, 0)
+    el.removeEventListener('mousedown', el.md, 0)
+    window.removeEventListener('mouseup', el.mu, 0)
+    window.removeEventListener('mousemove', el.mm, 0)
   }
 }
-
-const VueDragscroll = {
-  install (Vue, options) {
-    Vue.directive('dragscroll', dragscroll)
-  }
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-  window.VueDragscroll = VueDragscroll
-  window.Vue.use(VueDragscroll)
-}
-
-export default VueDragscroll

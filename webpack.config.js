@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const library = {
   name: 'VueDragScroll',
   target: 'umd',
-  entry: 'src/vueDragScroll.js'
+  entry: 'src/main.js'
 }
 
 const DEV = process.env.NODE_ENV === 'development'
