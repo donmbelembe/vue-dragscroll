@@ -3,7 +3,7 @@ let init = function (el, binding) {
   var reset = function () {
     let lastClientX, lastClientY, pushed
 
-    el.addEventListener('mousedown', el.md = function (e) {
+    el.md = function (e) {
       let hasNoChildDrag = binding.arg === 'nochilddrag'
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
       let isEl = document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el
@@ -27,11 +27,11 @@ let init = function (el, binding) {
       } else {
         start(e)
       }
-    }, 0)
+    }
 
-    window.addEventListener('mouseup', el.mu = function () { pushed = 0 }, 0)
+    el.mu = function () { pushed = 0 }
 
-    window.addEventListener('mousemove', el.mm = function (e) {
+    el.mm = function (e) {
       if (pushed) {
         if (binding.modifiers.x) {
           el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
@@ -52,7 +52,13 @@ let init = function (el, binding) {
           }
         }
       }
-    }, 0)
+    }
+
+    el.addEventListener('mousedown', el.md, 0)
+
+    window.addEventListener('mouseup', el.mu, 0)
+
+    window.addEventListener('mousemove', el.mm, 0)
   }
   // if value is undefined or true we will init
   if (binding.value === undefined || binding.value === true) {
