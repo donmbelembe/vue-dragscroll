@@ -13,6 +13,23 @@ demo](https://donmbelembe.github.io/vue-dragscroll/)).
 $ npm install vue-dragscroll
 ```
 
+Then, in your JavaScript file:
+
+```js
+import dragscroll from 'vue-dragscroll'
+
+// Register dragscroll globally
+Vue.directive('dragscroll', dragscroll)
+
+// Or, register it locally in a component
+export default {
+  name: 'MyComponent',
+  directives: {
+    'dragscroll': dragscroll
+  },
+}
+```
+
 #### Via cdn
 
 Download the and unpack
