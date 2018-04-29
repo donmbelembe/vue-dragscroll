@@ -17,4 +17,5 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueDragscroll)
 }
 
+export { directive as dragscroll }
 export default VueDragscroll
