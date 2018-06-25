@@ -111,6 +111,17 @@ The directive provides 3 events.
 * dragscrollmove
 * dragscrollend
 
+The `dragscrollmove` event includes a data object with the following format:
+
+```js
+{
+  detail: {
+    deltaX: 0, // if using the x modifier, or no axis modifier
+    deltaY: 0, // if using the y modifier, or no axis modifier
+  },
+}
+```
+
 Example:
 
 ```html
