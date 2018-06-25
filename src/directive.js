@@ -11,10 +11,13 @@ let init = function (el, binding, vnode) {
     let isDragging = false
 
     el.md = function (e) {
+      let pageX = e.pageX ? e.pageX : e.touches[0].pageX
+      let pageY = e.pageY ? e.pageY : e.touches[0].pageY
+
       let hasNoChildDrag = binding.arg === 'nochilddrag'
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
-      let isEl = document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el
-      let isFirstChild = document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset) === el.firstChild
+      let isEl = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el
+      let isFirstChild = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el.firstChild
 
       let start = (e) => {
         pushed = 1
