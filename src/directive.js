@@ -21,8 +21,8 @@ let init = function (el, binding, vnode) {
 
       let start = (e) => {
         pushed = 1
-        lastClientX = e.clientX
-        lastClientY = e.clientY
+        lastClientX = e.clientX ? e.clientX : e.touches[0].clientX
+        lastClientY = e.clientY ? e.clientY : e.touches[0].clientY
         e.preventDefault()
       }
 
@@ -54,18 +54,22 @@ let init = function (el, binding, vnode) {
         }
         isDragging = true
         if (binding.modifiers.x) {
-          el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
+          newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
+          el.scrollLeft -= newScrollX
           if (el === document.body) {
             el.scrollLeft -= newScrollX
           }
         } else if (binding.modifiers.y) {
-          el.scrollTop -= newScrollY = (-lastClientY + (lastClientY = e.clientY))
+          newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
+          el.scrollTop -= newScrollY
           if (el === document.body) {
             el.scrollTop -= newScrollY
           }
         } else {
-          el.scrollLeft -= newScrollX = (-lastClientX + (lastClientX = e.clientX))
-          el.scrollTop -= newScrollY = (-lastClientY + (lastClientY = e.clientY))
+          newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
+          newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
+          el.scrollLeft -= newScrollX
+          el.scrollTop -= newScrollY
           if (el === document.body) {
             el.scrollLeft -= newScrollX
             el.scrollTop -= newScrollY
