@@ -75,25 +75,30 @@
               <h5 class="text-uppercase">Via npm</h5>
             </div>
             <div>
-              <strong>Command</strong> <br>
-              <code>npm install vue-dragscroll</code>
+              <p><strong>Command</strong></p>
+<pre class="prettyprint">
+  <code>npm install vue-dragscroll</code>
+</pre>
             </div>
             <div class="mt-2">
-              <strong>Install globally (main.js)</strong> <br>
-              <code>import Vue from 'vue'</code> <br>
-              <code>import VueDragscroll from 'vue-dragscroll'</code> <br>
-              <code>Vue.use(VueDragscroll)</code> <br>
+              <p><strong>Install globally (main.js)</strong></p>
+<pre class="prettyprint">
+import Vue from 'vue'
+import VueDragscroll from 'vue-dragscroll'
+Vue.use(VueDragscroll)
+</pre>
             </div> 
             <div class="mt-2">
-              <strong>Install for a single component</strong> <br>
-              <code>import { dragscroll } from 'vue-dragscroll'</code> <br>
-              <code>
-                  export default {
-                    directives: {
-                      dragscroll
-                    }
-                  }
-              </code>
+              <p><strong>Install for a single component</strong></p>
+<pre class="prettyprint">
+import { dragscroll } from 'vue-dragscroll'
+
+export default {
+  directives: {
+    dragscroll
+  }
+}
+</pre>
             </div>
         </div>
         <div class="col-12 col-md-6">
@@ -101,9 +106,10 @@
               <h5 class="text-uppercase">Via cdn</h5>
             </div>
             <div>
-                <strong>Tag</strong> <br>
-                <code>&lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;</code>
-                
+              <p><strong>Tag</strong></p>
+<pre class="prettyprint lang-html">
+<code>&lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;</code>
+</pre>
             </div>
         </div>
       </div>
@@ -114,14 +120,20 @@
         </div>
 
         <div class="col-12 mb-3">
-          <strong>Just add the directive to the parent element</strong> <br>
-            <div v-if="drag">
-              <code>&lt;div v-dragscroll&gt; ... &lt;div&gt;</code> <br>
-              <strong>For more control</strong> <br>
-              <code>&lt;div v-dragscroll="true"&gt; ... &lt;div&gt;</code>
-            </div>
+          <p><strong>Just add the directive to the parent element</strong></p>
+          <div v-if="drag">
+<pre class="prettyprint lang-html">
+<code>
+&lt;div v-dragscroll&gt; ... &lt;div&gt;
+&lt;!-- For more control --&gt;
+&lt;div v-dragscroll="true"&gt; ... &lt;div&gt;
+</code>
+</pre>
+          </div>
             <div v-else="drag">
-              <code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
+<pre class="prettyprint lang-html">
+  <code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
+</pre>
             </div>
             <div>
               <input type="checkbox" v-model="drag"> Enable drag
@@ -138,7 +150,7 @@
             v-dragscroll="drag" 
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
@@ -150,7 +162,7 @@
             v-dragscroll="drag"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p>Lorem ipsum dolor sit</p>
             <p>Lorem ipsum</p>
@@ -172,8 +184,10 @@
         </div>
 
         <div class="col-12 my-5">
-          <strong>Directive with <span class="text-danger">:nochilddrag</span> argument</strong> <br>
-          <code>&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;</code> <br>
+          <p><strong>Directive with <span class="text-danger">:nochilddrag</span> argument</strong></p>
+<pre class="prettyprint lang-html">
+&lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;
+</pre>
           <i>This  will only enable drag-scrolling for an element itself, but not for its children.</i>
           <a href="http://asvd.github.io/jailed/demos/web/process/" target="_blank">Check this example</a> <br>
           <i><strong>On below examples, you can scroll on when holding mouse outside of child element</strong></i> <br>
@@ -186,7 +200,7 @@
             v-dragscroll:nochilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
               <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
               <p>Lorem ipsum dolor sit</p>
               <p>Lorem ipsum</p>
@@ -212,7 +226,7 @@
             v-dragscroll:nochilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
@@ -229,11 +243,14 @@
         </div>
 
         <div class="col-12 mt-5 mb-3">
-          <strong>Horizontally only or Vertically only</strong> <br>
+          <p><strong>Horizontally only or Vertically only</strong></p>
           <div>
-            <code>&lt;div v-dragscroll.x&gt; ... &lt;div&gt;</code> <br>
-            <strong>Or</strong> <br>
-            <code>&lt;div v-dragscroll.y="true"&gt; ... &lt;div&gt;</code>
+<pre class="prettyprint lang-html">
+&lt;div v-dragscroll.x&gt; ... &lt;div&gt;
+&lt;!-- Or --&gt;
+&lt;div v-dragscroll.y="true"&gt; ... &lt;div&gt;
+</pre>
+            
           </div>
         </div>
   
@@ -243,7 +260,7 @@
             v-dragscroll.x="drag"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
@@ -254,7 +271,7 @@
             v-dragscroll.y="drag"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p>Lorem ipsum dolor sit</p>
             <p>Lorem ipsum</p>
@@ -276,9 +293,15 @@
         </div>
 
         <div class="col-12 mt-5 mb-3">
-          <strong>firstchilddrag</strong> <br>
+          <p><strong>firstchilddrag</strong></p>
           <div>
-            <code>&lt;div v-dragscroll:firstchilddrag&gt; &lt;div class="subContainer"&gt;...&lt;div&gt; &lt;div&gt;</code>
+<pre class="prettyprint lang-html">
+<code>
+  &lt;div v-dragscroll:firstchilddrag&gt; 
+    &lt;div class="subContainer"&gt;...&lt;div&gt; 
+  &lt;div&gt;
+</code>
+</pre>
             <i>
               <br>When using <strong>nochilddrag</strong>, all elements inside the the parent element will not be dragable
              <br> but in some case you may need to have only one subchild and multile grandchild 
@@ -292,7 +315,7 @@
             v-dragscroll:firstchilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove')">
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <div class="bg-dark" style="width: 500px; height: 200px;">
               <div class="small-box bg-danger m-5"></div>
               <div class="small-box bg-danger m-5"></div>
@@ -309,10 +332,21 @@
             <li><strong>dragscrollmove</strong></li>
             <li><strong>dragscrollend</strong></li>
           </ul>
-          <strong>example:</strong>
-          <div>
-            <code>&lt;div v-dragscroll  v-on:dragscrollstart="doSomething" v-on:dragscrollmove="doSomething" v-on:dragscrollend="doSomething" &gt; ... &lt;div&gt;</code> <br>
-          </div>
+          <p>The dragscrollmove event includes a data object with the following format:</p>
+<pre class="prettyprint">
+  {
+    detail: {
+      deltaX: 0, // if using the x modifier, or no axis modifier
+      deltaY: 0, // if using the y modifier, or no axis modifier
+    },
+  }
+</pre>
+          <p><strong>example:</strong></p>
+<pre class="prettyprint lang-html">
+  &lt;div v-dragscroll  v-on:dragscrollstart="doSomething" v-on:dragscrollmove="doSomething(params, $event.detail.deltaX)" v-on:dragscrollend="doSomething"&gt;
+    ...
+  &lt;/div&gt;
+</pre>
         </div>
 
       </div>
@@ -332,6 +366,7 @@
   <script src="https://unpkg.com/vue"></script>
   <script src="./dist/vue-dragscroll.js"></script>
   <!-- <script src="https://unpkg.com/vue-dragscroll"></script> -->
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
   <script>
     new Vue({
       el: '#app',
@@ -340,8 +375,11 @@
         oh: false
       },
       methods: {
-        eventTrigged(name) {
+        eventTrigged(name, e) {
           console.log(name);
+          if(name == 'dragscrollmove'){
+            console.log(e.detail)
+          }
         }
       }
     })

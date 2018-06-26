@@ -5,7 +5,6 @@ const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
 
 let init = function (el, binding, vnode) {
-  let newScrollX, newScrollY
   var reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
@@ -48,6 +47,8 @@ let init = function (el, binding, vnode) {
     }
 
     el.mm = function (e) {
+      let newScrollX, newScrollY
+      let eventDetail = {}
       if (pushed) {
         if (!isDragging) {
           emitEvent(vnode, 'dragscrollstart')
@@ -59,12 +60,14 @@ let init = function (el, binding, vnode) {
           if (el === document.body) {
             el.scrollLeft -= newScrollX
           }
+          eventDetail.deltaX = -newScrollX
         } else if (binding.modifiers.y) {
           newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
           el.scrollTop -= newScrollY
           if (el === document.body) {
             el.scrollTop -= newScrollY
           }
+          eventDetail.deltaY = -newScrollY
         } else {
           newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
           newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
@@ -74,9 +77,10 @@ let init = function (el, binding, vnode) {
             el.scrollLeft -= newScrollX
             el.scrollTop -= newScrollY
           }
+          eventDetail.deltaX = -newScrollX
+          eventDetail.deltaY = -newScrollY
         }
-
-        emitEvent(vnode, 'dragscrollmove')
+        emitEvent(vnode, 'dragscrollmove', eventDetail)
       }
     }
 
@@ -107,13 +111,19 @@ let init = function (el, binding, vnode) {
   }
 }
 
-let emitEvent = function (vnode, eventName) {
+let emitEvent = function (vnode, eventName, eventDetail) {
   // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
   if (vnode.componentInstance) {
-    vnode.componentInstance.$emit(eventName)
+    vnode.componentInstance.$emit(eventName, eventDetail)
   } else {
-    let event = document.createEvent('Event')
-    event.initEvent(eventName, true, true)
+    let event
+    if (window.CustomEvent) {
+      event = new window.CustomEvent(eventName, { detail: eventDetail })
+    } else {
+      // Deprecated fallback for IE
+      event = document.createEvent('CustomEvent')
+      event.initCustomEvent(eventName, true, true, eventDetail)
+    }
     vnode.elm.dispatchEvent(event)
   }
 }
