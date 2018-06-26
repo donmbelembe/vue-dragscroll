@@ -128,7 +128,7 @@ Example:
 <div
   v-dragscroll
   v-on:dragscrollstart="doSomething"
-  v-on:dragscrollmove="doSomething"
+  v-on:dragscrollmove="doSomething(params, $event.detail.deltaX)"
   v-on:dragscrollend="doSomething"
 >
 ..Content
