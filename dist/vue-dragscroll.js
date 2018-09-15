@@ -7,7 +7,7 @@
 		exports["VueDragScroll"] = factory();
 	else
 		root["VueDragScroll"] = factory();
-})(this, function() {
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
