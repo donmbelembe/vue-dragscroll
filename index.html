@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vue drag-scroll</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <style>
     .big-box {
@@ -43,11 +45,12 @@
     }
   </style>
 </head>
+
 <body>
   <div id="app">
     <div class="container">
       <div class="row mt-4 justify-content-center">
-          <h1 class="display-4">vue-dragscroll</h1>
+        <h1 class="display-4">vue-dragscroll</h1>
       </div>
 
       <div class="row mt-4">
@@ -71,26 +74,26 @@
           <h4 class="text-uppercase">Install</h4>
         </div>
         <div class="col-12 col-md-6">
-            <div class="col-12 mb-3">
-              <h5 class="text-uppercase">Via npm</h5>
-            </div>
-            <div>
-              <p><strong>Command</strong></p>
-<pre class="prettyprint">
+          <div class="col-12 mb-3">
+            <h5 class="text-uppercase">Via npm</h5>
+          </div>
+          <div>
+            <p><strong>Command</strong></p>
+            <pre class="prettyprint">
   <code>npm install vue-dragscroll</code>
 </pre>
-            </div>
-            <div class="mt-2">
-              <p><strong>Install globally (main.js)</strong></p>
-<pre class="prettyprint">
+          </div>
+          <div class="mt-2">
+            <p><strong>Install globally (main.js)</strong></p>
+            <pre class="prettyprint">
 import Vue from 'vue'
 import VueDragscroll from 'vue-dragscroll'
 Vue.use(VueDragscroll)
 </pre>
-            </div> 
-            <div class="mt-2">
-              <p><strong>Install for a single component</strong></p>
-<pre class="prettyprint">
+          </div>
+          <div class="mt-2">
+            <p><strong>Install for a single component</strong></p>
+            <pre class="prettyprint">
 import { dragscroll } from 'vue-dragscroll'
 
 export default {
@@ -99,21 +102,21 @@ export default {
   }
 }
 </pre>
-            </div>
+          </div>
         </div>
         <div class="col-12 col-md-6">
-            <div class="col-12 mb-3">
-              <h5 class="text-uppercase">Via cdn</h5>
-            </div>
-            <div>
-              <p><strong>Tag</strong></p>
-<pre class="prettyprint lang-html">
+          <div class="col-12 mb-3">
+            <h5 class="text-uppercase">Via cdn</h5>
+          </div>
+          <div>
+            <p><strong>Tag</strong></p>
+            <pre class="prettyprint lang-html">
 <code>&lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;</code>
 </pre>
-            </div>
+          </div>
         </div>
       </div>
-        
+
       <div class="row mb-4 py-4 border border-primary">
         <div class="col-12 text-center mb-3">
           <h4 class="text-uppercase">Usage</h4>
@@ -122,7 +125,7 @@ export default {
         <div class="col-12 mb-3">
           <p><strong>Just add the directive to the parent element</strong></p>
           <div v-if="drag">
-<pre class="prettyprint lang-html">
+            <pre class="prettyprint lang-html">
 <code>
 &lt;div v-dragscroll&gt; ... &lt;div&gt;
 &lt;!-- For more control --&gt;
@@ -130,38 +133,30 @@ export default {
 </code>
 </pre>
           </div>
-            <div v-else="drag">
-<pre class="prettyprint lang-html">
+          <div v-else="drag">
+            <pre class="prettyprint lang-html">
   <code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
 </pre>
-            </div>
-            <div>
-              <input type="checkbox" v-model="drag"> Enable drag
-            </div>
-            <div>
-              <input type="checkbox" v-model="oh"> (overflow: hidden)
-            </div>
+          </div>
+          <div>
+            <input type="checkbox" v-model="drag"> Enable drag
+          </div>
+          <div>
+            <input type="checkbox" v-model="oh"> (overflow: hidden)
+          </div>
         </div>
 
         <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div 
-            class="big-box grab-bing border border-danger bg-secondary" 
-            :class="{oh: oh}" 
-            v-dragscroll="drag" 
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
+          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
 
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div 
-            class="big-box grab-bing border border-danger bg-secondary" 
-            :class="{oh: oh}" 
-            v-dragscroll="drag"
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
+          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p>Lorem ipsum dolor sit</p>
@@ -185,47 +180,41 @@ export default {
 
         <div class="col-12 my-5">
           <p><strong>Directive with <span class="text-danger">:nochilddrag</span> argument</strong></p>
-<pre class="prettyprint lang-html">
+          <pre class="prettyprint lang-html">
 &lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;
 </pre>
-          <i>This  will only enable drag-scrolling for an element itself, but not for its children.</i>
+          <i>This will only enable drag-scrolling for an element itself, but not for its children.</i>
           <a href="http://asvd.github.io/jailed/demos/web/process/" target="_blank">Check this example</a> <br>
           <i><strong>On below examples, you can scroll on when holding mouse outside of child element</strong></i> <br>
           <i>(Outside of the text or red box)</i>
         </div>
 
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div 
-            class="big-box oh grab-bing border border-danger bg-secondary" 
-            v-dragscroll:nochilddrag
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
+          <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-              <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-              <p>Lorem ipsum dolor sit</p>
-              <p>Lorem ipsum</p>
-              <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
-              <p>deserunt ipsa?</p>
-              <p>Lorem ipsum doipsa?</p>
-              <p>Unde impedit laboriosam deserunt ipsa?</p>
-              <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-              <p>deserunt ipsa?</p>
-              <p>laboriosam deserunt ipsa?</p>
-              <p>Loremlaboriosam deserunt ipsa?</p>
-              <p>deserunt ipsa?</p>
-              <p>Lorepedit laboriosam deserunt ipsa?</p>
-              <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
-              <p>Lorepedit laboriosam deserunt ipsa?</p>
-              <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit</p>
+            <p>Lorem ipsum</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+            <p>deserunt ipsa?</p>
+            <p>Lorem ipsum doipsa?</p>
+            <p>Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>deserunt ipsa?</p>
+            <p>laboriosam deserunt ipsa?</p>
+            <p>Loremlaboriosam deserunt ipsa?</p>
+            <p>deserunt ipsa?</p>
+            <p>Lorepedit laboriosam deserunt ipsa?</p>
+            <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p>Lorepedit laboriosam deserunt ipsa?</p>
+            <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
           </div>
         </div>
 
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div 
-            class="big-box oh grab-bing border border-danger bg-secondary" 
-            v-dragscroll:nochilddrag
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
+          <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <div class="small-box bg-danger m-5"></div>
             <div class="small-box bg-danger m-5"></div>
@@ -245,33 +234,25 @@ export default {
         <div class="col-12 mt-5 mb-3">
           <p><strong>Horizontally only or Vertically only</strong></p>
           <div>
-<pre class="prettyprint lang-html">
+            <pre class="prettyprint lang-html">
 &lt;div v-dragscroll.x&gt; ... &lt;div&gt;
 &lt;!-- Or --&gt;
 &lt;div v-dragscroll.y="true"&gt; ... &lt;div&gt;
 </pre>
-            
+
           </div>
         </div>
-  
+
         <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div 
-            class="big-box grab-bing border border-danger bg-secondary" 
-            v-dragscroll.x="drag"
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.x="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
-  
+
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
-          <div 
-            class="big-box grab-bing border border-danger bg-secondary" 
-            v-dragscroll.y="drag"
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
-            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+            v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p>Lorem ipsum dolor sit</p>
             <p>Lorem ipsum</p>
@@ -295,7 +276,7 @@ export default {
         <div class="col-12 mt-5 mb-3">
           <p><strong>firstchilddrag</strong></p>
           <div>
-<pre class="prettyprint lang-html">
+            <pre class="prettyprint lang-html">
 <code>
   &lt;div v-dragscroll:firstchilddrag&gt; 
     &lt;div class="subContainer"&gt;...&lt;div&gt; 
@@ -303,18 +284,16 @@ export default {
 </code>
 </pre>
             <i>
-              <br>When using <strong>nochilddrag</strong>, all elements inside the the parent element will not be dragable
-             <br> but in some case you may need to have only one subchild and multile grandchild 
-            <br> and only the grandchild should not be dragable.</i>
+              <br>When using <strong>nochilddrag</strong>, all elements inside the the parent element will not be
+              dragable
+              <br> but in some case you may need to have only one subchild and multile grandchild
+              <br> and only the grandchild should not be dragable.</i>
           </div>
         </div>
-  
+
         <div class="col-12 d-flex justify-content-center">
-          <div 
-            class="big-box grab-bing border border-danger bg-secondary" 
-            v-dragscroll:firstchilddrag
-            v-on:dragscrollstart="eventTrigged('dragscrollstart')"
-            v-on:dragscrollend="eventTrigged('dragscrollend')"
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll:firstchilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <div class="bg-dark" style="width: 500px; height: 200px;">
               <div class="small-box bg-danger m-5"></div>
@@ -333,7 +312,7 @@ export default {
             <li><strong>dragscrollend</strong></li>
           </ul>
           <p>The dragscrollmove event includes a data object with the following format:</p>
-<pre class="prettyprint">
+          <pre class="prettyprint">
   {
     detail: {
       deltaX: 0, // if using the x modifier, or no axis modifier
@@ -342,7 +321,7 @@ export default {
   }
 </pre>
           <p><strong>example:</strong></p>
-<pre class="prettyprint lang-html">
+          <pre class="prettyprint lang-html">
   &lt;div v-dragscroll  v-on:dragscrollstart="doSomething" v-on:dragscrollmove="doSomething(params, $event.detail.deltaX)" v-on:dragscrollend="doSomething"&gt;
     ...
   &lt;/div&gt;
@@ -377,7 +356,7 @@ export default {
       methods: {
         eventTrigged(name, e) {
           console.log(name);
-          if(name == 'dragscrollmove'){
+          if (name == 'dragscrollmove') {
             console.log(e.detail)
           }
         }
@@ -385,4 +364,5 @@ export default {
     })
   </script>
 </body>
+
 </html>
