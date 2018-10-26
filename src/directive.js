@@ -3,11 +3,32 @@ import u from './utils'
 const POINTER_START_EVENTS = ['mousedown', 'touchstart']
 const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
+// const POINTER_START_EVENTS = ['mousedown']
+// const POINTER_MOVE_EVENTS = ['mousemove']
+// const POINTER_END_EVENTS = ['mouseup']
+
+// [Polyfill] Adding CustomEvent to IE
+// (function () {
+//   if (typeof window.CustomEvent === 'function') return false
+
+//   function CustomEvent (event, params) {
+//     params = params || { bubbles: false, cancelable: false, detail: undefined }
+//     var evt = document.createEvent('CustomEvent')
+//     evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail)
+//     return evt
+//   }
+
+//   CustomEvent.prototype = window.Event.prototype
+
+//   window.CustomEvent = CustomEvent
+// })()
+// [Polyfill] End Adding CustomEvent to IE
 
 let init = function (el, binding, vnode) {
   var reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
+    // let isTouchDevice = ('ontouchstart' in window) || false
 
     el.md = function (e) {
       let pageX = e.pageX ? e.pageX : e.touches[0].pageX
@@ -38,7 +59,7 @@ let init = function (el, binding, vnode) {
       }
     }
 
-    el.mu = function () {
+    el.mu = function (e) {
       pushed = 0
       if (isDragging) {
         emitEvent(vnode, 'dragscrollend')
@@ -117,7 +138,7 @@ let emitEvent = function (vnode, eventName, eventDetail) {
     vnode.componentInstance.$emit(eventName, eventDetail)
   } else {
     let event
-    if (window.CustomEvent) {
+    if (typeof (window.CustomEvent) === 'function') {
       event = new window.CustomEvent(eventName, { detail: eventDetail })
     } else {
       // Deprecated fallback for IE
