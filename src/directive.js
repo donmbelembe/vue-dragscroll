@@ -3,34 +3,15 @@ import u from './utils'
 const POINTER_START_EVENTS = ['mousedown', 'touchstart']
 const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
-// const POINTER_START_EVENTS = ['mousedown']
-// const POINTER_MOVE_EVENTS = ['mousemove']
-// const POINTER_END_EVENTS = ['mouseup']
-
-// [Polyfill] Adding CustomEvent to IE
-// (function () {
-//   if (typeof window.CustomEvent === 'function') return false
-
-//   function CustomEvent (event, params) {
-//     params = params || { bubbles: false, cancelable: false, detail: undefined }
-//     var evt = document.createEvent('CustomEvent')
-//     evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail)
-//     return evt
-//   }
-
-//   CustomEvent.prototype = window.Event.prototype
-
-//   window.CustomEvent = CustomEvent
-// })()
-// [Polyfill] End Adding CustomEvent to IE
 
 let init = function (el, binding, vnode) {
   var reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
-    // let isTouchDevice = ('ontouchstart' in window) || false
+    let isClick = false // workaround to handle click event from touch
 
     el.md = function (e) {
+      // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
       let pageX = e.pageX ? e.pageX : e.touches[0].pageX
       let pageY = e.pageY ? e.pageY : e.touches[0].pageY
 
@@ -41,9 +22,13 @@ let init = function (el, binding, vnode) {
 
       let start = (e) => {
         pushed = 1
+        // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
         lastClientX = e.clientX ? e.clientX : e.touches[0].clientX
         lastClientY = e.clientY ? e.clientY : e.touches[0].clientY
         e.preventDefault()
+        if (e.type === 'touchstart') {
+          isClick = true
+        }
       }
 
       if (hasNoChildDrag) {
@@ -62,9 +47,13 @@ let init = function (el, binding, vnode) {
     el.mu = function (e) {
       pushed = 0
       if (isDragging) {
-        emitEvent(vnode, 'dragscrollend')
+        u.emitEvent(vnode, 'dragscrollend')
       }
       isDragging = false
+      if (e.type === 'touchend' && isClick === true) {
+        e.target.click()
+        isClick = false
+      }
     }
 
     el.mm = function (e) {
@@ -72,24 +61,24 @@ let init = function (el, binding, vnode) {
       let eventDetail = {}
       if (pushed) {
         if (!isDragging) {
-          emitEvent(vnode, 'dragscrollstart')
+          u.emitEvent(vnode, 'dragscrollstart')
         }
         isDragging = true
-        if (binding.modifiers.x) {
+        if (binding.modifiers.x) { // Scroll is enabled on axis only
           newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
           el.scrollLeft -= newScrollX
           if (el === document.body) {
             el.scrollLeft -= newScrollX
           }
           eventDetail.deltaX = -newScrollX
-        } else if (binding.modifiers.y) {
+        } else if (binding.modifiers.y) { // Scroll is enabled on ordinate only
           newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
           el.scrollTop -= newScrollY
           if (el === document.body) {
             el.scrollTop -= newScrollY
           }
           eventDetail.deltaY = -newScrollY
-        } else {
+        } else { // Scroll is enabled on both axis and ordinate
           newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
           newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
           el.scrollLeft -= newScrollX
@@ -101,7 +90,7 @@ let init = function (el, binding, vnode) {
           eventDetail.deltaX = -newScrollX
           eventDetail.deltaY = -newScrollY
         }
-        emitEvent(vnode, 'dragscrollmove', eventDetail)
+        u.emitEvent(vnode, 'dragscrollmove', eventDetail)
       }
     }
 
@@ -129,23 +118,6 @@ let init = function (el, binding, vnode) {
     u.removeEventListeners(el, POINTER_START_EVENTS, el.md)
     u.removeEventListeners(window, POINTER_END_EVENTS, el.mu)
     u.removeEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
-  }
-}
-
-let emitEvent = function (vnode, eventName, eventDetail) {
-  // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
-  if (vnode.componentInstance) {
-    vnode.componentInstance.$emit(eventName, eventDetail)
-  } else {
-    let event
-    if (typeof (window.CustomEvent) === 'function') {
-      event = new window.CustomEvent(eventName, { detail: eventDetail })
-    } else {
-      // Deprecated fallback for IE
-      event = document.createEvent('CustomEvent')
-      event.initCustomEvent(eventName, true, true, eventDetail)
-    }
-    vnode.elm.dispatchEvent(event)
   }
 }
 
