@@ -26,7 +26,7 @@
       display: inline-block;
     }
 
-    p {
+    p.p {
       margin: 25px;
       white-space: nowrap;
     }
@@ -158,22 +158,22 @@ export default {
           <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
-            <p>ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. <button class="btn btn-default" @click="testClick()">Test click</button> Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Loremlaboriosam deserunt ipsa?</p>
-            <p>deserunt ipsa?</p>
-            <p>Lorepedit laboriosam deserunt ipsa?</p>
-            <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorepedit laboriosam deserunt ipsa?</p>
-            <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit</p>
+            <p class="p">Lorem ipsum</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+            <p class="p">ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. <button class="btn btn-default" @click="testClick()">Test click</button> Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Loremlaboriosam deserunt ipsa?</p>
+            <p class="p">deserunt ipsa?</p>
+            <p class="p">Lorepedit laboriosam deserunt ipsa?</p>
+            <p class="p">Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorepedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
 
           </div>
         </div>
@@ -193,22 +193,22 @@ export default {
           <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
-            <p>deserunt ipsa?</p>
-            <p>Lorem ipsum doipsa?</p>
-            <p>Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>deserunt ipsa?</p>
-            <p>laboriosam deserunt ipsa?</p>
-            <p>Loremlaboriosam deserunt ipsa?</p>
-            <p>deserunt ipsa?</p>
-            <p>Lorepedit laboriosam deserunt ipsa?</p>
-            <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorepedit laboriosam deserunt ipsa?</p>
-            <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit</p>
+            <p class="p">Lorem ipsum</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+            <p class="p">deserunt ipsa?</p>
+            <p class="p">Lorem ipsum doipsa?</p>
+            <p class="p">Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">deserunt ipsa?</p>
+            <p class="p">laboriosam deserunt ipsa?</p>
+            <p class="p">Loremlaboriosam deserunt ipsa?</p>
+            <p class="p">deserunt ipsa?</p>
+            <p class="p">Lorepedit laboriosam deserunt ipsa?</p>
+            <p class="p">Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorepedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
           </div>
         </div>
 
@@ -253,22 +253,22 @@ export default {
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
           <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit</p>
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
-            <p>ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Loremlaboriosam deserunt ipsa?</p>
-            <p>deserunt ipsa?</p>
-            <p>Lorepedit laboriosam deserunt ipsa?</p>
-            <p>Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
-            <p>Lorepedit laboriosam deserunt ipsa?</p>
-            <p>Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit</p>
+            <p class="p">Lorem ipsum</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam</p>
+            <p class="p">ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Loremlaboriosam deserunt ipsa?</p>
+            <p class="p">deserunt ipsa?</p>
+            <p class="p">Lorepedit laboriosam deserunt ipsa?</p>
+            <p class="p">Loremeturutem. Unde impedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lorepedit laboriosam deserunt ipsa?</p>
+            <p class="p">Lore ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
 
           </div>
         </div>
@@ -311,7 +311,7 @@ export default {
             <li><strong>dragscrollmove</strong></li>
             <li><strong>dragscrollend</strong></li>
           </ul>
-          <p>The dragscrollmove event includes a data object with the following format:</p>
+          <p>The dragscrollmove event includes a data object with the following format: </p>
           <pre class="prettyprint">
   {
     detail: {
