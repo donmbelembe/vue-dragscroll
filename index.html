@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue drag-scroll</title>
+  <title>vue-dragscroll</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
     crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="row my-4 py-4 border border-primary">
+      <div class="row my-4 py-4 border">
         <div class="col-12 text-center mb-3">
           <h4 class="text-uppercase">Install</h4>
         </div>
@@ -92,7 +92,7 @@ Vue.use(VueDragscroll)
 </pre>
           </div>
           <div class="mt-2">
-            <p><strong>Install for a single component</strong></p>
+            <p><strong>(Or) Install for a single component</strong></p>
             <pre class="prettyprint">
 import { dragscroll } from 'vue-dragscroll'
 
@@ -117,12 +117,14 @@ export default {
         </div>
       </div>
 
-      <div class="row mb-4 py-4 border border-primary">
-        <div class="col-12 text-center mb-3">
+      <div class="row mb-4">
+        <div class="col-12 text-center">
           <h4 class="text-uppercase">Usage</h4>
         </div>
+      </div>
 
-        <div class="col-12 mb-3">
+      <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
           <p><strong>Just add the directive to the parent element</strong></p>
           <div v-if="drag">
             <pre class="prettyprint lang-html">
@@ -132,10 +134,10 @@ export default {
 &lt;div v-dragscroll="true"&gt; ... &lt;div&gt;
 </code>
 </pre>
-          </div>
-          <div v-else="drag">
-            <pre class="prettyprint lang-html">
-  <code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
+        </div>
+        <div v-else="drag">
+<pre class="prettyprint lang-html">
+<code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
 </pre>
           </div>
           <div>
@@ -146,15 +148,14 @@ export default {
           </div>
         </div>
 
-        <div class="col-12 col-md-6 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
           <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
-
-        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+        <div class="col-12 col-md-6 mt-3 d-flex justify-content-center">
           <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
@@ -177,10 +178,14 @@ export default {
 
           </div>
         </div>
+      </div>
 
-        <div class="col-12 my-5">
+      <hr>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
           <p><strong>Directive with <span class="text-danger">:nochilddrag</span> argument</strong></p>
-          <pre class="prettyprint lang-html">
+<pre class="prettyprint lang-html">
 &lt;div v-dragscroll:nochilddrag&gt; ... &lt;div&gt;
 </pre>
           <i>This will only enable drag-scrolling for an element itself, but not for its children.</i>
@@ -189,7 +194,7 @@ export default {
           <i>(Outside of the text or red box)</i>
         </div>
 
-        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
           <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
@@ -212,7 +217,7 @@ export default {
           </div>
         </div>
 
-        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
           <div class="big-box oh grab-bing border border-danger bg-secondary" v-dragscroll:nochilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
@@ -230,27 +235,29 @@ export default {
             <div class="small-box bg-danger m-5"></div>
           </div>
         </div>
+      </div>
+      
+      <hr>
 
-        <div class="col-12 mt-5 mb-3">
+      <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
           <p><strong>Horizontally only or Vertically only</strong></p>
           <div>
-            <pre class="prettyprint lang-html">
+<pre class="prettyprint lang-html">
 &lt;div v-dragscroll.x&gt; ... &lt;div&gt;
 &lt;!-- Or --&gt;
 &lt;div v-dragscroll.y="true"&gt; ... &lt;div&gt;
 </pre>
-
           </div>
         </div>
 
-        <div class="col-12 col-md-6 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
           <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.x="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
-
-        <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
           <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
@@ -272,11 +279,15 @@ export default {
 
           </div>
         </div>
+      </div>
 
-        <div class="col-12 mt-5 mb-3">
+      <hr>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
           <p><strong>firstchilddrag</strong></p>
           <div>
-            <pre class="prettyprint lang-html">
+<pre class="prettyprint lang-html">
 <code>
   &lt;div v-dragscroll:firstchilddrag&gt; 
     &lt;div class="subContainer"&gt;...&lt;div&gt; 
@@ -291,7 +302,7 @@ export default {
           </div>
         </div>
 
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
           <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll:firstchilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
@@ -302,7 +313,37 @@ export default {
             </div>
           </div>
         </div>
+      </div>
 
+      <hr>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+          <p><strong>Pass scroll when max reached</strong></p>
+          <div>
+<pre class="prettyprint lang-html">
+<code>
+  &lt;div v-dragscroll.pass&gt; 
+    &lt;div class="subContainer"&gt;...&lt;div&gt; 
+  &lt;div&gt;
+</code>
+</pre>
+            <i>It would be helpful if scroll were passed to the window object, when max scroll position were reached.</i>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.pass
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+            <img src="./assets/image.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
         <div class="col-12 mt-5 mb-3">
           <strong>EVENTS</strong> <br>
           <p>The directive provides 3 events.</p>
@@ -312,7 +353,7 @@ export default {
             <li><strong>dragscrollend</strong></li>
           </ul>
           <p>The dragscrollmove event includes a data object with the following format: </p>
-          <pre class="prettyprint">
+<pre class="prettyprint">
   {
     detail: {
       deltaX: 0, // if using the x modifier, or no axis modifier

@@ -95,10 +95,17 @@ If you wish to handle enable/disable dragscrolling, you can pass a `boolean` as 
 
 If you wish to scroll only Vertically or Horizotally, you can use `x` or `y` modifiers.
 ```html
-<div v-dragscroll.x="false">
+<div v-dragscroll.x="true">
   ...content
 </div>
-<div v-dragscroll.y="false">
+<div v-dragscroll.y="true">
+  ...content
+</div>
+```
+
+It would be helpful if scroll were passed to the window object, when max scroll position were reached, you can use `pass` modifier.
+```html
+<div v-dragscroll.pass">
   ...content
 </div>
 ```

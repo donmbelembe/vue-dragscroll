@@ -51,6 +51,7 @@ let init = function (el, binding, vnode) {
       }
       isDragging = false
       if (e.type === 'touchend' && isClick === true) {
+        // this workaround enable click will using touch
         e.target.click()
         isClick = false
       }
@@ -60,36 +61,47 @@ let init = function (el, binding, vnode) {
       let newScrollX, newScrollY
       let eventDetail = {}
       if (pushed) {
+        // pushed
+        // Emit start event
         if (!isDragging) {
           u.emitEvent(vnode, 'dragscrollstart')
         }
         isDragging = true
-        if (binding.modifiers.x) { // Scroll is enabled on axis only
-          newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
+
+        // when we reach the end or the begining of X or Y
+        let isEndX = ((el.scrollLeft + el.clientWidth) >= el.scrollWidth) || el.scrollLeft === 0
+        let isEndY = ((el.scrollTop + el.clientHeight) >= el.scrollHeight) || el.scrollTop === 0
+
+        // get new scroll dimentions
+        newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
+        newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
+
+        // disable one scroll direction in case x or y is specified
+        if (binding.modifiers.x) newScrollY = -0
+        if (binding.modifiers.y) newScrollX = -0
+
+        // compute and scroll
+        el.scrollLeft -= newScrollX
+        el.scrollTop -= newScrollY
+        if (el === document.body) {
           el.scrollLeft -= newScrollX
-          if (el === document.body) {
-            el.scrollLeft -= newScrollX
-          }
-          eventDetail.deltaX = -newScrollX
-        } else if (binding.modifiers.y) { // Scroll is enabled on ordinate only
-          newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
           el.scrollTop -= newScrollY
-          if (el === document.body) {
-            el.scrollTop -= newScrollY
-          }
-          eventDetail.deltaY = -newScrollY
-        } else { // Scroll is enabled on both axis and ordinate
-          newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
-          newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
-          el.scrollLeft -= newScrollX
-          el.scrollTop -= newScrollY
-          if (el === document.body) {
-            el.scrollLeft -= newScrollX
-            el.scrollTop -= newScrollY
-          }
-          eventDetail.deltaX = -newScrollX
-          eventDetail.deltaY = -newScrollY
         }
+
+        // pass scroll when max reached
+        if (binding.modifiers.pass) {
+          // if one side reach the end scroll window
+          if (isEndX) {
+            window.scrollBy(-newScrollX, 0)
+          }
+          if (isEndY) {
+            window.scrollBy(0, -newScrollY)
+          }
+        }
+
+        // Emit events
+        eventDetail.deltaX = -newScrollX
+        eventDetail.deltaY = -newScrollY
         u.emitEvent(vnode, 'dragscrollmove', eventDetail)
       }
     }
