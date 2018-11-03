@@ -18,7 +18,7 @@ Then, in your JavaScript file:
 ```js
 // Register dragscroll globally
 import VueDragscroll from 'vue-dragscroll'
-Vue.directive(VueDragscroll)
+Vue.use(VueDragscroll)
 
 // Or, register it locally in a component
 import { dragscroll } from 'vue-dragscroll'
