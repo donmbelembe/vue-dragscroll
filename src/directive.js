@@ -11,36 +11,27 @@ let init = function (el, binding, vnode) {
     let isClick = false // workaround to handle click event from touch
 
     el.md = function (e) {
+      let isMouseEvent = e instanceof MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
-      let pageX = e.pageX ? e.pageX : e.touches[0].pageX
-      let pageY = e.pageY ? e.pageY : e.touches[0].pageY
+      let pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
+      let pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
 
       let hasNoChildDrag = binding.arg === 'nochilddrag'
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
       let isEl = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el
       let isFirstChild = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el.firstChild
 
-      let start = (e) => {
-        pushed = 1
-        // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
-        lastClientX = e.clientX ? e.clientX : e.touches[0].clientX
-        lastClientY = e.clientY ? e.clientY : e.touches[0].clientY
-        e.preventDefault()
-        if (e.type === 'touchstart') {
-          isClick = true
-        }
+      if(hasNoChildDrag && !isEl || hasFirstChildDrag && !(isEl || isFirstChild)) {
+        return
       }
-
-      if (hasNoChildDrag) {
-        if (isEl) {
-          start(e)
-        }
-      } else if (hasFirstChildDrag) {
-        if (isEl || isFirstChild) {
-          start(e)
-        }
-      } else {
-        start(e)
+      
+      pushed = 1
+      // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
+      lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX
+      lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY
+      e.preventDefault()
+      if (e.type === 'touchstart') {
+        isClick = true
       }
     }
 
@@ -58,6 +49,7 @@ let init = function (el, binding, vnode) {
     }
 
     el.mm = function (e) {
+      let isMouseEvent = e instanceof MouseEvent
       let newScrollX, newScrollY
       let eventDetail = {}
       if (pushed) {
@@ -73,8 +65,8 @@ let init = function (el, binding, vnode) {
         let isEndY = ((el.scrollTop + el.clientHeight) >= el.scrollHeight) || el.scrollTop === 0
 
         // get new scroll dimentions
-        newScrollX = (-lastClientX + (lastClientX = e.clientX ? e.clientX : e.touches[0].clientX))
-        newScrollY = (-lastClientY + (lastClientY = e.clientY ? e.clientY : e.touches[0].clientY))
+        newScrollX = (-lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX))
+        newScrollY = (-lastClientY + (lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY))
 
         // disable one scroll direction in case x or y is specified
         if (binding.modifiers.x) newScrollY = -0
