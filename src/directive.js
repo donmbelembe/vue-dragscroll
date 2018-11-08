@@ -11,7 +11,7 @@ let init = function (el, binding, vnode) {
     let isClick = false // workaround to handle click event from touch
 
     el.md = function (e) {
-      let isMouseEvent = e instanceof MouseEvent
+      let isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
       let pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
       let pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
@@ -21,10 +21,10 @@ let init = function (el, binding, vnode) {
       let isEl = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el
       let isFirstChild = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el.firstChild
 
-      if(hasNoChildDrag && !isEl || hasFirstChildDrag && !(isEl || isFirstChild)) {
+      if ((hasNoChildDrag && !isEl) || (hasFirstChildDrag && !(isEl || isFirstChild))) {
         return
       }
-      
+
       pushed = 1
       // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
       lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX
@@ -49,7 +49,7 @@ let init = function (el, binding, vnode) {
     }
 
     el.mm = function (e) {
-      let isMouseEvent = e instanceof MouseEvent
+      let isMouseEvent = e instanceof window.MouseEvent
       let newScrollX, newScrollY
       let eventDetail = {}
       if (pushed) {
