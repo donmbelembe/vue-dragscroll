@@ -15,13 +15,15 @@ let init = function (el, binding, vnode) {
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
       let pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
       let pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
+      let clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
 
       let hasNoChildDrag = binding.arg === 'nochilddrag'
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
-      let isEl = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el
-      let isFirstChild = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) === el.firstChild
+      let isEl = clickedElement === el
+      let isFirstChild = clickedElement === el.firstChild
+      let isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
 
-      if ((hasNoChildDrag && !isEl) || (hasFirstChildDrag && !(isEl || isFirstChild))) {
+      if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
         return
       }
 
