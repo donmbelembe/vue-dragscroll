@@ -1,4 +1,4 @@
-# vue-dragscroll
+# vue-dragscroll ([Documentation](https://donmbelembe.github.io/vue-dragscroll/))
 
 vue-dragscroll is a micro vue.js directive which
 enables scrolling via holding the mouse button ("drag and drop" or
@@ -101,6 +101,26 @@ If you wish to scroll only Vertically or Horizotally, you can use `x` or `y` mod
 <div v-dragscroll.y="true">
   ...content
 </div>
+```
+
+Select which elements can be dragged (data attributes method)
+```html
+<div v-dragscroll> 
+  <div class="child">...<div><!-- can be dragged -->
+  <div class="child" data-no-dragscroll>...<div><!-- can't be dragged -->
+<div>
+
+<div v-dragscroll:nochilddrag> 
+  <div class="child" data-dragscroll>...<div><!-- can be dragged -->
+  <div class="child">...<div><!-- can't be dragged -->
+<div>
+```
+
+Firstchilddrag (DEPRECATED, prefer data attributes)
+```html
+<div v-dragscroll:firstchilddrag> 
+    <div class="subContainer">...<div> 
+  <div>
 ```
 
 It would be helpful if scroll were passed to the window object, when max scroll position were reached, you can use `pass` modifier.
