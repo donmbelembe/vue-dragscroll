@@ -285,7 +285,60 @@ export default {
 
       <div class="row">
         <div class="col-12 col-sm-6 mt-3">
-          <p><strong>firstchilddrag</strong></p>
+          <p><strong>Select which elements can be dragged</strong></p>
+          <div>
+<pre class="prettyprint lang-html">
+<code>
+  &lt;div v-dragscroll&gt; 
+    &lt;div class="child"&gt;...&lt;div&gt;&lt;!-- can be dragged --&gt;
+    &lt;div class="child" data-no-dragscroll&gt;...&lt;div&gt;&lt;!-- can't be dragged --&gt;
+  &lt;div&gt;
+
+  &lt;div v-dragscroll:nochilddrag&gt; 
+    &lt;div class="child" data-dragscroll&gt;...&lt;div&gt;&lt;!-- can be dragged --&gt;
+    &lt;div class="child"&gt;...&lt;div&gt;&lt;!-- can't be dragged --&gt;
+  &lt;div&gt;
+</code>
+</pre>
+            <p class="font-italic">
+              When using the directive all elements inside will be draggable. You can use 
+              <strong>data-no-dragscroll</strong> to tell which elements <strong>can't</strong> be dragged.
+            </p>
+            <p class="font-italic">
+              In the same way, if you are using <strong>nochilddrag</strong> you can use 
+              <strong>data-dragscroll</strong> to tell which element <strong>can</strong> be dragged.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 mt-3">
+          <div class="big-box grab-bing border border-danger bg-secondary mx-auto mb-3" v-dragscroll
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+            <div class="bg-dark" style="width: 500px; height: 200px;" data-no-dragscroll>
+              <div class="small-box bg-danger m-5"></div>
+              <div class="small-box bg-danger m-5"></div>
+              <div class="small-box bg-danger m-5"></div>
+            </div>
+          </div>
+
+          <div class="big-box grab-bing border border-danger bg-secondary mx-auto" v-dragscroll:nochilddrag
+            v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
+            v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+            <div class="bg-dark" style="width: 500px; height: 200px;" data-dragscroll>
+              <div class="small-box bg-danger m-5"></div>
+              <div class="small-box bg-danger m-5"></div>
+              <div class="small-box bg-danger m-5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+          <p><strong>firstchilddrag (DEPRECATED, prefer data attributes)</strong></p>
           <div>
 <pre class="prettyprint lang-html">
 <code>
@@ -294,11 +347,11 @@ export default {
   &lt;div&gt;
 </code>
 </pre>
-            <i>
-              <br>When using <strong>nochilddrag</strong>, all elements inside the the parent element will not be
-              dragable
-              <br> but in some case you may need to have only one subchild and multile grandchild
-              <br> and only the grandchild should not be dragable.</i>
+            <p class="font-italic">
+              When using <strong>nochilddrag</strong>, all elements inside the parent 
+              element will not be draggable, but in some case you may need to have only
+              one subchild and multile grandchild and only the grandchild should not be dragable.
+            </p>
           </div>
         </div>
 
