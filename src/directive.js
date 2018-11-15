@@ -11,6 +11,7 @@ let init = function (el, binding, vnode) {
     let isClick = false // workaround to handle click event from touch
 
     el.md = function (e) {
+      e.preventDefault()
       let isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
       let pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
@@ -31,7 +32,6 @@ let init = function (el, binding, vnode) {
       // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
       lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX
       lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY
-      e.preventDefault()
       if (e.type === 'touchstart') {
         isClick = true
       }
