@@ -103,6 +103,23 @@ If you wish to scroll only Vertically or Horizotally, you can use `x` or `y` mod
 </div>
 ```
 
+If you wish to ignore specific mouse buttons, you can use the following modifiers.
+
+* noleft
+* nomiddle
+* noright
+* noback
+* noforward
+
+```html
+<div v-dragscroll.noleft="true">
+  ...content
+</div>
+<div v-dragscroll.noback.noforward="true">
+  ...content
+</div>
+```
+
 Select which elements can be dragged (data attributes method)
 ```html
 <div v-dragscroll> 
