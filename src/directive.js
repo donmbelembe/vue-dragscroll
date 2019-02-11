@@ -72,28 +72,58 @@ let init = function (el, binding, vnode) {
         newScrollX = (-lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX))
         newScrollY = (-lastClientY + (lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY))
 
-        // disable one scroll direction in case x or y is specified
-        if (binding.modifiers.x) newScrollY = -0
-        if (binding.modifiers.y) newScrollX = -0
-
-        // compute and scroll
-        el.scrollLeft -= newScrollX
-        el.scrollTop -= newScrollY
-        if (el === document.body) {
-          el.scrollLeft -= newScrollX
-          el.scrollTop -= newScrollY
-        }
-
-        // pass scroll when max reached
         if (binding.modifiers.pass) {
+          // compute and scroll
+          el.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+          el.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          if (el === document.body) {
+            el.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+            el.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          }
+
           // if one side reach the end scroll window
-          if (isEndX) {
+          if (isEndX || binding.modifiers.y) {
             window.scrollBy(-newScrollX, 0)
           }
-          if (isEndY) {
+          if (isEndY || binding.modifiers.x) {
             window.scrollBy(0, -newScrollY)
           }
+        } else {
+          // disable one scroll direction in case x or y is specified
+          if (binding.modifiers.x) newScrollY = -0
+          if (binding.modifiers.y) newScrollX = -0
+
+          // compute and scroll
+          el.scrollLeft -= newScrollX
+          el.scrollTop -= newScrollY
+          if (el === document.body) {
+            el.scrollLeft -= newScrollX
+            el.scrollTop -= newScrollY
+          }
         }
+
+        // // disable one scroll direction in case x or y is specified
+        // if (binding.modifiers.x) newScrollY = -0
+        // if (binding.modifiers.y) newScrollX = -0
+
+        // // compute and scroll
+        // el.scrollLeft -= newScrollX
+        // el.scrollTop -= newScrollY
+        // if (el === document.body) {
+        //   el.scrollLeft -= newScrollX
+        //   el.scrollTop -= newScrollY
+        // }
+
+        // // pass scroll when max reached
+        // if (binding.modifiers.pass) {
+        //   // if one side reach the end scroll window
+        //   if (isEndX) {
+        //     window.scrollBy(-newScrollX, 0)
+        //   }
+        //   if (isEndY) {
+        //     window.scrollBy(0, -newScrollY)
+        //   }
+        // }
 
         // Emit events
         eventDetail.deltaX = -newScrollX
