@@ -47,6 +47,8 @@ let init = function (el, binding, vnode) {
         // this workaround enable click will using touch
         e.target.click()
         isClick = false
+      } else {
+        e.target.focus()
       }
     }
 
