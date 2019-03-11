@@ -131,13 +131,13 @@ export default {
 <code>
 &lt;div v-dragscroll&gt; ... &lt;div&gt;
 &lt;!-- For more control --&gt;
-&lt;div v-dragscroll="true"&gt; ... &lt;div&gt;
+&lt;div v-dragscroll="{ active: true }"&gt; ... &lt;div&gt;
 </code>
 </pre>
         </div>
         <div v-else="drag">
 <pre class="prettyprint lang-html">
-<code>&lt;div v-dragscroll="false"&gt; ... &lt;div&gt;</code>
+<code>&lt;div v-dragscroll="{ active: false}"&gt; ... &lt;div&gt;</code>
 </pre>
           </div>
           <div>
@@ -149,14 +149,14 @@ export default {
         </div>
 
         <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
+          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="{ active: drag }"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
         <div class="col-12 col-md-6 mt-3 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="drag"
+          <div class="big-box grab-bing border border-danger bg-secondary" :class="{oh: oh}" v-dragscroll="{ active: drag }"
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
@@ -247,19 +247,19 @@ export default {
 <pre class="prettyprint lang-html">
 &lt;div v-dragscroll.x&gt; ... &lt;div&gt;
 &lt;!-- Or --&gt;
-&lt;div v-dragscroll.y="true"&gt; ... &lt;div&gt;
+&lt;div v-dragscroll.y="{ active: true }" &gt; ... &lt;div&gt;
 </pre>
           </div>
         </div>
 
         <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.x="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.x="{ active: drag }" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <img src="./assets/image.jpg" alt="">
           </div>
         </div>
         <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center">
-          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="drag" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
+          <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.y="{ active: drag }" v-on:dragscrollstart="eventTrigged('dragscrollstart')"
             v-on:dragscrollend="eventTrigged('dragscrollend')" v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
             <p class="p">Lorem ipsum dolor sit ameturutem. Unde impedit laboriosam deserunt ipsa?</p>
             <p class="p">Lorem ipsum dolor sit</p>
@@ -398,6 +398,31 @@ export default {
       <hr>
 
       <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+          <p><strong>Change target to a child of the element</strong></p>
+          <div>
+<pre class="prettyprint lang-html">
+<code>
+  &lt;div v-dragscroll="{ target: 'childClass' }"&gt;
+    ...
+  &lt;div&gt;
+</code>
+</pre>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center" v-dragscroll="{ target: 'big-box' }"
+        v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
+        v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+          <div class="big-box grab-bing border border-danger bg-secondary" >
+            <img src="./assets/image.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
         <div class="col-12 mt-5 mb-3">
           <strong>EVENTS</strong> <br>
           <p>The directive provides 3 events.</p>
@@ -434,6 +459,8 @@ export default {
           Photo by <strong>Toa Heftiba</strong> on <a href="https://unsplash.com/">Unsplash</a>
         </div>
       </div>
+
+
     </div>
   </div>
 
