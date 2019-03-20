@@ -22,7 +22,12 @@ let init = function (el, binding, vnode) {
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
       let isEl = clickedElement === el
       let isFirstChild = clickedElement === el.firstChild
-      let isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
+
+      let isDataDraggable = hasNoChildDrag
+        ? (typeof clickedElement.dataset.dragscroll !== 'undefined' ||
+          clickedElement.closest('[data-dragscroll]') !== null)
+        : (typeof clickedElement.dataset.noDragscroll === 'undefined' &&
+          clickedElement.closest('[data-no-dragscroll]') === null)
 
       if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
         return
