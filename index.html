@@ -26,6 +26,12 @@
       display: inline-block;
     }
 
+    .medium-box {
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+    }
+
     p.p {
       margin: 25px;
       white-space: nowrap;
@@ -316,20 +322,20 @@ export default {
           <div class="big-box grab-bing border border-danger bg-secondary mx-auto mb-3" v-dragscroll
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-            <div class="bg-dark" style="width: 500px; height: 200px;" data-no-dragscroll>
-              <div class="small-box bg-danger m-5"></div>
-              <div class="small-box bg-danger m-5"></div>
-              <div class="small-box bg-danger m-5"></div>
+            <div class="bg-dark" style="width: 600px; height: 200px;">
+              <div class="medium-box bg-danger m-5" data-no-dragscroll><div class="small-box bg-warning"></div></div>
+              <div class="medium-box bg-danger m-5" data-no-dragscroll><div class="small-box bg-warning"></div></div>
+              <div class="medium-box bg-danger m-5" data-no-dragscroll><div class="small-box bg-warning"></div></div>
             </div>
           </div>
 
           <div class="big-box grab-bing border border-danger bg-secondary mx-auto" v-dragscroll:nochilddrag
             v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
             v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-            <div class="bg-dark" style="width: 500px; height: 200px;" data-dragscroll>
-              <div class="small-box bg-danger m-5"></div>
-              <div class="small-box bg-danger m-5"></div>
-              <div class="small-box bg-danger m-5"></div>
+            <div class="bg-dark" style="width: 600px; height: 200px;">
+              <div class="medium-box bg-danger m-5" data-dragscroll><div class="small-box bg-warning"></div></div>
+              <div class="medium-box bg-danger m-5" data-dragscroll><div class="small-box bg-warning"></div></div>
+              <div class="medium-box bg-danger m-5" data-dragscroll><div class="small-box bg-warning"></div></div>
             </div>
           </div>
         </div>
