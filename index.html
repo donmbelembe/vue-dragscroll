@@ -15,6 +15,18 @@
       height: 300px;
       overflow: scroll;
     }
+    
+    .my-draggable-div-parent {
+      width: 300px;
+      height: 500px;
+    }
+    
+    .my-draggable-div {
+      margin: 25px;
+      width: 250px;
+      height: 250px;
+      overflow: scroll;
+    }
 
     .oh {
       overflow: hidden;
@@ -433,11 +445,14 @@ export default {
           </div>
         </div>
 
-        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center" v-dragscroll="{ target: '.big-box', active: true }"
-        v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
-        v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
-          <div class="big-box grab-bing border border-danger bg-secondary" >
+        <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center" >
+          <div class="border border-danger bg-secondary my-draggable-div-parent"
+          v-dragscroll="{ target: '.my-draggable-div', active: true }"
+          v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
+          v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+          <div class="grab-bing my-draggable-div">
             <img src="./assets/image.jpg" alt="">
+          </div>
           </div>
         </div>
       </div>
