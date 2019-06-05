@@ -5,12 +5,44 @@ const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
 
 let init = function (el, binding, vnode) {
+  // Default parameters
+  let target = el // the element to apply the dragscroll on
+  let active = true // enable/disable dragscroll
+
+  // config type: boolean
+  // Example: v-dragscroll="true" or v-dragscroll="false"
+  if (typeof binding.value === 'boolean') {
+    active = binding.value
+  } else if (typeof binding.value === 'object') {
+    // config type: object
+    // Example: v-dragscroll="{ active: true , target: "child" }"
+
+    // parameter: target
+    if (typeof binding.value.target === 'string') {
+      target = el.querySelector(binding.value.target)
+      if (!target) {
+        console.error('There is no element with the current target value.')
+      }
+    } else if (typeof binding.value.target !== 'undefined') {
+      console.error('The parameter "target" should be be either \'undefined\' or \'string\'.')
+    }
+
+    // parameter: active
+    if (typeof binding.value.active === 'boolean') {
+      active = binding.value.active
+    } else if (typeof binding.value.active !== 'undefined') {
+      console.error('The parameter "active" value should be either \'undefined\', \'true\' or \'false\'.')
+    }
+  } else if (typeof binding.value !== 'undefined') {
+    // Throw an error if invalid parameters
+    console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.')
+  }
   var reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
     let isClick = false // workaround to handle click event from touch
 
-    el.md = function (e) {
+    target.md = function (e) {
       e.preventDefault()
       let isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
@@ -20,8 +52,8 @@ let init = function (el, binding, vnode) {
 
       let hasNoChildDrag = binding.arg === 'nochilddrag'
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
-      let isEl = clickedElement === el
-      let isFirstChild = clickedElement === el.firstChild
+      let isEl = clickedElement === target
+      let isFirstChild = clickedElement === target.firstChild
       let isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
 
       if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
@@ -37,7 +69,7 @@ let init = function (el, binding, vnode) {
       }
     }
 
-    el.mu = function (e) {
+    target.mu = function (e) {
       pushed = 0
       if (isDragging) {
         u.emitEvent(vnode, 'dragscrollend')
@@ -52,7 +84,7 @@ let init = function (el, binding, vnode) {
       }
     }
 
-    el.mm = function (e) {
+    target.mm = function (e) {
       let isMouseEvent = e instanceof window.MouseEvent
       let newScrollX, newScrollY
       let eventDetail = {}
@@ -65,8 +97,8 @@ let init = function (el, binding, vnode) {
         isDragging = true
 
         // when we reach the end or the begining of X or Y
-        let isEndX = ((el.scrollLeft + el.clientWidth) >= el.scrollWidth) || el.scrollLeft === 0
-        let isEndY = ((el.scrollTop + el.clientHeight) >= el.scrollHeight) || el.scrollTop === 0
+        let isEndX = ((target.scrollLeft + target.clientWidth) >= target.scrollWidth) || target.scrollLeft === 0
+        let isEndY = ((target.scrollTop + target.clientHeight) >= target.scrollHeight) || target.scrollTop === 0
 
         // get new scroll dimentions
         newScrollX = (-lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX))
@@ -74,11 +106,11 @@ let init = function (el, binding, vnode) {
 
         if (binding.modifiers.pass) {
           // compute and scroll
-          el.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
-          el.scrollTop -= binding.modifiers.x ? -0 : newScrollY
-          if (el === document.body) {
-            el.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
-            el.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+          target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
+          if (target === document.body) {
+            target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX
+            target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
           }
 
           // if one side reach the end scroll window
@@ -94,11 +126,11 @@ let init = function (el, binding, vnode) {
           if (binding.modifiers.y) newScrollX = -0
 
           // compute and scroll
-          el.scrollLeft -= newScrollX
-          el.scrollTop -= newScrollY
-          if (el === document.body) {
-            el.scrollLeft -= newScrollX
-            el.scrollTop -= newScrollY
+          target.scrollLeft -= newScrollX
+          target.scrollTop -= newScrollY
+          if (target === document.body) {
+            target.scrollLeft -= newScrollX
+            target.scrollTop -= newScrollY
           }
         }
 
@@ -132,14 +164,14 @@ let init = function (el, binding, vnode) {
       }
     }
 
-    u.addEventListeners(el, POINTER_START_EVENTS, el.md)
+    u.addEventListeners(target, POINTER_START_EVENTS, target.md)
 
-    u.addEventListeners(window, POINTER_END_EVENTS, el.mu)
+    u.addEventListeners(window, POINTER_END_EVENTS, target.mu)
 
-    u.addEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
+    u.addEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
   }
   // if value is undefined or true we will init
-  if (binding.value === undefined || binding.value === true) {
+  if (active) {
     if (document.readyState === 'complete') {
       reset()
     } else {
@@ -147,15 +179,10 @@ let init = function (el, binding, vnode) {
     }
   } else {
     // if value is false means we disable
-    // if value is anything else log error
-    if (binding.value) {
-      console.error('The passed value should be either \'undefined\', \'true\' or \'false\'.')
-    }
-
     // window.removeEventListener('load', reset)
-    u.removeEventListeners(el, POINTER_START_EVENTS, el.md)
-    u.removeEventListeners(window, POINTER_END_EVENTS, el.mu)
-    u.removeEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
+    u.removeEventListeners(target, POINTER_START_EVENTS, target.md)
+    u.removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+    u.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
   }
 }
 
@@ -164,13 +191,15 @@ export default {
     init(el, binding, vnode)
   },
   update: function (el, binding, vnode, oldVnode) {
-    if (binding.value !== binding.oldValue) {
+    // update the component only if the parameters change
+    if (JSON.stringify(binding.value) !== JSON.stringify(binding.oldValue)) {
       init(el, binding, vnode)
     }
   },
   unbind: function (el, binding, vnode) {
-    u.removeEventListeners(el, POINTER_START_EVENTS, el.md)
-    u.removeEventListeners(window, POINTER_END_EVENTS, el.mu)
-    u.removeEventListeners(window, POINTER_MOVE_EVENTS, el.mm)
+    let target = el
+    u.removeEventListeners(target, POINTER_START_EVENTS, target.md)
+    u.removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+    u.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
   }
 }
