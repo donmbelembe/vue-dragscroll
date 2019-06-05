@@ -148,9 +148,9 @@ If you want to apply dragscroll to a child dom element you have no control over 
 
 In this case to control if drag should be enabled/disabled you can add the `active` parameter.
 ```html
-<div v-dragscroll="{ target: '.element',  active: true }">
+<mycomponent v-dragscroll="{ target: '.my-draggable-div', active: true }">
   ...content
-</div>
+</mycomponent>
 ```
 
 ## Events
