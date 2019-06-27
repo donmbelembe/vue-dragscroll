@@ -51,12 +51,29 @@ let init = function (el, binding, vnode) {
       let clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
 
       let hasNoChildDrag = binding.arg === 'nochilddrag'
+      let ignoreLeft = binding.modifiers.noleft
+      let ignoreRight = binding.modifiers.noright
+      let ignoreMiddle = binding.modifiers.nomiddle
+      let ignoreBack = binding.modifiers.noback
+      let ignoreForward = binding.modifiers.noforward
       let hasFirstChildDrag = binding.arg === 'firstchilddrag'
       let isEl = clickedElement === target
       let isFirstChild = clickedElement === target.firstChild
       let isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
 
       if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
+        return
+      }
+
+      if (e.which === 1 && ignoreLeft) {
+        return
+      } else if (e.which === 2 && ignoreMiddle) {
+        return
+      } else if (e.which === 3 && ignoreRight) {
+        return
+      } else if (e.which === 4 && ignoreBack) {
+        return
+      } else if (e.which === 5 && ignoreForward) {
         return
       }
 
