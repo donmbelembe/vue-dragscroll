@@ -125,7 +125,7 @@ Firstchilddrag (DEPRECATED, prefer data attributes)
 
 It would be helpful if scroll were passed to the window object, when max scroll position were reached, you can use `pass` modifier.
 ```html
-<div v-dragscroll.pass">
+<div v-dragscroll.pass>
   ...content
 </div>
 ```
