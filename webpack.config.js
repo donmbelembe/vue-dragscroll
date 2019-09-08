@@ -11,7 +11,7 @@ const DEV = process.env.NODE_ENV === 'development'
 const WATCH = process.env.NODE_ENV === 'watch'
 const PROD = process.env.NODE_ENV === 'production'
 
-let webpackConfig = {
+const webpackConfig = {
   mode: PROD ? 'production' : 'development',
   entry: path.resolve(__dirname, library.entry),
   watch: WATCH,
