@@ -1,7 +1,5 @@
 const path = require('path')
 
-const webpack = require('webpack')
-
 // Config object
 const library = {
   name: 'VueDragScroll',
@@ -14,6 +12,7 @@ const WATCH = process.env.NODE_ENV === 'watch'
 const PROD = process.env.NODE_ENV === 'production'
 
 let webpackConfig = {
+  mode: PROD ? 'production' : 'development',
   entry: path.resolve(__dirname, library.entry),
   watch: WATCH,
   output: {
@@ -42,7 +41,10 @@ let webpackConfig = {
         enforce: 'pre',
         test: /\.js?$/,
         exclude: /(node_modules|bower_components)/,
-        use: ['eslint-loader']
+        loader: 'eslint-loader',
+        options: {
+          // eslint options (if necessary)
+        }
       },
       {
         test: /\.js?$/,
@@ -51,14 +53,14 @@ let webpackConfig = {
       }
     ]
   },
-  plugins: []
+  plugins: [],
+  optimization: {
+    minimize: false
+  }
 }
 
 if (PROD) {
-  webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    sourceMap: true,
-    compress: { warnings: false }
-  }))
+  webpackConfig.optimization.minimize = true
 }
 
 module.exports = webpackConfig
