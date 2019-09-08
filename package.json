@@ -1,11 +1,11 @@
 {
   "name": "vue-dragscroll",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": " vue directive to make a scrollable element scroll by draging to the scroll direction",
   "main": "dist/vue-dragscroll.min.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack",
-    "prod": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
+    "prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build": "npm run dev && npm run prod",
     "watch": "cross-env NODE_ENV=watch webpack-dev-server --open --hot"
   },
@@ -25,20 +25,20 @@
   },
   "homepage": "https://github.com/donmbelembe/vue-dragscroll#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-loader": "^8.0.6",
     "cross-env": "^5.2.1",
-    "eslint": "^4.6.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-loader": "^1.9.0",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.11.5"
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
   }
 }

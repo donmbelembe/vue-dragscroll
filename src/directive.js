@@ -4,7 +4,7 @@ const POINTER_START_EVENTS = ['mousedown', 'touchstart']
 const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
 
-let init = function (el, binding, vnode) {
+const init = function (el, binding, vnode) {
   // Default parameters
   let target = el // the element to apply the dragscroll on
   let active = true // enable/disable dragscroll
@@ -44,22 +44,22 @@ let init = function (el, binding, vnode) {
 
     target.md = function (e) {
       e.preventDefault()
-      let isMouseEvent = e instanceof window.MouseEvent
+      const isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
-      let pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
-      let pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
-      let clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
+      const pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
+      const pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
+      const clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
 
-      let hasNoChildDrag = binding.arg === 'nochilddrag'
-      let ignoreLeft = binding.modifiers.noleft
-      let ignoreRight = binding.modifiers.noright
-      let ignoreMiddle = binding.modifiers.nomiddle
-      let ignoreBack = binding.modifiers.noback
-      let ignoreForward = binding.modifiers.noforward
-      let hasFirstChildDrag = binding.arg === 'firstchilddrag'
-      let isEl = clickedElement === target
-      let isFirstChild = clickedElement === target.firstChild
-      let isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
+      const hasNoChildDrag = binding.arg === 'nochilddrag'
+      const ignoreLeft = binding.modifiers.noleft
+      const ignoreRight = binding.modifiers.noright
+      const ignoreMiddle = binding.modifiers.nomiddle
+      const ignoreBack = binding.modifiers.noback
+      const ignoreForward = binding.modifiers.noforward
+      const hasFirstChildDrag = binding.arg === 'firstchilddrag'
+      const isEl = clickedElement === target
+      const isFirstChild = clickedElement === target.firstChild
+      const isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
 
       if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
         return
@@ -102,9 +102,9 @@ let init = function (el, binding, vnode) {
     }
 
     target.mm = function (e) {
-      let isMouseEvent = e instanceof window.MouseEvent
+      const isMouseEvent = e instanceof window.MouseEvent
       let newScrollX, newScrollY
-      let eventDetail = {}
+      const eventDetail = {}
       if (pushed) {
         // pushed
         // Emit start event
@@ -114,8 +114,8 @@ let init = function (el, binding, vnode) {
         isDragging = true
 
         // when we reach the end or the begining of X or Y
-        let isEndX = ((target.scrollLeft + target.clientWidth) >= target.scrollWidth) || target.scrollLeft === 0
-        let isEndY = ((target.scrollTop + target.clientHeight) >= target.scrollHeight) || target.scrollTop === 0
+        const isEndX = ((target.scrollLeft + target.clientWidth) >= target.scrollWidth) || target.scrollLeft === 0
+        const isEndY = ((target.scrollTop + target.clientHeight) >= target.scrollHeight) || target.scrollTop === 0
 
         // get new scroll dimentions
         newScrollX = (-lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX))
@@ -214,7 +214,7 @@ export default {
     }
   },
   unbind: function (el, binding, vnode) {
-    let target = el
+    const target = el
     u.removeEventListeners(target, POINTER_START_EVENTS, target.md)
     u.removeEventListeners(window, POINTER_END_EVENTS, target.mu)
     u.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
