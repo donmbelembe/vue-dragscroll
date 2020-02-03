@@ -151,29 +151,6 @@ const init = function (el, binding, vnode) {
           }
         }
 
-        // // disable one scroll direction in case x or y is specified
-        // if (binding.modifiers.x) newScrollY = -0
-        // if (binding.modifiers.y) newScrollX = -0
-
-        // // compute and scroll
-        // el.scrollLeft -= newScrollX
-        // el.scrollTop -= newScrollY
-        // if (el === document.body) {
-        //   el.scrollLeft -= newScrollX
-        //   el.scrollTop -= newScrollY
-        // }
-
-        // // pass scroll when max reached
-        // if (binding.modifiers.pass) {
-        //   // if one side reach the end scroll window
-        //   if (isEndX) {
-        //     window.scrollBy(-newScrollX, 0)
-        //   }
-        //   if (isEndY) {
-        //     window.scrollBy(0, -newScrollY)
-        //   }
-        // }
-
         // Emit events
         eventDetail.deltaX = -newScrollX
         eventDetail.deltaY = -newScrollY
