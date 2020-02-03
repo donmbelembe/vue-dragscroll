@@ -40,10 +40,10 @@ const init = function (el, binding, vnode) {
   var reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
-    let isClick = false // workaround to handle click event from touch
+    // let isClick = false // workaround to handle click event from touch
 
     target.md = function (e) {
-      e.preventDefault()
+      // e.preventDefault()
       const isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
       const pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
@@ -81,9 +81,9 @@ const init = function (el, binding, vnode) {
       // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
       lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX
       lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY
-      if (e.type === 'touchstart') {
-        isClick = true
-      }
+      // if (e.type === 'touchstart') {
+      //   isClick = true
+      // }
     }
 
     target.mu = function (e) {
@@ -92,13 +92,13 @@ const init = function (el, binding, vnode) {
         u.emitEvent(vnode, 'dragscrollend')
       }
       isDragging = false
-      if (e.type === 'touchend' && isClick === true) {
-        // this workaround enable click will using touch
-        e.target.click()
-        isClick = false
-      } else {
-        e.target.focus()
-      }
+      // if (e.type === 'touchend' && isClick === true) {
+      //   // this workaround enable click will using touch
+      //   e.target.click()
+      //   isClick = false
+      // } else {
+      //   e.target.focus()
+      // }
     }
 
     target.mm = function (e) {
@@ -106,6 +106,7 @@ const init = function (el, binding, vnode) {
       let newScrollX, newScrollY
       const eventDetail = {}
       if (pushed) {
+        e.preventDefault()
         // pushed
         // Emit start event
         if (!isDragging) {
