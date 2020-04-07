@@ -24,7 +24,7 @@ const init = function (el, binding, vnode) {
         console.error('There is no element with the current target value.')
       }
     } else if (typeof binding.value.target !== 'undefined') {
-      console.error('The parameter "target" should be be either \'undefined\' or \'string\'.')
+      console.error('The parameter "target" should be either \'undefined\' or \'string\'.')
     }
 
     // parameter: active
