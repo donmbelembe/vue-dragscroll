@@ -55,6 +55,15 @@
       cursor : -o-grabbing;
       cursor : grabbing;
     }
+
+    .scroller-container {
+      height: 300px;
+      overflow: auto;
+    }
+
+    .scroller {
+      height: 600px;
+    }
   </style>
 </head>
 
@@ -408,6 +417,36 @@ export default {
       </div>
 
       <hr>
+      
+      <div class="row scroller-container">
+          <div class="col-12 col-sm-6 mt-3">
+            <p><strong>Pass scroll to a container when max reached</strong></p>
+            <div>
+  <pre class="prettyprint lang-html">
+  <code>
+    &lt;div class="scroller-container" style="overflow: auto; height: 300px"&gt;
+      &lt;div class="scroller" style="height: 600px"&gt;
+        &lt;div v-dragscroll.pass="{container: '.scroller-container'}&gt; 
+          &lt;div class="subContainer"&gt;...&lt;div&gt; 
+        &lt;div&gt;
+      &lt;div&gt;
+    &lt;div&gt;
+  </code>
+  </pre>
+          <i>It would be helpful if scroll were passed to the encapsulating scrolling context, when max scroll position were reached.</i>
+            </div>
+          </div>
+  
+          <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center scroller bg-secondary">
+            <div class="big-box grab-bing border border-danger bg-secondary" v-dragscroll.pass="{container: '.scroller-container'}"
+              v-on:dragscrollstart="eventTrigged('dragscrollstart')" v-on:dragscrollend="eventTrigged('dragscrollend')"
+              v-on:dragscrollmove="eventTrigged('dragscrollmove', $event)">
+              <img src="./assets/image.jpg" alt="">
+            </div>
+          </div>
+        </div>
+  
+        <hr>
 
       <div class="row">
         <div class="col-12 col-sm-6 mt-3">

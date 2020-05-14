@@ -8,6 +8,7 @@ const init = function (el, binding, vnode) {
   // Default parameters
   let target = el // the element to apply the dragscroll on
   let active = true // enable/disable dragscroll
+  let container = window
 
   // config type: boolean
   // Example: v-dragscroll="true" or v-dragscroll="false"
@@ -26,6 +27,15 @@ const init = function (el, binding, vnode) {
     } else if (typeof binding.value.target !== 'undefined') {
       console.error('The parameter "target" should be either \'undefined\' or \'string\'.')
     }
+    // parameter: container
+    if (typeof binding.value.container === 'string') {
+      container = document.querySelector(binding.value.container)
+      if (!container) {
+        console.error('There is no element with the current container value.')
+      }
+    } else if (typeof binding.value.container !== 'undefined') {
+      console.error('The parameter "container" should be be either \'undefined\' or \'string\'.')
+    }
 
     // parameter: active
     if (typeof binding.value.active === 'boolean') {
@@ -37,6 +47,16 @@ const init = function (el, binding, vnode) {
     // Throw an error if invalid parameters
     console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.')
   }
+
+  var scrollBy = function (x, y) {
+    if (container === window) {
+      window.scrollBy(x, y)
+    } else {
+      container.scrollLeft += x
+      container.scrollTop += y
+    }
+  }
+
   var reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
@@ -131,12 +151,12 @@ const init = function (el, binding, vnode) {
             target.scrollTop -= binding.modifiers.x ? -0 : newScrollY
           }
 
-          // if one side reach the end scroll window
+          // if one side reach the end scroll container
           if (isEndX || binding.modifiers.y) {
-            window.scrollBy(-newScrollX, 0)
+            scrollBy(-newScrollX, 0)
           }
           if (isEndY || binding.modifiers.x) {
-            window.scrollBy(0, -newScrollY)
+            scrollBy(0, -newScrollY)
           }
         } else {
           // disable one scroll direction in case x or y is specified
@@ -182,7 +202,7 @@ const init = function (el, binding, vnode) {
 }
 
 export default {
-  bind: function (el, binding, vnode) {
+  inserted: function (el, binding, vnode) {
     init(el, binding, vnode)
   },
   update: function (el, binding, vnode, oldVnode) {
