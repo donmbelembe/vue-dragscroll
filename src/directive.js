@@ -79,9 +79,32 @@ const init = function (el, binding, vnode) {
       const hasFirstChildDrag = binding.arg === 'firstchilddrag'
       const isEl = clickedElement === target
       const isFirstChild = clickedElement === target.firstChild
-      const isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
 
-      if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
+      let isDataDraggable = false
+      if (isEl) {
+        isDataDraggable = true
+      } else if (hasFirstChildDrag && isFirstChild) {
+        isDataDraggable = true
+      } else if (typeof clickedElement.dataset.dragscroll !== 'undefined') {
+        isDataDraggable = true
+      } else if (typeof clickedElement.dataset.noDragscroll !== 'undefined') {
+        isDataDraggable = false
+      } else {
+        isDataDraggable = !hasNoChildDrag
+        let clickedElementOrParent = clickedElement
+        while (clickedElementOrParent && clickedElementOrParent !== target) {
+          if (typeof clickedElementOrParent.dataset.dragscrollNested !== 'undefined') {
+            isDataDraggable = true
+            break
+          } else if (typeof clickedElementOrParent.dataset.noDragscrollNested !== 'undefined') {
+            isDataDraggable = false
+            break
+          }
+          clickedElementOrParent = clickedElementOrParent.parentElement
+        }
+      }
+
+      if (!isDataDraggable) {
         return
       }
 
