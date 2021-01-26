@@ -1,9 +1,9 @@
-# vue-dragscroll ([Documentation](https://donmbelembe.github.io/vue-dragscroll/))
+# vue-dragscroll ([Documentation](http://vue-dragscroll.donfalcon.com/))
 
 vue-dragscroll is a micro vue.js directive which
 enables scrolling via holding the mouse button ("drag and drop" or
 "click and hold" style, [online
-demo](https://donmbelembe.github.io/vue-dragscroll/)).
+demo](http://vue-dragscroll.donfalcon.com/)).
 
 ## Installation
 
