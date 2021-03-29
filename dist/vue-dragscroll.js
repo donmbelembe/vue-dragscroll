@@ -7,116 +7,245 @@
 		exports["VueDragScroll"] = factory();
 	else
 		root["VueDragScroll"] = factory();
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/dist/";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/main.js");
-/******/ })
-/************************************************************************/
-/******/ ({
+})(self, function() {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/directive.js":
 /*!**************************!*\
   !*** ./src/directive.js ***!
   \**************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ \"./src/utils.js\");\nfunction _typeof(obj) { \"@babel/helpers - typeof\"; if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\n\nvar POINTER_START_EVENTS = ['mousedown', 'touchstart'];\nvar POINTER_MOVE_EVENTS = ['mousemove', 'touchmove'];\nvar POINTER_END_EVENTS = ['mouseup', 'touchend'];\n\nvar init = function init(el, binding, vnode) {\n  // Default parameters\n  var target = el; // the element to apply the dragscroll on\n\n  var active = true; // enable/disable dragscroll\n\n  var container = window; // config type: boolean\n  // Example: v-dragscroll=\"true\" or v-dragscroll=\"false\"\n\n  if (typeof binding.value === 'boolean') {\n    active = binding.value;\n  } else if (_typeof(binding.value) === 'object') {\n    // config type: object\n    // Example: v-dragscroll=\"{ active: true , target: \"child\" }\"\n    // parameter: target\n    if (typeof binding.value.target === 'string') {\n      target = el.querySelector(binding.value.target);\n\n      if (!target) {\n        console.error('There is no element with the current target value.');\n      }\n    } else if (typeof binding.value.target !== 'undefined') {\n      console.error('The parameter \"target\" should be either \\'undefined\\' or \\'string\\'.');\n    } // parameter: container\n\n\n    if (typeof binding.value.container === 'string') {\n      container = document.querySelector(binding.value.container);\n\n      if (!container) {\n        console.error('There is no element with the current container value.');\n      }\n    } else if (typeof binding.value.container !== 'undefined') {\n      console.error('The parameter \"container\" should be be either \\'undefined\\' or \\'string\\'.');\n    } // parameter: active\n\n\n    if (typeof binding.value.active === 'boolean') {\n      active = binding.value.active;\n    } else if (typeof binding.value.active !== 'undefined') {\n      console.error('The parameter \"active\" value should be either \\'undefined\\', \\'true\\' or \\'false\\'.');\n    }\n  } else if (typeof binding.value !== 'undefined') {\n    // Throw an error if invalid parameters\n    console.error('The passed value should be either \\'undefined\\', \\'true\\' or \\'false\\' or \\'object\\'.');\n  }\n\n  var scrollBy = function scrollBy(x, y) {\n    if (container === window) {\n      window.scrollBy(x, y);\n    } else {\n      container.scrollLeft += x;\n      container.scrollTop += y;\n    }\n  };\n\n  var reset = function reset() {\n    var lastClientX, lastClientY, pushed;\n    var isDragging = false; // let isClick = false // workaround to handle click event from touch\n\n    target.md = function (e) {\n      // e.preventDefault()\n      var isMouseEvent = e instanceof window.MouseEvent; // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element\n\n      var pageX = isMouseEvent ? e.pageX : e.touches[0].pageX;\n      var pageY = isMouseEvent ? e.pageY : e.touches[0].pageY;\n      var clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset);\n      var hasNoChildDrag = binding.arg === 'nochilddrag';\n      var ignoreLeft = binding.modifiers.noleft;\n      var ignoreRight = binding.modifiers.noright;\n      var ignoreMiddle = binding.modifiers.nomiddle;\n      var ignoreBack = binding.modifiers.noback;\n      var ignoreForward = binding.modifiers.noforward;\n      var hasFirstChildDrag = binding.arg === 'firstchilddrag';\n      var isEl = clickedElement === target;\n      var isFirstChild = clickedElement === target.firstChild;\n      var isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined';\n\n      if (!isEl && (!isDataDraggable || hasFirstChildDrag && !isFirstChild)) {\n        return;\n      }\n\n      if (e.which === 1 && ignoreLeft) {\n        return;\n      } else if (e.which === 2 && ignoreMiddle) {\n        return;\n      } else if (e.which === 3 && ignoreRight) {\n        return;\n      } else if (e.which === 4 && ignoreBack) {\n        return;\n      } else if (e.which === 5 && ignoreForward) {\n        return;\n      }\n\n      pushed = 1; // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element\n\n      lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX;\n      lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY; // if (e.type === 'touchstart') {\n      //   isClick = true\n      // }\n    };\n\n    target.mu = function (e) {\n      pushed = 0;\n\n      if (isDragging) {\n        _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].emitEvent(vnode, 'dragscrollend');\n      }\n\n      isDragging = false; // if (e.type === 'touchend' && isClick === true) {\n      //   // this workaround enable click will using touch\n      //   e.target.click()\n      //   isClick = false\n      // } else {\n      //   e.target.focus()\n      // }\n    };\n\n    target.mm = function (e) {\n      var isMouseEvent = e instanceof window.MouseEvent;\n      var newScrollX, newScrollY;\n      var eventDetail = {};\n\n      if (pushed) {\n        e.preventDefault(); // pushed\n        // Emit start event\n\n        if (!isDragging) {\n          _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].emitEvent(vnode, 'dragscrollstart');\n        }\n\n        isDragging = true; // when we reach the end or the begining of X or Y\n\n        var isEndX = target.scrollLeft + target.clientWidth >= target.scrollWidth || target.scrollLeft === 0;\n        var isEndY = target.scrollTop + target.clientHeight >= target.scrollHeight || target.scrollTop === 0; // get new scroll dimentions\n\n        newScrollX = -lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX);\n        newScrollY = -lastClientY + (lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY);\n\n        if (binding.modifiers.pass) {\n          // compute and scroll\n          target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX;\n          target.scrollTop -= binding.modifiers.x ? -0 : newScrollY;\n\n          if (target === document.body) {\n            target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX;\n            target.scrollTop -= binding.modifiers.x ? -0 : newScrollY;\n          } // if one side reach the end scroll container\n\n\n          if (isEndX || binding.modifiers.y) {\n            scrollBy(-newScrollX, 0);\n          }\n\n          if (isEndY || binding.modifiers.x) {\n            scrollBy(0, -newScrollY);\n          }\n        } else {\n          // disable one scroll direction in case x or y is specified\n          if (binding.modifiers.x) newScrollY = -0;\n          if (binding.modifiers.y) newScrollX = -0; // compute and scroll\n\n          target.scrollLeft -= newScrollX;\n          target.scrollTop -= newScrollY;\n\n          if (target === document.body) {\n            target.scrollLeft -= newScrollX;\n            target.scrollTop -= newScrollY;\n          }\n        } // Emit events\n\n\n        eventDetail.deltaX = -newScrollX;\n        eventDetail.deltaY = -newScrollY;\n        _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].emitEvent(vnode, 'dragscrollmove', eventDetail);\n      }\n    };\n\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].addEventListeners(target, POINTER_START_EVENTS, target.md);\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].addEventListeners(window, POINTER_END_EVENTS, target.mu);\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].addEventListeners(window, POINTER_MOVE_EVENTS, target.mm);\n  }; // if value is undefined or true we will init\n\n\n  if (active) {\n    if (document.readyState === 'complete') {\n      reset();\n    } else {\n      window.addEventListener('load', reset);\n    }\n  } else {\n    // if value is false means we disable\n    // window.removeEventListener('load', reset)\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].removeEventListeners(target, POINTER_START_EVENTS, target.md);\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].removeEventListeners(window, POINTER_END_EVENTS, target.mu);\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  inserted: function inserted(el, binding, vnode) {\n    init(el, binding, vnode);\n  },\n  update: function update(el, binding, vnode, oldVnode) {\n    // update the component only if the parameters change\n    if (JSON.stringify(binding.value) !== JSON.stringify(binding.oldValue)) {\n      init(el, binding, vnode);\n    }\n  },\n  unbind: function unbind(el, binding, vnode) {\n    var target = el;\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].removeEventListeners(target, POINTER_START_EVENTS, target.md);\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].removeEventListeners(window, POINTER_END_EVENTS, target.mu);\n    _utils__WEBPACK_IMPORTED_MODULE_0__[\"default\"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvZGlyZWN0aXZlLmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vVnVlRHJhZ1Njcm9sbC8uL3NyYy9kaXJlY3RpdmUuanM/OGI0NyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdSBmcm9tICcuL3V0aWxzJ1xyXG5cclxuY29uc3QgUE9JTlRFUl9TVEFSVF9FVkVOVFMgPSBbJ21vdXNlZG93bicsICd0b3VjaHN0YXJ0J11cclxuY29uc3QgUE9JTlRFUl9NT1ZFX0VWRU5UUyA9IFsnbW91c2Vtb3ZlJywgJ3RvdWNobW92ZSddXHJcbmNvbnN0IFBPSU5URVJfRU5EX0VWRU5UUyA9IFsnbW91c2V1cCcsICd0b3VjaGVuZCddXHJcblxyXG5jb25zdCBpbml0ID0gZnVuY3Rpb24gKGVsLCBiaW5kaW5nLCB2bm9kZSkge1xyXG4gIC8vIERlZmF1bHQgcGFyYW1ldGVyc1xyXG4gIGxldCB0YXJnZXQgPSBlbCAvLyB0aGUgZWxlbWVudCB0byBhcHBseSB0aGUgZHJhZ3Njcm9sbCBvblxyXG4gIGxldCBhY3RpdmUgPSB0cnVlIC8vIGVuYWJsZS9kaXNhYmxlIGRyYWdzY3JvbGxcclxuICBsZXQgY29udGFpbmVyID0gd2luZG93XHJcblxyXG4gIC8vIGNvbmZpZyB0eXBlOiBib29sZWFuXHJcbiAgLy8gRXhhbXBsZTogdi1kcmFnc2Nyb2xsPVwidHJ1ZVwiIG9yIHYtZHJhZ3Njcm9sbD1cImZhbHNlXCJcclxuICBpZiAodHlwZW9mIGJpbmRpbmcudmFsdWUgPT09ICdib29sZWFuJykge1xyXG4gICAgYWN0aXZlID0gYmluZGluZy52YWx1ZVxyXG4gIH0gZWxzZSBpZiAodHlwZW9mIGJpbmRpbmcudmFsdWUgPT09ICdvYmplY3QnKSB7XHJcbiAgICAvLyBjb25maWcgdHlwZTogb2JqZWN0XHJcbiAgICAvLyBFeGFtcGxlOiB2LWRyYWdzY3JvbGw9XCJ7IGFjdGl2ZTogdHJ1ZSAsIHRhcmdldDogXCJjaGlsZFwiIH1cIlxyXG5cclxuICAgIC8vIHBhcmFtZXRlcjogdGFyZ2V0XHJcbiAgICBpZiAodHlwZW9mIGJpbmRpbmcudmFsdWUudGFyZ2V0ID09PSAnc3RyaW5nJykge1xyXG4gICAgICB0YXJnZXQgPSBlbC5xdWVyeVNlbGVjdG9yKGJpbmRpbmcudmFsdWUudGFyZ2V0KVxyXG4gICAgICBpZiAoIXRhcmdldCkge1xyXG4gICAgICAgIGNvbnNvbGUuZXJyb3IoJ1RoZXJlIGlzIG5vIGVsZW1lbnQgd2l0aCB0aGUgY3VycmVudCB0YXJnZXQgdmFsdWUuJylcclxuICAgICAgfVxyXG4gICAgfSBlbHNlIGlmICh0eXBlb2YgYmluZGluZy52YWx1ZS50YXJnZXQgIT09ICd1bmRlZmluZWQnKSB7XHJcbiAgICAgIGNvbnNvbGUuZXJyb3IoJ1RoZSBwYXJhbWV0ZXIgXCJ0YXJnZXRcIiBzaG91bGQgYmUgZWl0aGVyIFxcJ3VuZGVmaW5lZFxcJyBvciBcXCdzdHJpbmdcXCcuJylcclxuICAgIH1cclxuICAgIC8vIHBhcmFtZXRlcjogY29udGFpbmVyXHJcbiAgICBpZiAodHlwZW9mIGJpbmRpbmcudmFsdWUuY29udGFpbmVyID09PSAnc3RyaW5nJykge1xyXG4gICAgICBjb250YWluZXIgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGJpbmRpbmcudmFsdWUuY29udGFpbmVyKVxyXG4gICAgICBpZiAoIWNvbnRhaW5lcikge1xyXG4gICAgICAgIGNvbnNvbGUuZXJyb3IoJ1RoZXJlIGlzIG5vIGVsZW1lbnQgd2l0aCB0aGUgY3VycmVudCBjb250YWluZXIgdmFsdWUuJylcclxuICAgICAgfVxyXG4gICAgfSBlbHNlIGlmICh0eXBlb2YgYmluZGluZy52YWx1ZS5jb250YWluZXIgIT09ICd1bmRlZmluZWQnKSB7XHJcbiAgICAgIGNvbnNvbGUuZXJyb3IoJ1RoZSBwYXJhbWV0ZXIgXCJjb250YWluZXJcIiBzaG91bGQgYmUgYmUgZWl0aGVyIFxcJ3VuZGVmaW5lZFxcJyBvciBcXCdzdHJpbmdcXCcuJylcclxuICAgIH1cclxuXHJcbiAgICAvLyBwYXJhbWV0ZXI6IGFjdGl2ZVxyXG4gICAgaWYgKHR5cGVvZiBiaW5kaW5nLnZhbHVlLmFjdGl2ZSA9PT0gJ2Jvb2xlYW4nKSB7XHJcbiAgICAgIGFjdGl2ZSA9IGJpbmRpbmcudmFsdWUuYWN0aXZlXHJcbiAgICB9IGVsc2UgaWYgKHR5cGVvZiBiaW5kaW5nLnZhbHVlLmFjdGl2ZSAhPT0gJ3VuZGVmaW5lZCcpIHtcclxuICAgICAgY29uc29sZS5lcnJvcignVGhlIHBhcmFtZXRlciBcImFjdGl2ZVwiIHZhbHVlIHNob3VsZCBiZSBlaXRoZXIgXFwndW5kZWZpbmVkXFwnLCBcXCd0cnVlXFwnIG9yIFxcJ2ZhbHNlXFwnLicpXHJcbiAgICB9XHJcbiAgfSBlbHNlIGlmICh0eXBlb2YgYmluZGluZy52YWx1ZSAhPT0gJ3VuZGVmaW5lZCcpIHtcclxuICAgIC8vIFRocm93IGFuIGVycm9yIGlmIGludmFsaWQgcGFyYW1ldGVyc1xyXG4gICAgY29uc29sZS5lcnJvcignVGhlIHBhc3NlZCB2YWx1ZSBzaG91bGQgYmUgZWl0aGVyIFxcJ3VuZGVmaW5lZFxcJywgXFwndHJ1ZVxcJyBvciBcXCdmYWxzZVxcJyBvciBcXCdvYmplY3RcXCcuJylcclxuICB9XHJcblxyXG4gIHZhciBzY3JvbGxCeSA9IGZ1bmN0aW9uICh4LCB5KSB7XHJcbiAgICBpZiAoY29udGFpbmVyID09PSB3aW5kb3cpIHtcclxuICAgICAgd2luZG93LnNjcm9sbEJ5KHgsIHkpXHJcbiAgICB9IGVsc2Uge1xyXG4gICAgICBjb250YWluZXIuc2Nyb2xsTGVmdCArPSB4XHJcbiAgICAgIGNvbnRhaW5lci5zY3JvbGxUb3AgKz0geVxyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgdmFyIHJlc2V0ID0gZnVuY3Rpb24gKCkge1xyXG4gICAgbGV0IGxhc3RDbGllbnRYLCBsYXN0Q2xpZW50WSwgcHVzaGVkXHJcbiAgICBsZXQgaXNEcmFnZ2luZyA9IGZhbHNlXHJcbiAgICAvLyBsZXQgaXNDbGljayA9IGZhbHNlIC8vIHdvcmthcm91bmQgdG8gaGFuZGxlIGNsaWNrIGV2ZW50IGZyb20gdG91Y2hcclxuXHJcbiAgICB0YXJnZXQubWQgPSBmdW5jdGlvbiAoZSkge1xyXG4gICAgICAvLyBlLnByZXZlbnREZWZhdWx0KClcclxuICAgICAgY29uc3QgaXNNb3VzZUV2ZW50ID0gZSBpbnN0YW5jZW9mIHdpbmRvdy5Nb3VzZUV2ZW50XHJcbiAgICAgIC8vIFRoZSBjb29yZGluYXRlcyBvZiB0aGUgbW91c2UgcG9pbnRlciBjb21wYXJlZCB0byB0aGUgcGFnZSB3aGVuIHRoZSBtb3VzZSBidXR0b24gaXMgY2xpY2tlZCBvbiBhbiBlbGVtZW50XHJcbiAgICAgIGNvbnN0IHBhZ2VYID0gaXNNb3VzZUV2ZW50ID8gZS5wYWdlWCA6IGUudG91Y2hlc1swXS5wYWdlWFxyXG4gICAgICBjb25zdCBwYWdlWSA9IGlzTW91c2VFdmVudCA/IGUucGFnZVkgOiBlLnRvdWNoZXNbMF0ucGFnZVlcclxuICAgICAgY29uc3QgY2xpY2tlZEVsZW1lbnQgPSBkb2N1bWVudC5lbGVtZW50RnJvbVBvaW50KHBhZ2VYIC0gd2luZG93LnBhZ2VYT2Zmc2V0LCBwYWdlWSAtIHdpbmRvdy5wYWdlWU9mZnNldClcclxuXHJcbiAgICAgIGNvbnN0IGhhc05vQ2hpbGREcmFnID0gYmluZGluZy5hcmcgPT09ICdub2NoaWxkZHJhZydcclxuICAgICAgY29uc3QgaWdub3JlTGVmdCA9IGJpbmRpbmcubW9kaWZpZXJzLm5vbGVmdFxyXG4gICAgICBjb25zdCBpZ25vcmVSaWdodCA9IGJpbmRpbmcubW9kaWZpZXJzLm5vcmlnaHRcclxuICAgICAgY29uc3QgaWdub3JlTWlkZGxlID0gYmluZGluZy5tb2RpZmllcnMubm9taWRkbGVcclxuICAgICAgY29uc3QgaWdub3JlQmFjayA9IGJpbmRpbmcubW9kaWZpZXJzLm5vYmFja1xyXG4gICAgICBjb25zdCBpZ25vcmVGb3J3YXJkID0gYmluZGluZy5tb2RpZmllcnMubm9mb3J3YXJkXHJcbiAgICAgIGNvbnN0IGhhc0ZpcnN0Q2hpbGREcmFnID0gYmluZGluZy5hcmcgPT09ICdmaXJzdGNoaWxkZHJhZydcclxuICAgICAgY29uc3QgaXNFbCA9IGNsaWNrZWRFbGVtZW50ID09PSB0YXJnZXRcclxuICAgICAgY29uc3QgaXNGaXJzdENoaWxkID0gY2xpY2tlZEVsZW1lbnQgPT09IHRhcmdldC5maXJzdENoaWxkXHJcbiAgICAgIGNvbnN0IGlzRGF0YURyYWdnYWJsZSA9IGhhc05vQ2hpbGREcmFnID8gdHlwZW9mIGNsaWNrZWRFbGVtZW50LmRhdGFzZXQuZHJhZ3Njcm9sbCAhPT0gJ3VuZGVmaW5lZCcgOiB0eXBlb2YgY2xpY2tlZEVsZW1lbnQuZGF0YXNldC5ub0RyYWdzY3JvbGwgPT09ICd1bmRlZmluZWQnXHJcblxyXG4gICAgICBpZiAoIWlzRWwgJiYgKCFpc0RhdGFEcmFnZ2FibGUgfHwgKGhhc0ZpcnN0Q2hpbGREcmFnICYmICFpc0ZpcnN0Q2hpbGQpKSkge1xyXG4gICAgICAgIHJldHVyblxyXG4gICAgICB9XHJcblxyXG4gICAgICBpZiAoZS53aGljaCA9PT0gMSAmJiBpZ25vcmVMZWZ0KSB7XHJcbiAgICAgICAgcmV0dXJuXHJcbiAgICAgIH0gZWxzZSBpZiAoZS53aGljaCA9PT0gMiAmJiBpZ25vcmVNaWRkbGUpIHtcclxuICAgICAgICByZXR1cm5cclxuICAgICAgfSBlbHNlIGlmIChlLndoaWNoID09PSAzICYmIGlnbm9yZVJpZ2h0KSB7XHJcbiAgICAgICAgcmV0dXJuXHJcbiAgICAgIH0gZWxzZSBpZiAoZS53aGljaCA9PT0gNCAmJiBpZ25vcmVCYWNrKSB7XHJcbiAgICAgICAgcmV0dXJuXHJcbiAgICAgIH0gZWxzZSBpZiAoZS53aGljaCA9PT0gNSAmJiBpZ25vcmVGb3J3YXJkKSB7XHJcbiAgICAgICAgcmV0dXJuXHJcbiAgICAgIH1cclxuXHJcbiAgICAgIHB1c2hlZCA9IDFcclxuICAgICAgLy8gVGhlIGNvb3JkaW5hdGVzIG9mIHRoZSBtb3VzZSBwb2ludGVyIGNvbXBhcmVkIHRvIHRoZSB2aWV3cG9ydCB3aGVuIHRoZSBtb3VzZSBidXR0b24gaXMgY2xpY2tlZCBvbiBhbiBlbGVtZW50XHJcbiAgICAgIGxhc3RDbGllbnRYID0gaXNNb3VzZUV2ZW50ID8gZS5jbGllbnRYIDogZS50b3VjaGVzWzBdLmNsaWVudFhcclxuICAgICAgbGFzdENsaWVudFkgPSBpc01vdXNlRXZlbnQgPyBlLmNsaWVudFkgOiBlLnRvdWNoZXNbMF0uY2xpZW50WVxyXG4gICAgICAvLyBpZiAoZS50eXBlID09PSAndG91Y2hzdGFydCcpIHtcclxuICAgICAgLy8gICBpc0NsaWNrID0gdHJ1ZVxyXG4gICAgICAvLyB9XHJcbiAgICB9XHJcblxyXG4gICAgdGFyZ2V0Lm11ID0gZnVuY3Rpb24gKGUpIHtcclxuICAgICAgcHVzaGVkID0gMFxyXG4gICAgICBpZiAoaXNEcmFnZ2luZykge1xyXG4gICAgICAgIHUuZW1pdEV2ZW50KHZub2RlLCAnZHJhZ3Njcm9sbGVuZCcpXHJcbiAgICAgIH1cclxuICAgICAgaXNEcmFnZ2luZyA9IGZhbHNlXHJcbiAgICAgIC8vIGlmIChlLnR5cGUgPT09ICd0b3VjaGVuZCcgJiYgaXNDbGljayA9PT0gdHJ1ZSkge1xyXG4gICAgICAvLyAgIC8vIHRoaXMgd29ya2Fyb3VuZCBlbmFibGUgY2xpY2sgd2lsbCB1c2luZyB0b3VjaFxyXG4gICAgICAvLyAgIGUudGFyZ2V0LmNsaWNrKClcclxuICAgICAgLy8gICBpc0NsaWNrID0gZmFsc2VcclxuICAgICAgLy8gfSBlbHNlIHtcclxuICAgICAgLy8gICBlLnRhcmdldC5mb2N1cygpXHJcbiAgICAgIC8vIH1cclxuICAgIH1cclxuXHJcbiAgICB0YXJnZXQubW0gPSBmdW5jdGlvbiAoZSkge1xyXG4gICAgICBjb25zdCBpc01vdXNlRXZlbnQgPSBlIGluc3RhbmNlb2Ygd2luZG93Lk1vdXNlRXZlbnRcclxuICAgICAgbGV0IG5ld1Njcm9sbFgsIG5ld1Njcm9sbFlcclxuICAgICAgY29uc3QgZXZlbnREZXRhaWwgPSB7fVxyXG4gICAgICBpZiAocHVzaGVkKSB7XHJcbiAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpXHJcbiAgICAgICAgLy8gcHVzaGVkXHJcbiAgICAgICAgLy8gRW1pdCBzdGFydCBldmVudFxyXG4gICAgICAgIGlmICghaXNEcmFnZ2luZykge1xyXG4gICAgICAgICAgdS5lbWl0RXZlbnQodm5vZGUsICdkcmFnc2Nyb2xsc3RhcnQnKVxyXG4gICAgICAgIH1cclxuICAgICAgICBpc0RyYWdnaW5nID0gdHJ1ZVxyXG5cclxuICAgICAgICAvLyB3aGVuIHdlIHJlYWNoIHRoZSBlbmQgb3IgdGhlIGJlZ2luaW5nIG9mIFggb3IgWVxyXG4gICAgICAgIGNvbnN0IGlzRW5kWCA9ICgodGFyZ2V0LnNjcm9sbExlZnQgKyB0YXJnZXQuY2xpZW50V2lkdGgpID49IHRhcmdldC5zY3JvbGxXaWR0aCkgfHwgdGFyZ2V0LnNjcm9sbExlZnQgPT09IDBcclxuICAgICAgICBjb25zdCBpc0VuZFkgPSAoKHRhcmdldC5zY3JvbGxUb3AgKyB0YXJnZXQuY2xpZW50SGVpZ2h0KSA+PSB0YXJnZXQuc2Nyb2xsSGVpZ2h0KSB8fCB0YXJnZXQuc2Nyb2xsVG9wID09PSAwXHJcblxyXG4gICAgICAgIC8vIGdldCBuZXcgc2Nyb2xsIGRpbWVudGlvbnNcclxuICAgICAgICBuZXdTY3JvbGxYID0gKC1sYXN0Q2xpZW50WCArIChsYXN0Q2xpZW50WCA9IGlzTW91c2VFdmVudCA/IGUuY2xpZW50WCA6IGUudG91Y2hlc1swXS5jbGllbnRYKSlcclxuICAgICAgICBuZXdTY3JvbGxZID0gKC1sYXN0Q2xpZW50WSArIChsYXN0Q2xpZW50WSA9IGlzTW91c2VFdmVudCA/IGUuY2xpZW50WSA6IGUudG91Y2hlc1swXS5jbGllbnRZKSlcclxuXHJcbiAgICAgICAgaWYgKGJpbmRpbmcubW9kaWZpZXJzLnBhc3MpIHtcclxuICAgICAgICAgIC8vIGNvbXB1dGUgYW5kIHNjcm9sbFxyXG4gICAgICAgICAgdGFyZ2V0LnNjcm9sbExlZnQgLT0gYmluZGluZy5tb2RpZmllcnMueSA/IC0wIDogbmV3U2Nyb2xsWFxyXG4gICAgICAgICAgdGFyZ2V0LnNjcm9sbFRvcCAtPSBiaW5kaW5nLm1vZGlmaWVycy54ID8gLTAgOiBuZXdTY3JvbGxZXHJcbiAgICAgICAgICBpZiAodGFyZ2V0ID09PSBkb2N1bWVudC5ib2R5KSB7XHJcbiAgICAgICAgICAgIHRhcmdldC5zY3JvbGxMZWZ0IC09IGJpbmRpbmcubW9kaWZpZXJzLnkgPyAtMCA6IG5ld1Njcm9sbFhcclxuICAgICAgICAgICAgdGFyZ2V0LnNjcm9sbFRvcCAtPSBiaW5kaW5nLm1vZGlmaWVycy54ID8gLTAgOiBuZXdTY3JvbGxZXHJcbiAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgLy8gaWYgb25lIHNpZGUgcmVhY2ggdGhlIGVuZCBzY3JvbGwgY29udGFpbmVyXHJcbiAgICAgICAgICBpZiAoaXNFbmRYIHx8IGJpbmRpbmcubW9kaWZpZXJzLnkpIHtcclxuICAgICAgICAgICAgc2Nyb2xsQnkoLW5ld1Njcm9sbFgsIDApXHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgICBpZiAoaXNFbmRZIHx8IGJpbmRpbmcubW9kaWZpZXJzLngpIHtcclxuICAgICAgICAgICAgc2Nyb2xsQnkoMCwgLW5ld1Njcm9sbFkpXHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgIC8vIGRpc2FibGUgb25lIHNjcm9sbCBkaXJlY3Rpb24gaW4gY2FzZSB4IG9yIHkgaXMgc3BlY2lmaWVkXHJcbiAgICAgICAgICBpZiAoYmluZGluZy5tb2RpZmllcnMueCkgbmV3U2Nyb2xsWSA9IC0wXHJcbiAgICAgICAgICBpZiAoYmluZGluZy5tb2RpZmllcnMueSkgbmV3U2Nyb2xsWCA9IC0wXHJcblxyXG4gICAgICAgICAgLy8gY29tcHV0ZSBhbmQgc2Nyb2xsXHJcbiAgICAgICAgICB0YXJnZXQuc2Nyb2xsTGVmdCAtPSBuZXdTY3JvbGxYXHJcbiAgICAgICAgICB0YXJnZXQuc2Nyb2xsVG9wIC09IG5ld1Njcm9sbFlcclxuICAgICAgICAgIGlmICh0YXJnZXQgPT09IGRvY3VtZW50LmJvZHkpIHtcclxuICAgICAgICAgICAgdGFyZ2V0LnNjcm9sbExlZnQgLT0gbmV3U2Nyb2xsWFxyXG4gICAgICAgICAgICB0YXJnZXQuc2Nyb2xsVG9wIC09IG5ld1Njcm9sbFlcclxuICAgICAgICAgIH1cclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIC8vIEVtaXQgZXZlbnRzXHJcbiAgICAgICAgZXZlbnREZXRhaWwuZGVsdGFYID0gLW5ld1Njcm9sbFhcclxuICAgICAgICBldmVudERldGFpbC5kZWx0YVkgPSAtbmV3U2Nyb2xsWVxyXG4gICAgICAgIHUuZW1pdEV2ZW50KHZub2RlLCAnZHJhZ3Njcm9sbG1vdmUnLCBldmVudERldGFpbClcclxuICAgICAgfVxyXG4gICAgfVxyXG5cclxuICAgIHUuYWRkRXZlbnRMaXN0ZW5lcnModGFyZ2V0LCBQT0lOVEVSX1NUQVJUX0VWRU5UUywgdGFyZ2V0Lm1kKVxyXG5cclxuICAgIHUuYWRkRXZlbnRMaXN0ZW5lcnMod2luZG93LCBQT0lOVEVSX0VORF9FVkVOVFMsIHRhcmdldC5tdSlcclxuXHJcbiAgICB1LmFkZEV2ZW50TGlzdGVuZXJzKHdpbmRvdywgUE9JTlRFUl9NT1ZFX0VWRU5UUywgdGFyZ2V0Lm1tKVxyXG4gIH1cclxuICAvLyBpZiB2YWx1ZSBpcyB1bmRlZmluZWQgb3IgdHJ1ZSB3ZSB3aWxsIGluaXRcclxuICBpZiAoYWN0aXZlKSB7XHJcbiAgICBpZiAoZG9jdW1lbnQucmVhZHlTdGF0ZSA9PT0gJ2NvbXBsZXRlJykge1xyXG4gICAgICByZXNldCgpXHJcbiAgICB9IGVsc2Uge1xyXG4gICAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsIHJlc2V0KVxyXG4gICAgfVxyXG4gIH0gZWxzZSB7XHJcbiAgICAvLyBpZiB2YWx1ZSBpcyBmYWxzZSBtZWFucyB3ZSBkaXNhYmxlXHJcbiAgICAvLyB3aW5kb3cucmVtb3ZlRXZlbnRMaXN0ZW5lcignbG9hZCcsIHJlc2V0KVxyXG4gICAgdS5yZW1vdmVFdmVudExpc3RlbmVycyh0YXJnZXQsIFBPSU5URVJfU1RBUlRfRVZFTlRTLCB0YXJnZXQubWQpXHJcbiAgICB1LnJlbW92ZUV2ZW50TGlzdGVuZXJzKHdpbmRvdywgUE9JTlRFUl9FTkRfRVZFTlRTLCB0YXJnZXQubXUpXHJcbiAgICB1LnJlbW92ZUV2ZW50TGlzdGVuZXJzKHdpbmRvdywgUE9JTlRFUl9NT1ZFX0VWRU5UUywgdGFyZ2V0Lm1tKVxyXG4gIH1cclxufVxyXG5cclxuZXhwb3J0IGRlZmF1bHQge1xyXG4gIGluc2VydGVkOiBmdW5jdGlvbiAoZWwsIGJpbmRpbmcsIHZub2RlKSB7XHJcbiAgICBpbml0KGVsLCBiaW5kaW5nLCB2bm9kZSlcclxuICB9LFxyXG4gIHVwZGF0ZTogZnVuY3Rpb24gKGVsLCBiaW5kaW5nLCB2bm9kZSwgb2xkVm5vZGUpIHtcclxuICAgIC8vIHVwZGF0ZSB0aGUgY29tcG9uZW50IG9ubHkgaWYgdGhlIHBhcmFtZXRlcnMgY2hhbmdlXHJcbiAgICBpZiAoSlNPTi5zdHJpbmdpZnkoYmluZGluZy52YWx1ZSkgIT09IEpTT04uc3RyaW5naWZ5KGJpbmRpbmcub2xkVmFsdWUpKSB7XHJcbiAgICAgIGluaXQoZWwsIGJpbmRpbmcsIHZub2RlKVxyXG4gICAgfVxyXG4gIH0sXHJcbiAgdW5iaW5kOiBmdW5jdGlvbiAoZWwsIGJpbmRpbmcsIHZub2RlKSB7XHJcbiAgICBjb25zdCB0YXJnZXQgPSBlbFxyXG4gICAgdS5yZW1vdmVFdmVudExpc3RlbmVycyh0YXJnZXQsIFBPSU5URVJfU1RBUlRfRVZFTlRTLCB0YXJnZXQubWQpXHJcbiAgICB1LnJlbW92ZUV2ZW50TGlzdGVuZXJzKHdpbmRvdywgUE9JTlRFUl9FTkRfRVZFTlRTLCB0YXJnZXQubXUpXHJcbiAgICB1LnJlbW92ZUV2ZW50TGlzdGVuZXJzKHdpbmRvdywgUE9JTlRFUl9NT1ZFX0VWRU5UUywgdGFyZ2V0Lm1tKVxyXG4gIH1cclxufVxyXG4iXSwibWFwcGluZ3MiOiI7Ozs7QUFBQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBQUE7QUFHQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUVBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQWZBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/directive.js\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/***/ }),
 
-/***/ "./src/main.js":
-/*!*********************!*\
-  !*** ./src/main.js ***!
-  \*********************/
-/*! exports provided: dragscroll, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+var POINTER_START_EVENTS = ['mousedown', 'touchstart'];
+var POINTER_MOVE_EVENTS = ['mousemove', 'touchmove'];
+var POINTER_END_EVENTS = ['mouseup', 'touchend'];
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./directive */ \"./src/directive.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"dragscroll\", function() { return _directive__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\nvar VueDragscroll = {\n  install: function install(Vue, options) {\n    var major = Number(Vue.version.split('.')[0]);\n    var minor = Number(Vue.version.split('.')[1]);\n\n    if (major < 2 && minor < 1) {\n      throw new Error(\"v-dragscroll supports vue version 2.1 and above. You are using Vue@\".concat(Vue.version, \". Please upgrade to the latest version of Vue.\"));\n    } // registration\n\n\n    Vue.directive('dragscroll', _directive__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n  }\n};\n\nif (typeof window !== 'undefined' && window.Vue) {\n  window.VueDragscroll = VueDragscroll;\n  window.Vue.use(VueDragscroll);\n}\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (VueDragscroll);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvbWFpbi5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovL1Z1ZURyYWdTY3JvbGwvLi9zcmMvbWFpbi5qcz81NmQ3Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBkaXJlY3RpdmUgZnJvbSAnLi9kaXJlY3RpdmUnXHJcblxyXG5jb25zdCBWdWVEcmFnc2Nyb2xsID0ge1xyXG4gIGluc3RhbGwgKFZ1ZSwgb3B0aW9ucykge1xyXG4gICAgY29uc3QgbWFqb3IgPSBOdW1iZXIoVnVlLnZlcnNpb24uc3BsaXQoJy4nKVswXSlcclxuICAgIGNvbnN0IG1pbm9yID0gTnVtYmVyKFZ1ZS52ZXJzaW9uLnNwbGl0KCcuJylbMV0pXHJcbiAgICBpZiAobWFqb3IgPCAyICYmIG1pbm9yIDwgMSkge1xyXG4gICAgICB0aHJvdyBuZXcgRXJyb3IoYHYtZHJhZ3Njcm9sbCBzdXBwb3J0cyB2dWUgdmVyc2lvbiAyLjEgYW5kIGFib3ZlLiBZb3UgYXJlIHVzaW5nIFZ1ZUAke1Z1ZS52ZXJzaW9ufS4gUGxlYXNlIHVwZ3JhZGUgdG8gdGhlIGxhdGVzdCB2ZXJzaW9uIG9mIFZ1ZS5gKVxyXG4gICAgfVxyXG4gICAgLy8gcmVnaXN0cmF0aW9uXHJcbiAgICBWdWUuZGlyZWN0aXZlKCdkcmFnc2Nyb2xsJywgZGlyZWN0aXZlKVxyXG4gIH1cclxufVxyXG5cclxuaWYgKHR5cGVvZiB3aW5kb3cgIT09ICd1bmRlZmluZWQnICYmIHdpbmRvdy5WdWUpIHtcclxuICB3aW5kb3cuVnVlRHJhZ3Njcm9sbCA9IFZ1ZURyYWdzY3JvbGxcclxuICB3aW5kb3cuVnVlLnVzZShWdWVEcmFnc2Nyb2xsKVxyXG59XHJcblxyXG5leHBvcnQgeyBkaXJlY3RpdmUgYXMgZHJhZ3Njcm9sbCB9XHJcbmV4cG9ydCBkZWZhdWx0IFZ1ZURyYWdzY3JvbGxcclxuIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBVEE7QUFDQTtBQVdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/main.js\n");
+var init = function init(el, binding, vnode) {
+  // Default parameters
+  var target = el; // the element to apply the dragscroll on
+
+  var active = true; // enable/disable dragscroll
+
+  var container = window; // config type: boolean
+  // Example: v-dragscroll="true" or v-dragscroll="false"
+
+  if (typeof binding.value === 'boolean') {
+    active = binding.value;
+  } else if (_typeof(binding.value) === 'object') {
+    // config type: object
+    // Example: v-dragscroll="{ active: true , target: "child" }"
+    // parameter: target
+    if (typeof binding.value.target === 'string') {
+      target = el.querySelector(binding.value.target);
+
+      if (!target) {
+        console.error('There is no element with the current target value.');
+      }
+    } else if (typeof binding.value.target !== 'undefined') {
+      console.error('The parameter "target" should be either \'undefined\' or \'string\'.');
+    } // parameter: container
+
+
+    if (typeof binding.value.container === 'string') {
+      container = document.querySelector(binding.value.container);
+
+      if (!container) {
+        console.error('There is no element with the current container value.');
+      }
+    } else if (typeof binding.value.container !== 'undefined') {
+      console.error('The parameter "container" should be be either \'undefined\' or \'string\'.');
+    } // parameter: active
+
+
+    if (typeof binding.value.active === 'boolean') {
+      active = binding.value.active;
+    } else if (typeof binding.value.active !== 'undefined') {
+      console.error('The parameter "active" value should be either \'undefined\', \'true\' or \'false\'.');
+    }
+  } else if (typeof binding.value !== 'undefined') {
+    // Throw an error if invalid parameters
+    console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.');
+  }
+
+  var scrollBy = function scrollBy(x, y) {
+    if (container === window) {
+      window.scrollBy(x, y);
+    } else {
+      container.scrollLeft += x;
+      container.scrollTop += y;
+    }
+  };
+
+  var reset = function reset() {
+    var lastClientX, lastClientY, pushed;
+    var isDragging = false; // let isClick = false // workaround to handle click event from touch
+
+    target.md = function (e) {
+      // e.preventDefault()
+      var isMouseEvent = e instanceof window.MouseEvent; // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
+
+      var pageX = isMouseEvent ? e.pageX : e.touches[0].pageX;
+      var pageY = isMouseEvent ? e.pageY : e.touches[0].pageY;
+      var clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset);
+      var hasNoChildDrag = binding.arg === 'nochilddrag';
+      var ignoreLeft = binding.modifiers.noleft;
+      var ignoreRight = binding.modifiers.noright;
+      var ignoreMiddle = binding.modifiers.nomiddle;
+      var ignoreBack = binding.modifiers.noback;
+      var ignoreForward = binding.modifiers.noforward;
+      var hasFirstChildDrag = binding.arg === 'firstchilddrag';
+      var isEl = clickedElement === target;
+      var isFirstChild = clickedElement === target.firstChild;
+      var isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined';
+
+      if (!isEl && (!isDataDraggable || hasFirstChildDrag && !isFirstChild)) {
+        return;
+      }
+
+      if (e.which === 1 && ignoreLeft) {
+        return;
+      } else if (e.which === 2 && ignoreMiddle) {
+        return;
+      } else if (e.which === 3 && ignoreRight) {
+        return;
+      } else if (e.which === 4 && ignoreBack) {
+        return;
+      } else if (e.which === 5 && ignoreForward) {
+        return;
+      }
+
+      pushed = 1; // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
+
+      lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX;
+      lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY; // if (e.type === 'touchstart') {
+      //   isClick = true
+      // }
+    };
+
+    target.mu = function (e) {
+      pushed = 0;
+
+      if (isDragging) {
+        _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent(vnode, 'dragscrollend');
+      }
+
+      isDragging = false; // if (e.type === 'touchend' && isClick === true) {
+      //   // this workaround enable click will using touch
+      //   e.target.click()
+      //   isClick = false
+      // } else {
+      //   e.target.focus()
+      // }
+    };
+
+    target.mm = function (e) {
+      var isMouseEvent = e instanceof window.MouseEvent;
+      var newScrollX, newScrollY;
+      var eventDetail = {};
+
+      if (pushed) {
+        e.preventDefault(); // pushed
+        // Emit start event
+
+        if (!isDragging) {
+          _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent(vnode, 'dragscrollstart');
+        }
+
+        isDragging = true; // when we reach the end or the begining of X or Y
+
+        var isEndX = target.scrollLeft + target.clientWidth >= target.scrollWidth || target.scrollLeft === 0;
+        var isEndY = target.scrollTop + target.clientHeight >= target.scrollHeight || target.scrollTop === 0; // get new scroll dimentions
+
+        newScrollX = -lastClientX + (lastClientX = isMouseEvent ? e.clientX : e.touches[0].clientX);
+        newScrollY = -lastClientY + (lastClientY = isMouseEvent ? e.clientY : e.touches[0].clientY);
+
+        if (binding.modifiers.pass) {
+          // compute and scroll
+          target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX;
+          target.scrollTop -= binding.modifiers.x ? -0 : newScrollY;
+
+          if (target === document.body) {
+            target.scrollLeft -= binding.modifiers.y ? -0 : newScrollX;
+            target.scrollTop -= binding.modifiers.x ? -0 : newScrollY;
+          } // if one side reach the end scroll container
+
+
+          if (isEndX || binding.modifiers.y) {
+            scrollBy(-newScrollX, 0);
+          }
+
+          if (isEndY || binding.modifiers.x) {
+            scrollBy(0, -newScrollY);
+          }
+        } else {
+          // disable one scroll direction in case x or y is specified
+          if (binding.modifiers.x) newScrollY = -0;
+          if (binding.modifiers.y) newScrollX = -0; // compute and scroll
+
+          target.scrollLeft -= newScrollX;
+          target.scrollTop -= newScrollY;
+
+          if (target === document.body) {
+            target.scrollLeft -= newScrollX;
+            target.scrollTop -= newScrollY;
+          }
+        } // Emit events
+
+
+        eventDetail.deltaX = -newScrollX;
+        eventDetail.deltaY = -newScrollY;
+        _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent(vnode, 'dragscrollmove', eventDetail);
+      }
+    };
+
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+  }; // if value is undefined or true we will init
+
+
+  if (active) {
+    if (document.readyState === 'complete') {
+      reset();
+    } else {
+      window.addEventListener('load', reset);
+    }
+  } else {
+    // if value is false means we disable
+    // window.removeEventListener('load', reset)
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  inserted: function inserted(el, binding, vnode) {
+    init(el, binding, vnode);
+  },
+  update: function update(el, binding, vnode, oldVnode) {
+    // update the component only if the parameters change
+    if (JSON.stringify(binding.value) !== JSON.stringify(binding.oldValue)) {
+      init(el, binding, vnode);
+    }
+  },
+  unbind: function unbind(el, binding, vnode) {
+    var target = el;
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+  }
+});
 
 /***/ }),
 
@@ -124,13 +253,145 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _dir
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  addEventListeners: function addEventListeners(el, events, handler) {\n    for (var i = 0, len = events.length; i < len; i++) {\n      el.addEventListener(events[i], handler, {\n        passive: false\n      });\n    }\n  },\n  removeEventListeners: function removeEventListeners(el, events, handler) {\n    for (var i = 0, len = events.length; i < len; i++) {\n      el.removeEventListener(events[i], handler, {\n        passive: false\n      });\n    }\n  },\n  emitEvent: function emitEvent(vnode, eventName, eventDetail) {\n    // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.\n    if (vnode.componentInstance) {\n      vnode.componentInstance.$emit(eventName, eventDetail);\n    } else {\n      var event;\n\n      if (typeof window.CustomEvent === 'function') {\n        event = new window.CustomEvent(eventName, {\n          detail: eventDetail\n        });\n      } else {\n        // Deprecated fallback for IE\n        event = document.createEvent('CustomEvent');\n        event.initCustomEvent(eventName, true, true, eventDetail);\n      }\n\n      vnode.elm.dispatchEvent(event);\n    }\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvdXRpbHMuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9WdWVEcmFnU2Nyb2xsLy4vc3JjL3V0aWxzLmpzPzAyNWUiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQge1xyXG4gIGFkZEV2ZW50TGlzdGVuZXJzIChlbCwgZXZlbnRzLCBoYW5kbGVyKSB7XHJcbiAgICBmb3IgKHZhciBpID0gMCwgbGVuID0gZXZlbnRzLmxlbmd0aDsgaSA8IGxlbjsgaSsrKSB7XHJcbiAgICAgIGVsLmFkZEV2ZW50TGlzdGVuZXIoZXZlbnRzW2ldLCBoYW5kbGVyLCB7IHBhc3NpdmU6IGZhbHNlIH0pXHJcbiAgICB9XHJcbiAgfSxcclxuXHJcbiAgcmVtb3ZlRXZlbnRMaXN0ZW5lcnMgKGVsLCBldmVudHMsIGhhbmRsZXIpIHtcclxuICAgIGZvciAodmFyIGkgPSAwLCBsZW4gPSBldmVudHMubGVuZ3RoOyBpIDwgbGVuOyBpKyspIHtcclxuICAgICAgZWwucmVtb3ZlRXZlbnRMaXN0ZW5lcihldmVudHNbaV0sIGhhbmRsZXIsIHsgcGFzc2l2ZTogZmFsc2UgfSlcclxuICAgIH1cclxuICB9LFxyXG5cclxuICBlbWl0RXZlbnQ6IGZ1bmN0aW9uICh2bm9kZSwgZXZlbnROYW1lLCBldmVudERldGFpbCkge1xyXG4gICAgLy8gSWYgdm5vZGUgaXMgYSBWdWUgY29tcG9uZW50IGluc3RhbmNlLCB1c2UgJGVtaXQuIE90aGVyd2lzZSB1c2UgYSBuYXRpdmUgSFRNTCBldmVudC5cclxuICAgIGlmICh2bm9kZS5jb21wb25lbnRJbnN0YW5jZSkge1xyXG4gICAgICB2bm9kZS5jb21wb25lbnRJbnN0YW5jZS4kZW1pdChldmVudE5hbWUsIGV2ZW50RGV0YWlsKVxyXG4gICAgfSBlbHNlIHtcclxuICAgICAgbGV0IGV2ZW50XHJcbiAgICAgIGlmICh0eXBlb2YgKHdpbmRvdy5DdXN0b21FdmVudCkgPT09ICdmdW5jdGlvbicpIHtcclxuICAgICAgICBldmVudCA9IG5ldyB3aW5kb3cuQ3VzdG9tRXZlbnQoZXZlbnROYW1lLCB7IGRldGFpbDogZXZlbnREZXRhaWwgfSlcclxuICAgICAgfSBlbHNlIHtcclxuICAgICAgICAvLyBEZXByZWNhdGVkIGZhbGxiYWNrIGZvciBJRVxyXG4gICAgICAgIGV2ZW50ID0gZG9jdW1lbnQuY3JlYXRlRXZlbnQoJ0N1c3RvbUV2ZW50JylcclxuICAgICAgICBldmVudC5pbml0Q3VzdG9tRXZlbnQoZXZlbnROYW1lLCB0cnVlLCB0cnVlLCBldmVudERldGFpbClcclxuICAgICAgfVxyXG4gICAgICB2bm9kZS5lbG0uZGlzcGF0Y2hFdmVudChldmVudClcclxuICAgIH1cclxuICB9XHJcbn1cclxuIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUE1QkEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/utils.js\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  addEventListeners: function addEventListeners(el, events, handler) {
+    for (var i = 0, len = events.length; i < len; i++) {
+      el.addEventListener(events[i], handler, {
+        passive: false
+      });
+    }
+  },
+  removeEventListeners: function removeEventListeners(el, events, handler) {
+    for (var i = 0, len = events.length; i < len; i++) {
+      el.removeEventListener(events[i], handler, {
+        passive: false
+      });
+    }
+  },
+  emitEvent: function emitEvent(vnode, eventName, eventDetail) {
+    // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
+    if (vnode.componentInstance) {
+      vnode.componentInstance.$emit(eventName, eventDetail);
+    } else {
+      var event;
+
+      if (typeof window.CustomEvent === 'function') {
+        event = new window.CustomEvent(eventName, {
+          detail: eventDetail
+        });
+      } else {
+        // Deprecated fallback for IE
+        event = document.createEvent('CustomEvent');
+        event.initCustomEvent(eventName, true, true, eventDetail);
+      }
+
+      vnode.elm.dispatchEvent(event);
+    }
+  }
+});
 
 /***/ })
 
-/******/ });
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dragscroll": () => (/* reexport safe */ _directive__WEBPACK_IMPORTED_MODULE_0__.default),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./directive */ "./src/directive.js");
+
+var VueDragscroll = {
+  install: function install(Vue, options) {
+    var major = Number(Vue.version.split('.')[0]);
+    var minor = Number(Vue.version.split('.')[1]);
+
+    if (major < 2 && minor < 1) {
+      throw new Error("v-dragscroll supports vue version 2.1 and above. You are using Vue@".concat(Vue.version, ". Please upgrade to the latest version of Vue."));
+    } // registration
+
+
+    Vue.directive('dragscroll', _directive__WEBPACK_IMPORTED_MODULE_0__.default);
+  }
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.VueDragscroll = VueDragscroll;
+  window.Vue.use(VueDragscroll);
+}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VueDragscroll);
+})();
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
 });
+//# sourceMappingURL=vue-dragscroll.js.map

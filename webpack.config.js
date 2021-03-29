@@ -14,7 +14,7 @@ const PROD = process.env.NODE_ENV === 'production'
 const webpackConfig = {
   mode: PROD ? 'production' : 'development',
   entry: path.resolve(__dirname, library.entry),
-  watch: WATCH,
+  // watch: WATCH,
   output: {
     library: library.name,
     libraryTarget: library.target,
@@ -30,7 +30,7 @@ const webpackConfig = {
       root: '_'
     }
   },
-  devtool: DEV || WATCH ? 'cheap-module-eval-source-map' : 'source-map',
+  devtool: 'source-map',
   devServer: {
     overlay: true,
     contentBase: path.resolve(__dirname)

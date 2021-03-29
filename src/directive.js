@@ -48,7 +48,7 @@ const init = function (el, binding, vnode) {
     console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.')
   }
 
-  var scrollBy = function (x, y) {
+  const scrollBy = function (x, y) {
     if (container === window) {
       window.scrollBy(x, y)
     } else {
@@ -57,7 +57,7 @@ const init = function (el, binding, vnode) {
     }
   }
 
-  var reset = function () {
+  const reset = function () {
     let lastClientX, lastClientY, pushed
     let isDragging = false
     // let isClick = false // workaround to handle click event from touch
