@@ -12,6 +12,7 @@ export default {
   },
 
   emitEvent: function (vnode, eventName, eventDetail) {
+    // Vue 2
     // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
     if (vnode.componentInstance) {
       vnode.componentInstance.$emit(eventName, eventDetail)
@@ -25,6 +26,24 @@ export default {
         event.initCustomEvent(eventName, true, true, eventDetail)
       }
       vnode.elm.dispatchEvent(event)
+    }
+  },
+
+  emitEvent2: function (vnode, eventName, eventDetail) {
+    // Vue 3
+    // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
+    if (vnode.componentInstance) {
+      vnode.componentInstance.$emit(eventName, eventDetail)
+    } else {
+      let event
+      if (typeof (window.CustomEvent) === 'function') {
+        event = new window.CustomEvent(eventName, { detail: eventDetail })
+      } else {
+        // Deprecated fallback for IE
+        event = document.createEvent('CustomEvent')
+        event.initCustomEvent(eventName, true, true, eventDetail)
+      }
+      vnode.el.dispatchEvent(event)
     }
   }
 }
