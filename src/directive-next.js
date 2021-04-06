@@ -179,6 +179,21 @@ const init = function (el, binding, vnode) {
       }
     }
 
+    target.wm = function (e) {
+      const wheelx = binding.modifiers.wheelx
+      const wheelflip = binding.modifiers.wheelflip
+      if (wheelx && !wheelflip) {
+        target.scrollLeft += e.deltaY
+      }
+      if (wheelx && wheelflip) {
+        target.scrollLeft -= e.deltaY
+      }
+      if (!wheelx && wheelflip) {
+        target.scrollTop -= e.deltaY
+      }
+    }
+    target.addEventListener('wheel', target.wm)
+
     u.addEventListeners(target, POINTER_START_EVENTS, target.md)
 
     u.addEventListeners(window, POINTER_END_EVENTS, target.mu)
@@ -195,6 +210,7 @@ const init = function (el, binding, vnode) {
   } else {
     // if value is false means we disable
     // window.removeEventListener('load', reset)
+    target.removeEventListener('wheel', target.wm)
     u.removeEventListeners(target, POINTER_START_EVENTS, target.md)
     u.removeEventListeners(window, POINTER_END_EVENTS, target.mu)
     u.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
