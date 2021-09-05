@@ -32,8 +32,12 @@ const webpackConfig = {
   },
   devtool: 'source-map',
   devServer: {
-    overlay: true,
-    contentBase: path.resolve(__dirname)
+    static: {
+      directory: path.resolve(__dirname)
+    },
+    client: {
+      overlay: true
+    }
   },
   module: {
     rules: [
