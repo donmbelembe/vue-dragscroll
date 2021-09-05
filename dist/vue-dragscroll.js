@@ -136,7 +136,7 @@ var init = function init(el, binding, vnode) {
       pushed = 0;
 
       if (isDragging) {
-        _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent2(vnode, 'dragscrollend');
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent2(vnode, 'dragscrollend');
       }
 
       isDragging = false; // if (e.type === 'touchend' && isClick === true) {
@@ -158,7 +158,7 @@ var init = function init(el, binding, vnode) {
         // Emit start event
 
         if (!isDragging) {
-          _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent2(vnode, 'dragscrollstart');
+          _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent2(vnode, 'dragscrollstart');
         }
 
         isDragging = true; // when we reach the end or the begining of X or Y
@@ -204,13 +204,13 @@ var init = function init(el, binding, vnode) {
 
         eventDetail.deltaX = -newScrollX;
         eventDetail.deltaY = -newScrollY;
-        _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent2(vnode, 'dragscrollmove', eventDetail);
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent2(vnode, 'dragscrollmove', eventDetail);
       }
     };
 
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(target, POINTER_START_EVENTS, target.md);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(window, POINTER_END_EVENTS, target.mu);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
   }; // if value is undefined or true we will init
 
 
@@ -223,9 +223,9 @@ var init = function init(el, binding, vnode) {
   } else {
     // if value is false means we disable
     // window.removeEventListener('load', reset)
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(target, POINTER_START_EVENTS, target.md);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_END_EVENTS, target.mu);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
   }
 };
 
@@ -241,9 +241,9 @@ var init = function init(el, binding, vnode) {
   },
   unmounted: function unmounted(el, binding, vnode) {
     var target = el;
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(target, POINTER_START_EVENTS, target.md);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_END_EVENTS, target.mu);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
   }
 });
 
@@ -373,7 +373,7 @@ var init = function init(el, binding, vnode) {
       pushed = 0;
 
       if (isDragging) {
-        _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent(vnode, 'dragscrollend');
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent(vnode, 'dragscrollend');
       }
 
       isDragging = false; // if (e.type === 'touchend' && isClick === true) {
@@ -395,7 +395,7 @@ var init = function init(el, binding, vnode) {
         // Emit start event
 
         if (!isDragging) {
-          _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent(vnode, 'dragscrollstart');
+          _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent(vnode, 'dragscrollstart');
         }
 
         isDragging = true; // when we reach the end or the begining of X or Y
@@ -441,13 +441,13 @@ var init = function init(el, binding, vnode) {
 
         eventDetail.deltaX = -newScrollX;
         eventDetail.deltaY = -newScrollY;
-        _utils__WEBPACK_IMPORTED_MODULE_0__.default.emitEvent(vnode, 'dragscrollmove', eventDetail);
+        _utils__WEBPACK_IMPORTED_MODULE_0__["default"].emitEvent(vnode, 'dragscrollmove', eventDetail);
       }
     };
 
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(target, POINTER_START_EVENTS, target.md);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(window, POINTER_END_EVENTS, target.mu);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.addEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].addEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
   }; // if value is undefined or true we will init
 
 
@@ -460,9 +460,9 @@ var init = function init(el, binding, vnode) {
   } else {
     // if value is false means we disable
     // window.removeEventListener('load', reset)
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(target, POINTER_START_EVENTS, target.md);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_END_EVENTS, target.mu);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
   }
 };
 
@@ -478,9 +478,9 @@ var init = function init(el, binding, vnode) {
   },
   unbind: function unbind(el, binding, vnode) {
     var target = el;
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(target, POINTER_START_EVENTS, target.md);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_END_EVENTS, target.mu);
-    _utils__WEBPACK_IMPORTED_MODULE_0__.default.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(target, POINTER_START_EVENTS, target.md);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_END_EVENTS, target.mu);
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm);
   }
 });
 
@@ -621,8 +621,8 @@ var __webpack_exports__ = {};
   \*********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "dragscroll": () => (/* reexport safe */ _directive__WEBPACK_IMPORTED_MODULE_0__.default),
-/* harmony export */   "dragscrollNext": () => (/* reexport safe */ _directive_next__WEBPACK_IMPORTED_MODULE_1__.default),
+/* harmony export */   "dragscroll": () => (/* reexport safe */ _directive__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "dragscrollNext": () => (/* reexport safe */ _directive_next__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./directive */ "./src/directive.js");
@@ -639,7 +639,7 @@ var VueDragscroll = {
       throw new Error("v-dragscroll supports vue version 2.1 and above. You are using Vue@".concat(Vue.version, ". Please upgrade to the latest version of Vue."));
     }
 
-    Vue.directive('dragscroll', _directive__WEBPACK_IMPORTED_MODULE_0__.default);
+    Vue.directive('dragscroll', _directive__WEBPACK_IMPORTED_MODULE_0__["default"]);
   }
 };
 
@@ -648,7 +648,7 @@ if (typeof window !== 'undefined' && window.Vue) {
     window.VueDragscroll = VueDragscroll;
     window.Vue.use(VueDragscroll);
   } else {
-    window.VueDragscroll = _directive_next__WEBPACK_IMPORTED_MODULE_1__.default;
+    window.VueDragscroll = _directive_next__WEBPACK_IMPORTED_MODULE_1__["default"];
   }
 }
 
