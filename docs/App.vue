@@ -27,6 +27,7 @@ const testClick = function() {
       <div class="row mt-4">
         <div class="col-12 col-md-6">
           <p class="lead"><strong>vue-dragscroll</strong> is a micro vue.js directive which enables scrolling via holding the mouse button ("drag and drop" or "click and hold" style).</p>
+          <p class="lead">For vue 2 please use the <a href="https://www.npmjs.com/package/vue-dragscroll/v/3.0.1" target="_blank">version 3.0 of this package</a></p>
         </div>
         <div class="col-12 col-md-6">
           <a href="https://github.com/donmbelembe/vue-dragscroll" target="_blank" class="text-warning">
@@ -45,80 +46,12 @@ const testClick = function() {
 
       <div class="row mt-4">
         <div class="col-12 text-center mb-3">
-          <h4 class="text-uppercase">Install via CDN</h4>
+          <h4 class="text-uppercase">Installation</h4>
         </div>
 
         <div class="col-12 col-md-6">
           <div>
-            <p><strong>Vue 2</strong></p>
-            <pre class="prettyprint">
-  <code>
-    &lt;body>
-      &lt;div id="app"&gt;
-        &lt;div vue-dragscroll&gt;
-          ...
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;script src="https://unpkg.com/vue"&gt;&lt;/script&gt;
-      &lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;
-      &lt;script&gt;
-    
-        new Vue({
-          el: '#app',
-          data: {
-            message: 'Hello World'
-          }
-        })
-      &lt;/script&gt;
-    &lt;/body&gt;
-  </code>
-</pre>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6">
-          <div>
-            <p><strong>Vue 3</strong></p>
-            <pre class="prettyprint">
-  <code>
-    &lt;body>
-      &lt;div id="app"&gt;
-        &lt;div vue-dragscroll&gt;
-          ...
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;script src="https://unpkg.com/vue@next"&gt;&lt;/script&gt;
-      &lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;
-      &lt;script&gt;
-    
-        const App = {
-          data() {
-            return {
-              message: 'Hello World'
-            }
-          }
-        }
-    
-        const app = Vue.createApp(App);
-        app.directive('dragscroll', VueDragscroll);
-        app.mount('#app')
-      &lt;/script&gt;
-    &lt;/body&gt;
-  </code>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div class="row my-4 py-4 border">
-        <div class="col-12 text-center mb-3">
-          <h4 class="text-uppercase">Install via NPM</h4>
-        </div>
-        <div class="col-12 col-md-6">
-          <div>
-            <p><strong>Vue 2</strong></p>
+            <p><strong>Via NPM</strong></p>
             <pre class="prettyprint">
   <code>npm install vue-dragscroll</code>
 </pre>
@@ -126,9 +59,14 @@ const testClick = function() {
           <div class="mt-2">
             <p><strong>Install globally (main.js)</strong></p>
             <pre class="prettyprint">
-  import Vue from 'vue'
-  import VueDragscroll from 'vue-dragscroll'
-  Vue.use(VueDragscroll)
+  import { createApp } from 'vue'
+  import App from './App.vue'
+  import VueDragscroll from "vue-dragscroll";
+  
+  const app = createApp(App);
+  
+  app.use(VueDragscroll);
+  app.mount('#app')
 </pre>
           </div>
           <div class="mt-2">
@@ -144,24 +82,37 @@ export default {
 </pre>
           </div>
         </div>
+
         <div class="col-12 col-md-6">
           <div>
-            <p><strong>Vue 3</strong></p>
+            <p><strong>Via CDN</strong></p>
             <pre class="prettyprint">
-  <code>npm install vue-dragscroll</code>
-</pre>
-          </div>
-          <div class="mt-2">
-            <p><strong>Install globally (main.js)</strong></p>
-            <pre class="prettyprint">
-  import { createApp } from 'vue'
-  import { dragscrollNext } from "vue-dragscroll";
-  import App from './App.vue'
-  
-  const app = createApp(App);
-  
-  app.directive('dragscroll', dragscrollNext);
-  app.mount('#app')
+  <code>
+    &lt;body>
+      &lt;div id="app"&gt;
+        &lt;div vue-dragscroll&gt;
+          ...
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;script src="https://unpkg.com/vue"&gt;&lt;/script&gt;
+      &lt;script src="https://unpkg.com/vue-dragscroll"&gt;&lt;/script&gt;
+      &lt;script&gt;
+    
+        const App = {
+          data() {
+            return {
+              message: 'Hello World'
+            }
+          }
+        }
+    
+        const app = Vue.createApp(App);
+        app.use(VueDragscroll);
+        app.mount('#app')
+      &lt;/script&gt;
+    &lt;/body&gt;
+  </code>
 </pre>
           </div>
         </div>
