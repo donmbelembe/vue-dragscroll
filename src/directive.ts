@@ -1,14 +1,15 @@
 import u from './utils'
+import type { DirectiveBinding, VNode } from 'vue'
 
 const POINTER_START_EVENTS = ['mousedown', 'touchstart']
 const POINTER_MOVE_EVENTS = ['mousemove', 'touchmove']
 const POINTER_END_EVENTS = ['mouseup', 'touchend']
 
-const init = function (el, binding, vnode) {
+const init = function (el: Element, binding: DirectiveBinding, vnode: VNode) {
   // Default parameters
-  let target = el // the element to apply the dragscroll on
+  let target = el as any // the element to apply the dragscroll on
   let active = true // enable/disable dragscroll
-  let container = window
+  let container = window as any
 
   // config type: boolean
   // Example: v-dragscroll="true" or v-dragscroll="false"
@@ -48,7 +49,7 @@ const init = function (el, binding, vnode) {
     console.error('The passed value should be either \'undefined\', \'true\' or \'false\' or \'object\'.')
   }
 
-  const scrollBy = function (x, y) {
+  const scrollBy = function (x: number, y: number) {
     if (container === window) {
       window.scrollBy(x, y)
     } else {
@@ -58,17 +59,17 @@ const init = function (el, binding, vnode) {
   }
 
   const reset = function () {
-    let lastClientX, lastClientY, pushed
+    let lastClientX: number, lastClientY: number, pushed: number
     let isDragging = false
     // let isClick = false // workaround to handle click event from touch
 
-    target.md = function (e) {
+    target.md = function (e: { pageX: any; touches: { clientX: any, clientY: any, pageX: any, pageY: any }[]; pageY: any; which: number; clientX: any; clientY: any }) {
       // e.preventDefault()
       const isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
       const pageX = isMouseEvent ? e.pageX : e.touches[0].pageX
       const pageY = isMouseEvent ? e.pageY : e.touches[0].pageY
-      const clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset)
+      const clickedElement = document.elementFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset) as HTMLElement | null
 
       const hasNoChildDrag = binding.arg === 'nochilddrag'
       const ignoreLeft = binding.modifiers.noleft
@@ -79,7 +80,7 @@ const init = function (el, binding, vnode) {
       const hasFirstChildDrag = binding.arg === 'firstchilddrag'
       const isEl = clickedElement === target
       const isFirstChild = clickedElement === target.firstChild
-      const isDataDraggable = hasNoChildDrag ? typeof clickedElement.dataset.dragscroll !== 'undefined' : typeof clickedElement.dataset.noDragscroll === 'undefined'
+      const isDataDraggable = hasNoChildDrag ? typeof clickedElement?.dataset.dragscroll !== 'undefined' : typeof clickedElement?.dataset.noDragscroll === 'undefined'
 
       if (!isEl && (!isDataDraggable || (hasFirstChildDrag && !isFirstChild))) {
         return
@@ -106,10 +107,10 @@ const init = function (el, binding, vnode) {
       // }
     }
 
-    target.mu = function (e) {
+    target.mu = function (e: any) {
       pushed = 0
       if (isDragging) {
-        u.emitEvent2(vnode, 'dragscrollend')
+        u.emitEvent(vnode, 'dragscrollend')
       }
       isDragging = false
       // if (e.type === 'touchend' && isClick === true) {
@@ -121,16 +122,15 @@ const init = function (el, binding, vnode) {
       // }
     }
 
-    target.mm = function (e) {
+    target.mm = function (e: { preventDefault: () => void; clientX: any; touches: { clientY: any, clientX: any }[]; clientY: any }) {
       const isMouseEvent = e instanceof window.MouseEvent
       let newScrollX, newScrollY
-      const eventDetail = {}
       if (pushed) {
         e.preventDefault()
         // pushed
         // Emit start event
         if (!isDragging) {
-          u.emitEvent2(vnode, 'dragscrollstart')
+          u.emitEvent(vnode, 'dragscrollstart')
         }
         isDragging = true
 
@@ -173,9 +173,11 @@ const init = function (el, binding, vnode) {
         }
 
         // Emit events
-        eventDetail.deltaX = -newScrollX
-        eventDetail.deltaY = -newScrollY
-        u.emitEvent2(vnode, 'dragscrollmove', eventDetail)
+        u.emitEvent(vnode, 'dragscrollmove', {
+          // eventDetail
+          deltaX: -newScrollX,
+          deltaY: -newScrollY
+        })
       }
     }
 
@@ -201,20 +203,20 @@ const init = function (el, binding, vnode) {
   }
 }
 
+const destroy = (el: any) => {
+  const target = el
+  u.removeEventListeners(target, POINTER_START_EVENTS, target.md)
+  u.removeEventListeners(window, POINTER_END_EVENTS, target.mu)
+  u.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
+}
+
 export default {
-  mounted: function (el, binding, vnode) {
-    init(el, binding, vnode)
-  },
-  updated: function (el, binding, vnode, oldVnode) {
+  mounted: (el: Element, binding: DirectiveBinding, vnode: VNode) => init(el, binding, vnode),
+  updated: (el: Element, binding: DirectiveBinding, vnode: VNode) => {
     // update the component only if the parameters change
     if (JSON.stringify(binding.value) !== JSON.stringify(binding.oldValue)) {
       init(el, binding, vnode)
     }
   },
-  unmounted: function (el, binding, vnode) {
-    const target = el
-    u.removeEventListeners(target, POINTER_START_EVENTS, target.md)
-    u.removeEventListeners(window, POINTER_END_EVENTS, target.mu)
-    u.removeEventListeners(window, POINTER_MOVE_EVENTS, target.mm)
-  }
+  unmounted: (el: Element) => destroy(el),
 }
