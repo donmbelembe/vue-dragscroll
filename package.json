@@ -5,6 +5,7 @@
   "type": "module",
   "module": "dist/vue-dragscroll.js",
   "main": "dist/vue-dragscroll.umd.cjs",
+  "types": "src/types.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vue-dragscroll.js",
