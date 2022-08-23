@@ -24,15 +24,15 @@ const l = {
     let u, d, h, v = !1;
     t.md = function(o) {
       const f = o instanceof window.MouseEvent, n = f ? o.pageX : o.touches[0].pageX, i = f ? o.pageY : o.touches[0].pageY, c = document.elementFromPoint(n - window.pageXOffset, i - window.pageYOffset), w = e.arg === "nochilddrag", Y = e.modifiers.noleft, S = e.modifiers.noright, D = e.modifiers.nomiddle, N = e.modifiers.noback, O = e.modifiers.noforward, V = e.arg === "firstchilddrag", C = c === t, M = c === t.firstChild, _ = w ? typeof (c == null ? void 0 : c.dataset.dragscroll) < "u" : typeof (c == null ? void 0 : c.dataset.noDragscroll) > "u";
-      if (!(!C && (!_ || V && !M)) && !(o.which === 1 && Y)) {
+      if (!(!C && (!_ || V && !M)) && !(o.button === 0 && Y)) {
         {
-          if (o.which === 2 && D)
+          if (o.button === 1 && D)
             return;
-          if (o.which === 3 && S)
+          if (o.button === 2 && S)
             return;
-          if (o.which === 4 && N)
+          if (o.button === 3 && N)
             return;
-          if (o.which === 5 && O)
+          if (o.button === 4 && O)
             return;
         }
         h = 1, u = f ? o.clientX : o.touches[0].clientX, d = f ? o.clientY : o.touches[0].clientY;
