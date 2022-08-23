@@ -63,7 +63,7 @@ const init = function (el: Element, binding: DirectiveBinding, vnode: VNode) {
     let isDragging = false
     // let isClick = false // workaround to handle click event from touch
 
-    target.md = function (e: { pageX: any; touches: { clientX: any, clientY: any, pageX: any, pageY: any }[]; pageY: any; which: number; clientX: any; clientY: any }) {
+    target.md = function (e: { pageX: any; touches: { clientX: any, clientY: any, pageX: any, pageY: any }[]; pageY: any; button: number; clientX: any; clientY: any }) {
       // e.preventDefault()
       const isMouseEvent = e instanceof window.MouseEvent
       // The coordinates of the mouse pointer compared to the page when the mouse button is clicked on an element
@@ -86,17 +86,17 @@ const init = function (el: Element, binding: DirectiveBinding, vnode: VNode) {
         return
       }
 
-      if (e.which === 1 && ignoreLeft) {
+      if (e.button === 0 && ignoreLeft) {
         return
-      } else if (e.which === 2 && ignoreMiddle) {
+      } else if (e.button === 1 && ignoreMiddle) {
         return
-      } else if (e.which === 3 && ignoreRight) {
+      } else if (e.button === 2 && ignoreRight) {
         return
-      } else if (e.which === 4 && ignoreBack) {
+      } else if (e.button === 3 && ignoreBack) {
         return
-      } else if (e.which === 5 && ignoreForward) {
+      } else if (e.button === 4 && ignoreForward) {
         return
-      }
+      } 
 
       pushed = 1
       // The coordinates of the mouse pointer compared to the viewport when the mouse button is clicked on an element
