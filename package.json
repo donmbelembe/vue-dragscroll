@@ -9,7 +9,8 @@
   "exports": {
     ".": {
       "import": "./dist/vue-dragscroll.js",
-      "require": "./dist/vue-dragscroll.umd.cjs"
+      "require": "./dist/vue-dragscroll.umd.cjs",
+      "types": "./src/types.d.ts"
     }
   },
   "scripts": {
