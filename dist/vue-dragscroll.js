@@ -1,29 +1,31 @@
 const l = {
   addEventListeners(r, e, s) {
-    for (let t = 0, a = e.length; t < a; t++)
+    for (let t = 0, n = e.length; t < n; t++)
       r.addEventListener(e[t], s, { passive: !1 });
   },
   removeEventListeners(r, e, s) {
-    for (let t = 0, a = e.length; t < a; t++)
+    for (let t = 0, n = e.length; t < n; t++)
       r.removeEventListener(e[t], s, { passive: !1 });
   },
-  emitEvent: function(r, e, s) {
-    if (r.componentInstance)
-      r.componentInstance.$emit(e, s);
+  emitEvent(r, e, s) {
+    var n;
+    const t = r.component;
+    if (t && typeof t.emit == "function")
+      t.emit(e, s);
     else {
-      let t = new window.CustomEvent(e, { detail: s });
-      r.el.dispatchEvent(t);
+      const f = new window.CustomEvent(e, { detail: s });
+      (n = r.el) == null || n.dispatchEvent(f);
     }
   }
-}, p = ["mousedown", "touchstart"], E = ["mousemove", "touchmove"], y = ["mouseup", "touchend"], T = function(r, e, s) {
-  let t = r, a = !0, m = window;
-  typeof e.value == "boolean" ? a = e.value : typeof e.value == "object" ? (typeof e.value.target == "string" ? (t = r.querySelector(e.value.target), t || console.error("There is no element with the current target value.")) : typeof e.value.target < "u" && console.error(`The parameter "target" should be either 'undefined' or 'string'.`), typeof e.value.container == "string" ? (m = document.querySelector(e.value.container), m || console.error("There is no element with the current container value.")) : typeof e.value.container < "u" && console.error(`The parameter "container" should be be either 'undefined' or 'string'.`), typeof e.value.active == "boolean" ? a = e.value.active : typeof e.value.active < "u" && console.error(`The parameter "active" value should be either 'undefined', 'true' or 'false'.`)) : typeof e.value < "u" && console.error("The passed value should be either 'undefined', 'true' or 'false' or 'object'.");
-  const g = function(u, d) {
-    m === window ? window.scrollBy(u, d) : (m.scrollLeft += u, m.scrollTop += d);
+}, w = ["mousedown", "touchstart"], E = ["mousemove", "touchmove"], y = ["mouseup", "touchend"], T = function(r, e, s) {
+  let t = r, n = !0, f = window;
+  typeof e.value == "boolean" ? n = e.value : typeof e.value == "object" ? (typeof e.value.target == "string" ? (t = r.querySelector(e.value.target), t || console.error("There is no element with the current target value.")) : typeof e.value.target < "u" && console.error(`The parameter "target" should be either 'undefined' or 'string'.`), typeof e.value.container == "string" ? (f = document.querySelector(e.value.container), f || console.error("There is no element with the current container value.")) : typeof e.value.container < "u" && console.error(`The parameter "container" should be be either 'undefined' or 'string'.`), typeof e.value.active == "boolean" ? n = e.value.active : typeof e.value.active < "u" && console.error(`The parameter "active" value should be either 'undefined', 'true' or 'false'.`)) : typeof e.value < "u" && console.error("The passed value should be either 'undefined', 'true' or 'false' or 'object'.");
+  const g = function(d, m) {
+    f === window ? window.scrollBy(d, m) : (f.scrollLeft += d, f.scrollTop += m);
   }, L = function() {
-    let u, d, h, v = !1;
+    let d, m, h, v = !1;
     t.md = function(o) {
-      const f = o instanceof window.MouseEvent, n = f ? o.pageX : o.touches[0].pageX, i = f ? o.pageY : o.touches[0].pageY, c = document.elementFromPoint(n - window.pageXOffset, i - window.pageYOffset), w = e.arg === "nochilddrag", Y = e.modifiers.noleft, S = e.modifiers.noright, D = e.modifiers.nomiddle, N = e.modifiers.noback, O = e.modifiers.noforward, V = e.arg === "firstchilddrag", C = c === t, M = c === t.firstChild, _ = w ? typeof (c == null ? void 0 : c.dataset.dragscroll) < "u" : typeof (c == null ? void 0 : c.dataset.noDragscroll) > "u";
+      const u = o instanceof window.MouseEvent, i = u ? o.pageX : o.touches[0].pageX, c = u ? o.pageY : o.touches[0].pageY, a = document.elementFromPoint(i - window.pageXOffset, c - window.pageYOffset), p = e.arg === "nochilddrag", Y = e.modifiers.noleft, S = e.modifiers.noright, D = e.modifiers.nomiddle, N = e.modifiers.noback, O = e.modifiers.noforward, V = e.arg === "firstchilddrag", C = a === t, M = a === t.firstChild, _ = p ? typeof (a == null ? void 0 : a.dataset.dragscroll) < "u" : typeof (a == null ? void 0 : a.dataset.noDragscroll) > "u";
       if (!(!C && (!_ || V && !M)) && !(o.button === 0 && Y)) {
         {
           if (o.button === 1 && D)
@@ -35,40 +37,40 @@ const l = {
           if (o.button === 4 && O)
             return;
         }
-        h = 1, u = f ? o.clientX : o.touches[0].clientX, d = f ? o.clientY : o.touches[0].clientY;
+        h = 1, d = u ? o.clientX : o.touches[0].clientX, m = u ? o.clientY : o.touches[0].clientY;
       }
     }, t.mu = function(o) {
       h = 0, v && l.emitEvent(s, "dragscrollend"), v = !1;
     }, t.mm = function(o) {
-      const f = o instanceof window.MouseEvent;
-      let n, i;
+      const u = o instanceof window.MouseEvent;
+      let i, c;
       if (h) {
         o.preventDefault(), v || l.emitEvent(s, "dragscrollstart"), v = !0;
-        const c = t.scrollLeft + t.clientWidth >= t.scrollWidth || t.scrollLeft === 0, w = t.scrollTop + t.clientHeight >= t.scrollHeight || t.scrollTop === 0;
-        n = -u + (u = f ? o.clientX : o.touches[0].clientX), i = -d + (d = f ? o.clientY : o.touches[0].clientY), e.modifiers.pass ? (t.scrollLeft -= e.modifiers.y ? -0 : n, t.scrollTop -= e.modifiers.x ? -0 : i, t === document.body && (t.scrollLeft -= e.modifiers.y ? -0 : n, t.scrollTop -= e.modifiers.x ? -0 : i), (c || e.modifiers.y) && g(-n, 0), (w || e.modifiers.x) && g(0, -i)) : (e.modifiers.x && (i = -0), e.modifiers.y && (n = -0), t.scrollLeft -= n, t.scrollTop -= i, t === document.body && (t.scrollLeft -= n, t.scrollTop -= i)), l.emitEvent(s, "dragscrollmove", {
-          deltaX: -n,
-          deltaY: -i
+        const a = t.scrollLeft + t.clientWidth >= t.scrollWidth || t.scrollLeft === 0, p = t.scrollTop + t.clientHeight >= t.scrollHeight || t.scrollTop === 0;
+        i = -d + (d = u ? o.clientX : o.touches[0].clientX), c = -m + (m = u ? o.clientY : o.touches[0].clientY), e.modifiers.pass ? (t.scrollLeft -= e.modifiers.y ? -0 : i, t.scrollTop -= e.modifiers.x ? -0 : c, t === document.body && (t.scrollLeft -= e.modifiers.y ? -0 : i, t.scrollTop -= e.modifiers.x ? -0 : c), (a || e.modifiers.y) && g(-i, 0), (p || e.modifiers.x) && g(0, -c)) : (e.modifiers.x && (c = -0), e.modifiers.y && (i = -0), t.scrollLeft -= i, t.scrollTop -= c, t === document.body && (t.scrollLeft -= i, t.scrollTop -= c)), l.emitEvent(s, "dragscrollmove", {
+          deltaX: -i,
+          deltaY: -c
         });
       }
-    }, l.addEventListeners(t, p, t.md), l.addEventListeners(window, y, t.mu), l.addEventListeners(window, E, t.mm);
+    }, l.addEventListeners(t, w, t.md), l.addEventListeners(window, y, t.mu), l.addEventListeners(window, E, t.mm);
   };
-  a ? document.readyState === "complete" ? L() : window.addEventListener("load", L) : (l.removeEventListeners(t, p, t.md), l.removeEventListeners(window, y, t.mu), l.removeEventListeners(window, E, t.mm));
-}, I = (r) => {
+  n ? document.readyState === "complete" ? L() : window.addEventListener("load", L) : (l.removeEventListeners(t, w, t.md), l.removeEventListeners(window, y, t.mu), l.removeEventListeners(window, E, t.mm));
+}, R = (r) => {
   const e = r;
-  l.removeEventListeners(e, p, e.md), l.removeEventListeners(window, y, e.mu), l.removeEventListeners(window, E, e.mm);
+  l.removeEventListeners(e, w, e.md), l.removeEventListeners(window, y, e.mu), l.removeEventListeners(window, E, e.mm);
 }, X = {
   mounted: (r, e, s) => T(r, e, s),
   updated: (r, e, s) => {
     JSON.stringify(e.value) !== JSON.stringify(e.oldValue) && T(r, e, s);
   },
-  unmounted: (r) => I(r)
-}, R = {
+  unmounted: (r) => R(r)
+}, x = {
   install(r) {
     r.directive("dragscroll", X);
   }
 };
 typeof window < "u" && window.Vue && (window.VueDragscroll = X);
 export {
-  R as default,
+  x as default,
   X as dragscroll
 };

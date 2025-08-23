@@ -1,4 +1,4 @@
-import type { VNode, VNodeRef } from 'vue'
+import type { VNode } from 'vue'
 
 export default {
   addEventListeners (el: any, events: Array<string>, handler: Function) {
@@ -13,14 +13,15 @@ export default {
     }
   },
 
-  emitEvent: function (vnode: any, eventName: string, eventDetail?: any) {
-    // Vue 3
-    // If vnode is a Vue component instance, use $emit. Otherwise use a native HTML event.
-    if (vnode.componentInstance) {
-      vnode.componentInstance.$emit(eventName, eventDetail)
+  emitEvent (vnode: VNode, eventName: string, eventDetail?: any) {
+    // If vnode corresponds to a Vue component, emit the event on the component
+    // instance. Otherwise, dispatch a native event on the underlying element.
+    const component = (vnode as any).component
+    if (component && typeof component.emit === 'function') {
+      component.emit(eventName, eventDetail)
     } else {
-      let event = new window.CustomEvent(eventName, { detail: eventDetail })
-      vnode.el.dispatchEvent(event)
+      const event = new window.CustomEvent(eventName, { detail: eventDetail })
+      vnode.el?.dispatchEvent(event)
     }
   }
 }
