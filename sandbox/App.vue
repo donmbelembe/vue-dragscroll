@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"
 import { ref } from 'vue';
 
 let drag= ref(true)
