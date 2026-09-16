@@ -13,21 +13,36 @@ demo](https://vue-dragscroll.clebinfosys.com/)).
 $ npm install vue-dragscroll
 ```
 
-Then, in your JavaScript file:
+Then, in your JavaScript file (Vue 3):
 
 ```js
-// Register dragscroll globally
+import { createApp } from 'vue'
+import App from './App.vue'
 import VueDragscroll from 'vue-dragscroll'
-Vue.use(VueDragscroll)
 
-// Or, register it locally in a component
+const app = createApp(App)
+// Register dragscroll globally
+app.use(VueDragscroll)
+app.mount('#app')
+```
+
+To register the directive locally:
+
+```js
 import { dragscroll } from 'vue-dragscroll'
 export default {
-  name: 'MyComponent',
   directives: {
-    'dragscroll': dragscroll
+    dragscroll,
   },
 }
+```
+
+For Vue 2, use the legacy plugin syntax:
+
+```js
+import Vue from 'vue'
+import VueDragscroll from 'vue-dragscroll'
+Vue.use(VueDragscroll)
 ```
 
 #### Via cdn
@@ -197,14 +212,14 @@ The `dragscrollmove` event includes a data object with the following format:
 Example:
 
 ```html
-<div
-  v-dragscroll
-  v-on:dragscrollstart="doSomething"
-  v-on:dragscrollmove="doSomething(params, $event.detail.deltaX)"
-  v-on:dragscrollend="doSomething"
->
-..Content
-<div>
+  <div
+    v-dragscroll
+    @dragscrollstart="doSomething"
+    @dragscrollmove="doSomething(params, $event.detail.deltaX)"
+    @dragscrollend="doSomething"
+  >
+  ..Content
+  </div>
 ```
 
 Follow me on twitter: https://twitter.com/don_jon243
